@@ -1,0 +1,1464 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>8 Regression Analysis Methods | Data Analysis and Processing with R based on IBIS data</title>
+  <meta name="description" content="8 Regression Analysis Methods | Data Analysis and Processing with R based on IBIS data" />
+  <meta name="generator" content="bookdown 0.13 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="8 Regression Analysis Methods | Data Analysis and Processing with R based on IBIS data" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:image" content="mushroom.jpg" />
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="8 Regression Analysis Methods | Data Analysis and Processing with R based on IBIS data" />
+  
+  
+  <meta name="twitter:image" content="mushroom.jpg" />
+
+<meta name="author" content="Kevin Donovan" />
+
+
+<meta name="date" content="2019-10-21" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="statistical-fundamentals.html"/>
+<link rel="next" href="documenting-your-results-with-r-markdown.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Index</a><ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#preface"><i class="fa fa-check"></i><b>1.1</b> Preface</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="introducing-r-and-rstudio.html"><a href="introducing-r-and-rstudio.html"><i class="fa fa-check"></i><b>2</b> Introducing R and Rstudio</a><ul>
+<li class="chapter" data-level="2.1" data-path="introducing-r-and-rstudio.html"><a href="introducing-r-and-rstudio.html#intro"><i class="fa fa-check"></i><b>2.1</b> Intro</a></li>
+<li class="chapter" data-level="2.2" data-path="introducing-r-and-rstudio.html"><a href="introducing-r-and-rstudio.html#why-use-r-for-data-analysis"><i class="fa fa-check"></i><b>2.2</b> Why use R for data analysis?</a></li>
+<li class="chapter" data-level="2.3" data-path="introducing-r-and-rstudio.html"><a href="introducing-r-and-rstudio.html#r-and-rstudio-what-is-the-difference"><i class="fa fa-check"></i><b>2.3</b> R and RStudio: What is the difference?</a></li>
+<li class="chapter" data-level="2.4" data-path="introducing-r-and-rstudio.html"><a href="introducing-r-and-rstudio.html#installing-r-and-rstudio"><i class="fa fa-check"></i><b>2.4</b> Installing R and RStudio</a></li>
+<li class="chapter" data-level="2.5" data-path="introducing-r-and-rstudio.html"><a href="introducing-r-and-rstudio.html#the-interface-of-rstudio"><i class="fa fa-check"></i><b>2.5</b> The interface of RStudio</a><ul>
+<li class="chapter" data-level="2.5.1" data-path="introducing-r-and-rstudio.html"><a href="introducing-r-and-rstudio.html#console"><i class="fa fa-check"></i><b>2.5.1</b> Console</a></li>
+<li class="chapter" data-level="2.5.2" data-path="introducing-r-and-rstudio.html"><a href="introducing-r-and-rstudio.html#scripts"><i class="fa fa-check"></i><b>2.5.2</b> Scripts</a></li>
+<li class="chapter" data-level="2.5.3" data-path="introducing-r-and-rstudio.html"><a href="introducing-r-and-rstudio.html#rmd-files"><i class="fa fa-check"></i><b>2.5.3</b> RMD Files</a></li>
+<li class="chapter" data-level="2.5.4" data-path="introducing-r-and-rstudio.html"><a href="introducing-r-and-rstudio.html#environment"><i class="fa fa-check"></i><b>2.5.4</b> Environment</a></li>
+<li class="chapter" data-level="2.5.5" data-path="introducing-r-and-rstudio.html"><a href="introducing-r-and-rstudio.html#plots-packages-and-help"><i class="fa fa-check"></i><b>2.5.5</b> Plots, Packages, and Help</a></li>
+</ul></li>
+<li class="chapter" data-level="2.6" data-path="introducing-r-and-rstudio.html"><a href="introducing-r-and-rstudio.html#file-directories-in-r"><i class="fa fa-check"></i><b>2.6</b> File Directories in R</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="objects-and-functions.html"><a href="objects-and-functions.html"><i class="fa fa-check"></i><b>3</b> Objects and Functions</a><ul>
+<li class="chapter" data-level="3.1" data-path="objects-and-functions.html"><a href="objects-and-functions.html#intro-1"><i class="fa fa-check"></i><b>3.1</b> Intro</a></li>
+<li class="chapter" data-level="3.2" data-path="objects-and-functions.html"><a href="objects-and-functions.html#functions"><i class="fa fa-check"></i><b>3.2</b> Functions</a></li>
+<li class="chapter" data-level="3.3" data-path="objects-and-functions.html"><a href="objects-and-functions.html#objects"><i class="fa fa-check"></i><b>3.3</b> Objects</a></li>
+<li class="chapter" data-level="3.4" data-path="objects-and-functions.html"><a href="objects-and-functions.html#object-classes-and-types"><i class="fa fa-check"></i><b>3.4</b> Object classes and types</a><ul>
+<li class="chapter" data-level="3.4.1" data-path="objects-and-functions.html"><a href="objects-and-functions.html#vectors"><i class="fa fa-check"></i><b>3.4.1</b> Vectors</a></li>
+<li class="chapter" data-level="3.4.2" data-path="objects-and-functions.html"><a href="objects-and-functions.html#matricies"><i class="fa fa-check"></i><b>3.4.2</b> Matricies</a></li>
+<li class="chapter" data-level="3.4.3" data-path="objects-and-functions.html"><a href="objects-and-functions.html#lists"><i class="fa fa-check"></i><b>3.4.3</b> Lists</a></li>
+<li class="chapter" data-level="3.4.4" data-path="objects-and-functions.html"><a href="objects-and-functions.html#data-frames"><i class="fa fa-check"></i><b>3.4.4</b> Data Frames</a></li>
+<li class="chapter" data-level="3.4.5" data-path="objects-and-functions.html"><a href="objects-and-functions.html#types"><i class="fa fa-check"></i><b>3.4.5</b> Types</a></li>
+</ul></li>
+<li class="chapter" data-level="3.5" data-path="objects-and-functions.html"><a href="objects-and-functions.html#subsetting"><i class="fa fa-check"></i><b>3.5</b> Subsetting</a></li>
+<li class="chapter" data-level="3.6" data-path="objects-and-functions.html"><a href="objects-and-functions.html#base-r"><i class="fa fa-check"></i><b>3.6</b> Base R</a></li>
+<li class="chapter" data-level="3.7" data-path="objects-and-functions.html"><a href="objects-and-functions.html#environment-1"><i class="fa fa-check"></i><b>3.7</b> Environment</a></li>
+<li class="chapter" data-level="3.8" data-path="objects-and-functions.html"><a href="objects-and-functions.html#putting-it-all-together-read.csv"><i class="fa fa-check"></i><b>3.8</b> Putting It All Together: read.csv</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="using-dplyr.html"><a href="using-dplyr.html"><i class="fa fa-check"></i><b>4</b> Using dplyr</a><ul>
+<li class="chapter" data-level="4.1" data-path="using-dplyr.html"><a href="using-dplyr.html#intro-2"><i class="fa fa-check"></i><b>4.1</b> Intro</a></li>
+<li class="chapter" data-level="4.2" data-path="using-dplyr.html"><a href="using-dplyr.html#dplyr-functions"><i class="fa fa-check"></i><b>4.2</b> dplyr Functions</a><ul>
+<li class="chapter" data-level="4.2.1" data-path="using-dplyr.html"><a href="using-dplyr.html#select-filter-and-arrange"><i class="fa fa-check"></i><b>4.2.1</b> Select, filter, and arrange</a></li>
+<li class="chapter" data-level="4.2.2" data-path="using-dplyr.html"><a href="using-dplyr.html#mutate-and-summarize"><i class="fa fa-check"></i><b>4.2.2</b> Mutate and summarize</a></li>
+<li class="chapter" data-level="4.2.3" data-path="using-dplyr.html"><a href="using-dplyr.html#spread-gather-separate-and-unite"><i class="fa fa-check"></i><b>4.2.3</b> Spread, Gather, Separate and Unite</a></li>
+<li class="chapter" data-level="4.2.4" data-path="using-dplyr.html"><a href="using-dplyr.html#renaming-variables"><i class="fa fa-check"></i><b>4.2.4</b> Renaming variables</a></li>
+<li class="chapter" data-level="4.2.5" data-path="using-dplyr.html"><a href="using-dplyr.html#using-the-pipe"><i class="fa fa-check"></i><b>4.2.5</b> Using the pipe</a></li>
+<li class="chapter" data-level="4.2.6" data-path="using-dplyr.html"><a href="using-dplyr.html#editing-factor-variables-recode-and-relevel"><i class="fa fa-check"></i><b>4.2.6</b> Editing factor variables: recode() and relevel()</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="creating-graphs-with-ggplot2.html"><a href="creating-graphs-with-ggplot2.html"><i class="fa fa-check"></i><b>5</b> Creating Graphs With ggplot2</a><ul>
+<li class="chapter" data-level="5.1" data-path="creating-graphs-with-ggplot2.html"><a href="creating-graphs-with-ggplot2.html#base-r-vs.-ggplot2"><i class="fa fa-check"></i><b>5.1</b> Base R vs. ggplot2</a></li>
+<li class="chapter" data-level="5.2" data-path="creating-graphs-with-ggplot2.html"><a href="creating-graphs-with-ggplot2.html#ggplot2"><i class="fa fa-check"></i><b>5.2</b> ggplot2</a><ul>
+<li class="chapter" data-level="5.2.1" data-path="creating-graphs-with-ggplot2.html"><a href="creating-graphs-with-ggplot2.html#introduction"><i class="fa fa-check"></i><b>5.2.1</b> Introduction</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="creating-graphs-with-ggplot2.html"><a href="creating-graphs-with-ggplot2.html#ggplot-aesthetics"><i class="fa fa-check"></i><b>5.3</b> ggplot Aesthetics</a><ul>
+<li class="chapter" data-level="5.3.1" data-path="creating-graphs-with-ggplot2.html"><a href="creating-graphs-with-ggplot2.html#scatterplot"><i class="fa fa-check"></i><b>5.3.1</b> Scatterplot</a></li>
+<li class="chapter" data-level="5.3.2" data-path="creating-graphs-with-ggplot2.html"><a href="creating-graphs-with-ggplot2.html#colors-in-r"><i class="fa fa-check"></i><b>5.3.2</b> Colors in R</a></li>
+<li class="chapter" data-level="5.3.3" data-path="creating-graphs-with-ggplot2.html"><a href="creating-graphs-with-ggplot2.html#line-of-best-fit"><i class="fa fa-check"></i><b>5.3.3</b> Line of best fit</a></li>
+<li class="chapter" data-level="5.3.4" data-path="creating-graphs-with-ggplot2.html"><a href="creating-graphs-with-ggplot2.html#box-and-whisker"><i class="fa fa-check"></i><b>5.3.4</b> Box and whisker</a></li>
+<li class="chapter" data-level="5.3.5" data-path="creating-graphs-with-ggplot2.html"><a href="creating-graphs-with-ggplot2.html#barchart"><i class="fa fa-check"></i><b>5.3.5</b> Barchart</a></li>
+<li class="chapter" data-level="5.3.6" data-path="creating-graphs-with-ggplot2.html"><a href="creating-graphs-with-ggplot2.html#other-aesthetics"><i class="fa fa-check"></i><b>5.3.6</b> Other aesthetics</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="creating-graphs-with-ggplot2.html"><a href="creating-graphs-with-ggplot2.html#additional-customization"><i class="fa fa-check"></i><b>5.4</b> Additional customization</a><ul>
+<li class="chapter" data-level="5.4.1" data-path="creating-graphs-with-ggplot2.html"><a href="creating-graphs-with-ggplot2.html#titles-and-labels"><i class="fa fa-check"></i><b>5.4.1</b> Titles and Labels</a></li>
+<li class="chapter" data-level="5.4.2" data-path="creating-graphs-with-ggplot2.html"><a href="creating-graphs-with-ggplot2.html#colors"><i class="fa fa-check"></i><b>5.4.2</b> Colors</a></li>
+<li class="chapter" data-level="5.4.3" data-path="creating-graphs-with-ggplot2.html"><a href="creating-graphs-with-ggplot2.html#sizes-and-shapes"><i class="fa fa-check"></i><b>5.4.3</b> Sizes and shapes</a></li>
+<li class="chapter" data-level="5.4.4" data-path="creating-graphs-with-ggplot2.html"><a href="creating-graphs-with-ggplot2.html#themes"><i class="fa fa-check"></i><b>5.4.4</b> Themes</a></li>
+<li class="chapter" data-level="5.4.5" data-path="creating-graphs-with-ggplot2.html"><a href="creating-graphs-with-ggplot2.html#reversing-the-axes"><i class="fa fa-check"></i><b>5.4.5</b> Reversing the axes</a></li>
+<li class="chapter" data-level="5.4.6" data-path="creating-graphs-with-ggplot2.html"><a href="creating-graphs-with-ggplot2.html#facets"><i class="fa fa-check"></i><b>5.4.6</b> Facets</a></li>
+<li class="chapter" data-level="5.4.7" data-path="creating-graphs-with-ggplot2.html"><a href="creating-graphs-with-ggplot2.html#exporting-your-plot"><i class="fa fa-check"></i><b>5.4.7</b> Exporting your plot</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="working-with-tables-in-r.html"><a href="working-with-tables-in-r.html"><i class="fa fa-check"></i><b>6</b> Working with Tables in R</a><ul>
+<li class="chapter" data-level="6.1" data-path="working-with-tables-in-r.html"><a href="working-with-tables-in-r.html#intro-3"><i class="fa fa-check"></i><b>6.1</b> Intro</a></li>
+<li class="chapter" data-level="6.2" data-path="working-with-tables-in-r.html"><a href="working-with-tables-in-r.html#creating-basic-tables-table-and-xtabs"><i class="fa fa-check"></i><b>6.2</b> Creating Basic Tables: table() and xtabs()</a></li>
+<li class="chapter" data-level="6.3" data-path="working-with-tables-in-r.html"><a href="working-with-tables-in-r.html#tabular-data-analysis"><i class="fa fa-check"></i><b>6.3</b> Tabular Data Analysis</a><ul>
+<li class="chapter" data-level="6.3.1" data-path="working-with-tables-in-r.html"><a href="working-with-tables-in-r.html#tests-for-independence"><i class="fa fa-check"></i><b>6.3.1</b> Tests for Independence</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="statistical-fundamentals.html"><a href="statistical-fundamentals.html"><i class="fa fa-check"></i><b>7</b> Statistical Fundamentals</a><ul>
+<li class="chapter" data-level="7.1" data-path="statistical-fundamentals.html"><a href="statistical-fundamentals.html#intro-4"><i class="fa fa-check"></i><b>7.1</b> Intro</a></li>
+<li class="chapter" data-level="7.2" data-path="statistical-fundamentals.html"><a href="statistical-fundamentals.html#statistical-inference"><i class="fa fa-check"></i><b>7.2</b> Statistical Inference</a><ul>
+<li class="chapter" data-level="7.2.1" data-path="statistical-fundamentals.html"><a href="statistical-fundamentals.html#parameter-estimation-mean-median-tutorial-quantiles"><i class="fa fa-check"></i><b>7.2.1</b> Parameter Estimation: Mean, Median, tutorial, Quantiles</a></li>
+<li class="chapter" data-level="7.2.2" data-path="statistical-fundamentals.html"><a href="statistical-fundamentals.html#accounting-for-estimation-variance-and-hypothesis-testing"><i class="fa fa-check"></i><b>7.2.2</b> Accounting for estimation variance and hypothesis testing</a></li>
+<li class="chapter" data-level="7.2.3" data-path="statistical-fundamentals.html"><a href="statistical-fundamentals.html#confidence-intervals"><i class="fa fa-check"></i><b>7.2.3</b> Confidence intervals</a></li>
+<li class="chapter" data-level="7.2.4" data-path="statistical-fundamentals.html"><a href="statistical-fundamentals.html#hypothesis-testing"><i class="fa fa-check"></i><b>7.2.4</b> Hypothesis testing</a></li>
+<li class="chapter" data-level="7.2.5" data-path="statistical-fundamentals.html"><a href="statistical-fundamentals.html#hypothesis-testing-with-means"><i class="fa fa-check"></i><b>7.2.5</b> Hypothesis Testing with Means</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="regression-analysis-methods.html"><a href="regression-analysis-methods.html"><i class="fa fa-check"></i><b>8</b> Regression Analysis Methods</a><ul>
+<li class="chapter" data-level="8.1" data-path="regression-analysis-methods.html"><a href="regression-analysis-methods.html#intro-5"><i class="fa fa-check"></i><b>8.1</b> Intro</a></li>
+<li class="chapter" data-level="8.2" data-path="regression-analysis-methods.html"><a href="regression-analysis-methods.html#linear-regression"><i class="fa fa-check"></i><b>8.2</b> Linear Regression</a><ul>
+<li class="chapter" data-level="8.2.1" data-path="regression-analysis-methods.html"><a href="regression-analysis-methods.html#motivation"><i class="fa fa-check"></i><b>8.2.1</b> Motivation</a></li>
+<li class="chapter" data-level="8.2.2" data-path="regression-analysis-methods.html"><a href="regression-analysis-methods.html#methodology"><i class="fa fa-check"></i><b>8.2.2</b> Methodology</a></li>
+<li class="chapter" data-level="8.2.3" data-path="regression-analysis-methods.html"><a href="regression-analysis-methods.html#overview"><i class="fa fa-check"></i><b>8.2.3</b> Overview</a></li>
+<li class="chapter" data-level="8.2.4" data-path="regression-analysis-methods.html"><a href="regression-analysis-methods.html#example-1-continuous-predictors"><i class="fa fa-check"></i><b>8.2.4</b> Example 1: Continuous predictors</a></li>
+<li class="chapter" data-level="8.2.5" data-path="regression-analysis-methods.html"><a href="regression-analysis-methods.html#example-2-categorical-predictors"><i class="fa fa-check"></i><b>8.2.5</b> Example 2: Categorical predictors</a></li>
+<li class="chapter" data-level="8.2.6" data-path="regression-analysis-methods.html"><a href="regression-analysis-methods.html#diagnostics"><i class="fa fa-check"></i><b>8.2.6</b> Diagnostics</a></li>
+<li class="chapter" data-level="8.2.7" data-path="regression-analysis-methods.html"><a href="regression-analysis-methods.html#anova-and-ancova"><i class="fa fa-check"></i><b>8.2.7</b> ANOVA and ANCOVA</a></li>
+</ul></li>
+<li class="chapter" data-level="8.3" data-path="regression-analysis-methods.html"><a href="regression-analysis-methods.html#logistic-regression"><i class="fa fa-check"></i><b>8.3</b> Logistic regression</a><ul>
+<li class="chapter" data-level="8.3.1" data-path="regression-analysis-methods.html"><a href="regression-analysis-methods.html#methodology-1"><i class="fa fa-check"></i><b>8.3.1</b> Methodology</a></li>
+<li class="chapter" data-level="8.3.2" data-path="regression-analysis-methods.html"><a href="regression-analysis-methods.html#example-1-continuous-covariates"><i class="fa fa-check"></i><b>8.3.2</b> Example 1: Continuous Covariates</a></li>
+<li class="chapter" data-level="8.3.3" data-path="regression-analysis-methods.html"><a href="regression-analysis-methods.html#example-2-categorical-covariates"><i class="fa fa-check"></i><b>8.3.3</b> Example 2: Categorical Covariates</a></li>
+<li class="chapter" data-level="8.3.4" data-path="regression-analysis-methods.html"><a href="regression-analysis-methods.html#prediction"><i class="fa fa-check"></i><b>8.3.4</b> Prediction</a></li>
+</ul></li>
+<li class="chapter" data-level="8.4" data-path="regression-analysis-methods.html"><a href="regression-analysis-methods.html#mixed-models"><i class="fa fa-check"></i><b>8.4</b> Mixed Models</a><ul>
+<li class="chapter" data-level="8.4.1" data-path="regression-analysis-methods.html"><a href="regression-analysis-methods.html#motivation-1"><i class="fa fa-check"></i><b>8.4.1</b> Motivation</a></li>
+<li class="chapter" data-level="8.4.2" data-path="regression-analysis-methods.html"><a href="regression-analysis-methods.html#example-mullen-composite-and-visit"><i class="fa fa-check"></i><b>8.4.2</b> Example: Mullen composite and Visit</a></li>
+<li class="chapter" data-level="8.4.3" data-path="regression-analysis-methods.html"><a href="regression-analysis-methods.html#interpreting-results-time-dependent-covariates"><i class="fa fa-check"></i><b>8.4.3</b> Interpreting results: time dependent covariates</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="documenting-your-results-with-r-markdown.html"><a href="documenting-your-results-with-r-markdown.html"><i class="fa fa-check"></i><b>9</b> Documenting your results with R Markdown</a><ul>
+<li class="chapter" data-level="9.1" data-path="documenting-your-results-with-r-markdown.html"><a href="documenting-your-results-with-r-markdown.html#intro-6"><i class="fa fa-check"></i><b>9.1</b> Intro</a></li>
+<li class="chapter" data-level="9.2" data-path="documenting-your-results-with-r-markdown.html"><a href="documenting-your-results-with-r-markdown.html#starting-your-r-markdown"><i class="fa fa-check"></i><b>9.2</b> Starting Your R Markdown</a></li>
+<li class="chapter" data-level="9.3" data-path="documenting-your-results-with-r-markdown.html"><a href="documenting-your-results-with-r-markdown.html#understanding-the-r-markdown-editor"><i class="fa fa-check"></i><b>9.3</b> Understanding the R Markdown editor</a><ul>
+<li class="chapter" data-level="9.3.1" data-path="documenting-your-results-with-r-markdown.html"><a href="documenting-your-results-with-r-markdown.html#prelude"><i class="fa fa-check"></i><b>9.3.1</b> Prelude</a></li>
+<li class="chapter" data-level="9.3.2" data-path="documenting-your-results-with-r-markdown.html"><a href="documenting-your-results-with-r-markdown.html#chunk"><i class="fa fa-check"></i><b>9.3.2</b> Chunk</a></li>
+<li class="chapter" data-level="9.3.3" data-path="documenting-your-results-with-r-markdown.html"><a href="documenting-your-results-with-r-markdown.html#non-chunk"><i class="fa fa-check"></i><b>9.3.3</b> Non-chunk</a></li>
+</ul></li>
+<li class="chapter" data-level="9.4" data-path="documenting-your-results-with-r-markdown.html"><a href="documenting-your-results-with-r-markdown.html#creating-your-document-from-the-r-markdown-file"><i class="fa fa-check"></i><b>9.4</b> Creating your document from the R Markdown file</a></li>
+<li class="chapter" data-level="9.5" data-path="documenting-your-results-with-r-markdown.html"><a href="documenting-your-results-with-r-markdown.html#creating-tables-with-r-markdown"><i class="fa fa-check"></i><b>9.5</b> Creating tables with R Markdown</a><ul>
+<li class="chapter" data-level="9.5.1" data-path="documenting-your-results-with-r-markdown.html"><a href="documenting-your-results-with-r-markdown.html#summary-statistics"><i class="fa fa-check"></i><b>9.5.1</b> Summary statistics</a></li>
+<li class="chapter" data-level="9.5.2" data-path="documenting-your-results-with-r-markdown.html"><a href="documenting-your-results-with-r-markdown.html#general-tables"><i class="fa fa-check"></i><b>9.5.2</b> General tables</a></li>
+</ul></li>
+<li class="chapter" data-level="9.6" data-path="documenting-your-results-with-r-markdown.html"><a href="documenting-your-results-with-r-markdown.html#practice-with-r-markdown"><i class="fa fa-check"></i><b>9.6</b> Practice with R Markdown</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="loops-and-functional-programming.html"><a href="loops-and-functional-programming.html"><i class="fa fa-check"></i><b>10</b> Loops and Functional Programming</a><ul>
+<li class="chapter" data-level="10.1" data-path="loops-and-functional-programming.html"><a href="loops-and-functional-programming.html#intro-7"><i class="fa fa-check"></i><b>10.1</b> Intro</a></li>
+<li class="chapter" data-level="10.2" data-path="loops-and-functional-programming.html"><a href="loops-and-functional-programming.html#loops"><i class="fa fa-check"></i><b>10.2</b> Loops</a><ul>
+<li class="chapter" data-level="10.2.1" data-path="loops-and-functional-programming.html"><a href="loops-and-functional-programming.html#example-1-running-many-regression-models"><i class="fa fa-check"></i><b>10.2.1</b> Example 1: Running many regression models</a></li>
+<li class="chapter" data-level="10.2.2" data-path="loops-and-functional-programming.html"><a href="loops-and-functional-programming.html#example-2-the-apply-functions"><i class="fa fa-check"></i><b>10.2.2</b> Example 2: The Apply Functions</a></li>
+</ul></li>
+<li class="chapter" data-level="10.3" data-path="loops-and-functional-programming.html"><a href="loops-and-functional-programming.html#functional-programming"><i class="fa fa-check"></i><b>10.3</b> Functional Programming</a><ul>
+<li class="chapter" data-level="10.3.1" data-path="loops-and-functional-programming.html"><a href="loops-and-functional-programming.html#example-regression-analysis-as-a-function-call"><i class="fa fa-check"></i><b>10.3.1</b> Example: Regression Analysis as a Function Call</a></li>
+</ul></li>
+<li class="chapter" data-level="10.4" data-path="loops-and-functional-programming.html"><a href="loops-and-functional-programming.html#simulation-studies"><i class="fa fa-check"></i><b>10.4</b> Simulation Studies</a><ul>
+<li class="chapter" data-level="10.4.1" data-path="loops-and-functional-programming.html"><a href="loops-and-functional-programming.html#setting-the-seed-reproducibility-in-simulation-studies"><i class="fa fa-check"></i><b>10.4.1</b> Setting the Seed: Reproducibility in Simulation Studies</a></li>
+</ul></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Data Analysis and Processing with R based on IBIS data</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="regression-analysis-methods" class="section level1">
+<h1><span class="header-section-number">8</span> Regression Analysis Methods</h1>
+<div class="sourceCode" id="cb387"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb387-1" title="1">full_data &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;Data/Cross-sec_full.csv&quot;</span>, <span class="dt">stringsAsFactors=</span><span class="ot">FALSE</span>, <span class="dt">na.strings =</span> <span class="kw">c</span>(<span class="st">&quot;.&quot;</span>, <span class="st">&quot;&quot;</span>, <span class="st">&quot; &quot;</span>))</a>
+<a class="sourceLine" id="cb387-2" title="2"></a>
+<a class="sourceLine" id="cb387-3" title="3"><span class="kw">library</span>(ggplot2)</a>
+<a class="sourceLine" id="cb387-4" title="4"><span class="kw">library</span>(tidyverse)</a></code></pre></div>
+<div id="intro-5" class="section level2">
+<h2><span class="header-section-number">8.1</span> Intro</h2>
+<p>Regression methods form the backbone of much of the analyses in research. In general, these methods are used to estimate associations between variables, espeically when one or more of these are variables are continuous. In this section, we cover linear regression, logistic regression, and mixed models. For most people, understanding these methods will be sufficient for the analyses required for their research. Since these methods are so often used, they are covered in great detail, so each reader should take into account their own knowledge of statistics when deciding which parts of this tutorial to read or skip over. Both the statistical motivation behind these methods and their implementation in R to data are covered, and understanding both concepts is essential when carrying out your own analyses. Furthermore, terminology is introduced to help standardize the language used with these concepts across the IBIS network. The full cross sectional dataset is used for illustration of these concepts throughout this tutorial.</p>
+</div>
+<div id="linear-regression" class="section level2">
+<h2><span class="header-section-number">8.2</span> Linear Regression</h2>
+<div id="motivation" class="section level3">
+<h3><span class="header-section-number">8.2.1</span> Motivation</h3>
+<p>Suppose we are interested in the association between Mullen composite score (recorded as a standard score in the dataset) and Autism severity as measured by the AOSI, in children at month 12. Since both are continuous variables, a simple measure of this association is their correlation. Let’s see the scatterplot for these two variables.</p>
+<div class="sourceCode" id="cb388"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb388-1" title="1"><span class="kw">ggplot</span>(<span class="dt">data=</span>full_data, <span class="kw">aes</span>(<span class="dt">x=</span>V12.mullen.composite_standard_score, <span class="dt">y=</span>V12.aosi.total_score_<span class="dv">1</span>_<span class="dv">18</span>))<span class="op">+</span></a>
+<a class="sourceLine" id="cb388-2" title="2"><span class="st">  </span><span class="kw">geom_point</span>()<span class="op">+</span></a>
+<a class="sourceLine" id="cb388-3" title="3"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x=</span><span class="st">&quot;Mullen Composite Standard Score&quot;</span>, </a>
+<a class="sourceLine" id="cb388-4" title="4">       <span class="dt">y=</span><span class="st">&quot;AOSI Total Score&quot;</span>, </a>
+<a class="sourceLine" id="cb388-5" title="5">       <span class="dt">title=</span><span class="st">&quot;Scatterplot of Mullen Composite Standard Score </span><span class="ch">\n</span><span class="st">and AOSI Total Score at Month 12&quot;</span>)</a></code></pre></div>
+<p><img src="_main_files/figure-html/cor_1-1.png" width="672" /></p>
+<div class="sourceCode" id="cb389"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb389-1" title="1"><span class="co"># Note the use of \n when specifying the title.  If this is not included, R will force the whole string on one line, cutting off part of the title due to lack of space.  Adding \n forces a line break at this spot.  This \n string specifies a new line for any general string (so it can be used with the axis labels, legend title, captions or subtitles, etc.)</span></a></code></pre></div>
+<p>At best, there appears to be a weak, negative relationship between these variables. Let’s estimate the correlation. This can be done in R using <strong>cor()</strong>. Note that cor() does not have a data= argument, so you must specify the variables of interest in the dataset$variable form discussed in previous tutorials. Also, by default, if any of the variables have missing values, an NA is returned by cor(). To remove any subjects missing one or more of the variables from the calculation, specify use=“pairwise.complete” as an argument in the function. We can also 1) conduct a formal hypothesis test for zero correlation and 2) calculate a 95% confidence interval for the correlation using the function <strong>cor.test()</strong>. Note that the default correlation measure is Pearson, though this can be changed in both functions using the measure= argument. Also, when conducting the hypothesis test or calculating the confidence interval, we must always take into account any distributional assumptions that are used in these calculations (as discussed in Chapters 6 and 7). For the hypothesis test and confidence interval calculations done here to be valid, one of the following needs to hold: 1) the two variables are jointly normally distributed or 2) sample size is “large enough” for the approximate distribution of the test statistic to be accurate. This approximate distribution is a T distribution with <span class="math inline">\(n-2\)</span> degrees of freedom, where <span class="math inline">\(n\)</span> denotes the sample sze. Hence, the test statistic value in the R output is denoted by t.</p>
+<div class="sourceCode" id="cb390"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb390-1" title="1"><span class="kw">cor</span>(<span class="dt">x=</span>full_data<span class="op">$</span>V12.mullen.composite_standard_score, <span class="dt">y=</span>full_data<span class="op">$</span>V12.aosi.total_score_<span class="dv">1</span>_<span class="dv">18</span>)</a></code></pre></div>
+<pre><code>## [1] NA</code></pre>
+<div class="sourceCode" id="cb392"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb392-1" title="1"><span class="kw">cor</span>(<span class="dt">x=</span>full_data<span class="op">$</span>V12.mullen.composite_standard_score, <span class="dt">y=</span>full_data<span class="op">$</span>V12.aosi.total_score_<span class="dv">1</span>_<span class="dv">18</span>, </a>
+<a class="sourceLine" id="cb392-2" title="2">    <span class="dt">use=</span><span class="st">&quot;pairwise.complete&quot;</span>)</a></code></pre></div>
+<pre><code>## [1] -0.2964536</code></pre>
+<div class="sourceCode" id="cb394"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb394-1" title="1"><span class="kw">cor.test</span>(<span class="dt">x=</span>full_data<span class="op">$</span>V12.mullen.composite_standard_score, <span class="dt">y=</span>full_data<span class="op">$</span>V12.aosi.total_score_<span class="dv">1</span>_<span class="dv">18</span>)</a></code></pre></div>
+<pre><code>## 
+##  Pearson&#39;s product-moment correlation
+## 
+## data:  full_data$V12.mullen.composite_standard_score and full_data$V12.aosi.total_score_1_18
+## t = -7.01, df = 510, p-value = 7.59e-12
+## alternative hypothesis: true correlation is not equal to 0
+## 95 percent confidence interval:
+##  -0.3735142 -0.2153293
+## sample estimates:
+##        cor 
+## -0.2964536</code></pre>
+<p>We see that there evidence from data of a moderate, negative correlation between these variables.</p>
+<p>However, using this pairwise correlation has its limitations as 1) it is a more “general” measure and 2) it does not account for other variables which may impact this association. To better illustrate the first point, consider the following scatterplots (created using simulated data).</p>
+<div class="sourceCode" id="cb396"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb396-1" title="1"><span class="co"># simulate data: this is explained in tutorial 9 for those who are interested</span></a>
+<a class="sourceLine" id="cb396-2" title="2"><span class="kw">set.seed</span>(<span class="dv">123</span>)</a>
+<a class="sourceLine" id="cb396-3" title="3">E &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">500</span>)</a>
+<a class="sourceLine" id="cb396-4" title="4">X &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">500</span>, <span class="dt">mean=</span><span class="dv">5</span>)</a>
+<a class="sourceLine" id="cb396-5" title="5">Y1 &lt;-<span class="st"> </span><span class="dv">2</span><span class="op">*</span>X<span class="op">+</span>E</a>
+<a class="sourceLine" id="cb396-6" title="6">Y2 &lt;-<span class="st"> </span><span class="dv">6</span><span class="op">*</span>X<span class="op">+</span>E</a>
+<a class="sourceLine" id="cb396-7" title="7"></a>
+<a class="sourceLine" id="cb396-8" title="8"><span class="co"># will use default R plotting functions, which we did not cover</span></a>
+<a class="sourceLine" id="cb396-9" title="9"><span class="kw">plot</span>(X, Y1, <span class="dt">main=</span><span class="st">&quot;Scatterplot Example: Dataset 1 in black, Dataset 2 in blue&quot;</span>, <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">8</span>), <span class="dt">ylim=</span><span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">50</span>), <span class="dt">ylab=</span><span class="st">&quot;Y&quot;</span>)</a>
+<a class="sourceLine" id="cb396-10" title="10"><span class="kw">points</span>(X, Y2, <span class="dt">col=</span><span class="st">&quot;blue&quot;</span>)</a>
+<a class="sourceLine" id="cb396-11" title="11"><span class="kw">text</span>(<span class="dt">x=</span><span class="dv">7</span>, <span class="dt">y=</span><span class="dv">9</span>,<span class="dt">labels=</span><span class="kw">paste</span>(<span class="st">&quot;Cor=&quot;</span>,<span class="kw">round</span>(<span class="kw">cor</span>(X, Y1),<span class="dv">2</span>),<span class="dt">sep=</span><span class="st">&quot;&quot;</span>))</a>
+<a class="sourceLine" id="cb396-12" title="12"><span class="kw">text</span>(<span class="dt">x=</span><span class="dv">7</span>, <span class="dt">y=</span><span class="dv">35</span>,<span class="dt">labels=</span><span class="kw">paste</span>(<span class="st">&quot;Cor=&quot;</span>,<span class="kw">round</span>(<span class="kw">cor</span>(X, Y2),<span class="dv">2</span>),<span class="dt">sep=</span><span class="st">&quot;&quot;</span>), <span class="dt">col=</span><span class="st">&quot;blue&quot;</span>)</a></code></pre></div>
+<p><img src="_main_files/figure-html/cor_3-1.png" width="672" /></p>
+<div class="sourceCode" id="cb397"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb397-1" title="1"><span class="kw">cor</span>(X, Y1)</a></code></pre></div>
+<pre><code>## [1] 0.8969942</code></pre>
+<div class="sourceCode" id="cb399"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb399-1" title="1"><span class="kw">cor</span>(X, Y2)</a></code></pre></div>
+<pre><code>## [1] 0.9872073</code></pre>
+<p>We can see that both examples have similar correlation, though the dataset denoted in blue has a much larger increase in variable <span class="math inline">\(Y\)</span> as variable <span class="math inline">\(X\)</span> increases. It would be useful to more explictly measure these “slopes” and adjust this measure based on other variables of interest which may impact the association.</p>
+</div>
+<div id="methodology" class="section level3">
+<h3><span class="header-section-number">8.2.2</span> Methodology</h3>
+</div>
+<div id="overview" class="section level3">
+<h3><span class="header-section-number">8.2.3</span> Overview</h3>
+<p>Suppose variables <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> are of interest, where <span class="math inline">\(Y\)</span> is continuous (<span class="math inline">\(X\)</span> can be discrete or continuous). With linear regression, we specify the following model between these variables:
+<span class="math inline">\(Y=\beta_0+\beta_1X+\epsilon\)</span>.</p>
+<p>Where <span class="math inline">\(\epsilon\)</span> is commonly thought of as the “error term” for the model. We assume <span class="math inline">\(\epsilon\)</span> has mean zero and variance denoted by <span class="math inline">\(\sigma^2\)</span>.<br />
+For variables <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>, denote the mean of <span class="math inline">\(Y\)</span> conditional on <span class="math inline">\(X\)</span> by <span class="math inline">\(\mbox{E}(Y|X)\)</span>. With linear regression, since the mean of <span class="math inline">\(\epsilon\)</span> is 0,</p>
+<p><span class="math inline">\(\mbox{E}(Y|X)=\beta_0+\beta_1X\)</span></p>
+<p>which is a <em>linear</em> function of <span class="math inline">\(X\)</span>. When we apply this model to data, we assume that each observation’s <span class="math inline">\(\epsilon\)</span> is independent, which implies that each observation’s outcome <span class="math inline">\(Y\)</span> is independent as <span class="math inline">\(Y\)</span> is a function of <span class="math inline">\(\epsilon\)</span>. As a result, for data were there are multiple observations per subject, the linear regression model would not hold true and applying it would not produce valid results.</p>
+<p>We see that <span class="math inline">\(\beta_0\)</span> (the intercept) represents the mean of <span class="math inline">\(Y\)</span> when <span class="math inline">\(X\)</span> is 0 and <span class="math inline">\(\beta_1\)</span> (the slope) represents the change in mean of <span class="math inline">\(Y\)</span> when <span class="math inline">\(X\)</span> increases by 1. Based on this model, we want to estimate the parameters <span class="math inline">\(\beta_0\)</span> and <span class="math inline">\(\beta_1\)</span> with the slope serving as a measure of the association between <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>. We denote the estimates with <span class="math inline">\(\hat{\beta_0}\)</span> and <span class="math inline">\(\hat{\beta_1}\)</span> respectively. This is generally done using <em>least squares estimation</em>.</p>
+<p>Since the estimates of the intercept and slope will vary across samples from a given populuation, we would like to account for this randomness. This generally done by conducting a hypothesis test and/or computing a confidence interval. In linear regression, the standard methods for computing a p-value from a hypothesis test or a confidence interval require one of two assumptions to hold: 1) <span class="math inline">\(\epsilon\)</span> is normally distributed or 2) the sample size is large enough for your intercept and slope estimates (<span class="math inline">\(\hat{\beta}_0\)</span> and <span class="math inline">\(\hat{\beta}_1\)</span> respectively) to be approximately normally distributed. If one of these hold, the test statistic has (approximately if a large sample approximation is used) a T distribution with <span class="math inline">\(n-p\)</span> degrees of freedom where <span class="math inline">\(p\)</span> denotes the number of parameters in the model (<span class="math inline">\(p=2\)</span> in this case). A p-value can then be calculated using this distribution, along with a confidence interval.</p>
+<p>As a result, when doing a linear regression analysis, we have a set of assumptions that we need to check using the data.</p>
+<ol style="list-style-type: decimal">
+<li>Mean of <span class="math inline">\(Y\)</span> given <span class="math inline">\(X\)</span> is a linear function of <span class="math inline">\(X\)</span></li>
+<li>Across values of <span class="math inline">\(X\)</span>, the error terms have equal variances (called <em>homoskedasticity</em>)</li>
+<li>Across values of <span class="math inline">\(X\)</span>, the error terms are normally distributed or the sample size is large enough for the large sample approximation to be accurate</li>
+<li>All error terms/observations in the data are independent</li>
+</ol>
+<p>Assumptions 1), 2), and 3) can be evaluated from the data while 4) is usually evaluated based on the study design from which the data originated.</p>
+<p>Now, suppose we were also interested in adjusting these associations for another variable <span class="math inline">\(Z\)</span> (can be continuous or categorical). We can specify the following linear regression model:
+<span class="math inline">\(Y=\beta_0+\beta_1X+\beta_2Z+\epsilon\)</span>.</p>
+<p><span class="math inline">\(\mbox{E}(Y|X,Z)=\beta_0+\beta_1X+\beta_2Z\)</span></p>
+<p>where <span class="math inline">\(\epsilon\)</span> has the same properties as before. Statisticians often refer to <span class="math inline">\(Y\)</span> as the <strong>outcome</strong>, <span class="math inline">\(X\)</span> and <span class="math inline">\(Z\)</span> as <strong>predictors</strong> or <strong>covariates</strong>, and <span class="math inline">\(\beta_0, \beta_1\)</span>, and <span class="math inline">\(\beta_2\)</span> as <strong>regression parameters</strong>. Notice that now we are doing inference on the mean of <span class="math inline">\(Y\)</span> conditional on <span class="math inline">\(X\)</span> <strong>and</strong> <span class="math inline">\(Z\)</span>. Futhermore, you see that <span class="math inline">\(\beta_1\)</span> represents the change in the mean of <span class="math inline">\(Y\)</span> when <span class="math inline">\(X\)</span> increases by 1 unit <strong>and</strong> <span class="math inline">\(Z\)</span> is held fixed:</p>
+<p><span class="math inline">\(\mbox{E}(Y|X+1,Z)-\mbox{E}(Y|X,Z)\)</span><br />
+<span class="math inline">\(=\beta_0+\beta_1(X+1)+\beta_2Z-(\beta_0+\beta_1X+\beta_2Z)\)</span><br />
+<span class="math inline">\(=\beta_0+\beta_1X+\beta_1+\beta_2Z-(\beta_0+\beta_1X+\beta_2Z)\)</span><br />
+<span class="math inline">\(=\beta_1\)</span></p>
+<p>Thus, we are conducting inference about the relationship between <span class="math inline">\(Y\)</span> and <span class="math inline">\(X\)</span> controlling for <span class="math inline">\(Z\)</span>. You can control for any number of predictors; the interpretation of the regression parameters is the same as the one or two predictor scenarios discussed above.</p>
+</div>
+<div id="example-1-continuous-predictors" class="section level3">
+<h3><span class="header-section-number">8.2.4</span> Example 1: Continuous predictors</h3>
+<p>Let’s conduct a linear regression analysis of the relationship between AOSI total score and Mullen composite at 12 months, controlling for age at the month 12 visit. The corresponding regression model is:</p>
+<p><span class="math inline">\(AOSI=\beta_0+\beta_1Mullen+\beta_2Age+\epsilon\)</span><br />
+<span class="math inline">\(\mbox{E}(\epsilon)=0\)</span>, <span class="math inline">\(Var(\epsilon)=\sigma^2\)</span>, and all <span class="math inline">\(\epsilon\)</span> are independent.</p>
+<p>Anytime you are doing a regression analysis (including logistic regression and mixed models as discussed later), it is important to be able to explicitly write down the model you are using as we have done above.
+To apply the model to data and obtain estimates and confidence intervals (referred to as <em>fitting the model</em>) in R, you use the <strong>lm()</strong> function. The main syntax is the following: lm(y~x+z+…,data=…) where y is the name of the outcome variable, x and z are the predictors and data= is the argument where you specify the dataset to be used. The ~ symbol acts as the equal sign in the equation from the regression model.</p>
+<div class="sourceCode" id="cb401"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb401-1" title="1"><span class="co"># Fit the model to data to obtain estimates</span></a>
+<a class="sourceLine" id="cb401-2" title="2"><span class="kw">lm</span>(V12.aosi.total_score_<span class="dv">1</span>_<span class="dv">18</span><span class="op">~</span>V12.mullen.composite_standard_score</a>
+<a class="sourceLine" id="cb401-3" title="3">   <span class="op">+</span>V12.mullen.Candidate_Age, <span class="dt">data=</span>full_data)</a></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = V12.aosi.total_score_1_18 ~ V12.mullen.composite_standard_score + 
+##     V12.mullen.Candidate_Age, data = full_data)
+## 
+## Coefficients:
+##                         (Intercept)  V12.mullen.composite_standard_score  
+##                            12.34763                             -0.07873  
+##            V12.mullen.Candidate_Age  
+##                             0.04692</code></pre>
+<p>The estimated regression coefficients are returned. However, fitting the model produces many more results then just these estimates. To access the full results, first we need to save the lm() function output as a function. Then, we can access confidence intervals for the regression parameters, obtain p-values for hypothesis testing, obtain sum of squares measures and residuals, etc. This is done next in our AOSI example.</p>
+<div class="sourceCode" id="cb403"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb403-1" title="1"><span class="co"># Fit the model to data and save results as object</span></a>
+<a class="sourceLine" id="cb403-2" title="2">aosi_ex_<span class="dv">1</span>_fit &lt;-<span class="st"> </span><span class="kw">lm</span>(V12.aosi.total_score_<span class="dv">1</span>_<span class="dv">18</span><span class="op">~</span>V12.mullen.composite_standard_score</a>
+<a class="sourceLine" id="cb403-3" title="3">   <span class="op">+</span>V12.mullen.Candidate_Age, <span class="dt">data=</span>full_data)</a>
+<a class="sourceLine" id="cb403-4" title="4"><span class="kw">summary</span>(aosi_ex_<span class="dv">1</span>_fit)</a></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = V12.aosi.total_score_1_18 ~ V12.mullen.composite_standard_score + 
+##     V12.mullen.Candidate_Age, data = full_data)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -6.8582 -2.4493 -0.5611  1.9431 15.9197 
+## 
+## Coefficients:
+##                                     Estimate Std. Error t value Pr(&gt;|t|)
+## (Intercept)                         12.34763    3.21106   3.845 0.000136
+## V12.mullen.composite_standard_score -0.07873    0.01125  -6.999 8.17e-12
+## V12.mullen.Candidate_Age             0.04692    0.23631   0.199 0.842687
+##                                        
+## (Intercept)                         ***
+## V12.mullen.composite_standard_score ***
+## V12.mullen.Candidate_Age               
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 3.461 on 509 degrees of freedom
+##   (75 observations deleted due to missingness)
+## Multiple R-squared:  0.08796,    Adjusted R-squared:  0.08437 
+## F-statistic: 24.54 on 2 and 509 DF,  p-value: 6.67e-11</code></pre>
+<p>After saving the fit output, using the <strong>summary()</strong> with this object produces the standard results from a regression analysis. We now explain each element of this table.</p>
+<ol style="list-style-type: decimal">
+<li>Residuals:</li>
+</ol>
+<p>These are the error terms for each subject, which are the “gaps” between their actual outcome value and their predicted outcome value based on the <strong>fitted line</strong> (defined by <span class="math inline">\(\hat{\beta}_0+\hat{\beta_1}X+\hat{\beta_2}Z\)</span>). The minimum, 1st quartile, median, 3rd quartile, and maximum of these from the data are reported</p>
+<ol start="2" style="list-style-type: decimal">
+<li>Coefficients:</li>
+</ol>
+<p>Here the regression parameter estimates and their standard errors are reported, as well as the test statistic and p-value corresponding to the hypothesis test that this parameter is 0. Recall each test statistic has a T distribution, hence the labels “t value” and “Pr(&gt;|t|)”.</p>
+<ol start="3" style="list-style-type: decimal">
+<li>Residual standard error:</li>
+</ol>
+<p>Recall that the error term <span class="math inline">\(\epsilon\)</span> is assumed to have variance <span class="math inline">\(\sigma^2\)</span> for all observations in the data. The residual standard error is an estimate for <span class="math inline">\(\sigma\)</span>.</p>
+<ol start="4" style="list-style-type: decimal">
+<li>R-squared:</li>
+</ol>
+<p>The usual R-squared (“multiple”) and adjusted R-squared. Essentially, adjusted R-squared takes the usual R-squared and reduces it as the number of regression parameters in the model increases. Both reflect the same idea.</p>
+<ol start="5" style="list-style-type: decimal">
+<li>F-statistic:</li>
+</ol>
+<p>We have discussed conducting a hypothesis test for one single regression parameter equalling 0. To test if more then one regression parameters equal to 0, the test statistic has an F distribution with <span class="math inline">\(p-1\)</span> <em>numerator degrees of freedom</em> and <span class="math inline">\(n-p-1\)</span> <em>denominator degrees of freedom</em>. The test statistic and p-value reported here specifically correspond to the test for all non-intercept regression parameters equalling 0. This is generally not a hypothesis test of interest, though statistical software often reports it.</p>
+<p>You will generally only be interested in the Coefficients section and maybe the R-squared results, though it is useful to have an idea of what the other terms in output represent. We see that there is evidence from the regression results of a negative association between AOSI total score and Mullen composite score at 12 months, controlling for Age, with a one unit increase in Mullen composite score corresponding to a 0.08 decrease in the mean AOSI total score at 12 months. From the very small p-value, there is <strong>strong evidence</strong> of a <strong>weak association</strong>. Furthermore, the two R-squared values are very small, around 0.08. This indicates that most of a subject’s AOSI score is coming from the error term (<span class="math inline">\(\epsilon\)</span>) compared to the mean term (<span class="math inline">\(\beta_0+\beta_1Mullen+\beta_2Age\)</span>).</p>
+</div>
+<div id="example-2-categorical-predictors" class="section level3">
+<h3><span class="header-section-number">8.2.5</span> Example 2: Categorical predictors</h3>
+<p>Now, suppose one of the two predictors is a categorical variable. Note that if you use a predictor that measures counts (i.e., it not exactly continuous but can take any integer value or any integer value greater than or equal to 0), the interpretation of the regression model is essentially the same as the continuous case. Suppose we consider the following regression model:</p>
+<p><span class="math inline">\(AOSI=\beta_0+\beta_1Mullen+\beta_2Diagnosis+\epsilon\)</span><br />
+<span class="math inline">\(\mbox{E}(\epsilon)=0\)</span>, <span class="math inline">\(Var(\epsilon)=\sigma^2\)</span>, and all <span class="math inline">\(\epsilon\)</span> are independent.</p>
+<p>where variable <span class="math inline">\(Diagnosis\)</span> indicates clinical diagnosis of one of the following types: low risk:ASD (LR:ASD), low risk: negative (LR:Neg), high risk: ASD (HR:ASD) and high risk: negative (HR:Neg). To interpret the model, we require the</p>
+<ol style="list-style-type: decimal">
+<li><p><span class="math inline">\(\beta_0\)</span> to make sense and</p></li>
+<li><p><span class="math inline">\(Diagnosis\)</span> to be numeric.</p></li>
+</ol>
+<p>To accomplish 1), we need <span class="math inline">\(Diagnosis=0\)</span> to make sense. One way of achieving these two goals is to have <span class="math inline">\(Diagnosis\)</span> take values 0 (LR:ASD), 1 (LR:Neg), 2 (HR:ASD), or 3 (HR:Neg). Then, <span class="math inline">\(\beta_0\)</span> denotes the mean AOSI total score at 12 months when a subject has a 0 Mullen composite score and is diagnosed as LR:ASD. The issue is that <span class="math inline">\(\beta_1\)</span> measures the change in mean AOSI as <span class="math inline">\(Diagnosis\)</span> changes by 1 and Mullen composite score is constant. If <span class="math inline">\(Diagnosis\)</span> is coded in the above way, this implies that this change in mean AOSI is the same when going LR:ASD to LR:Neg as it is going from LR:Neg to HR:ASD. While this structure may be reasonable if the variable has an inherent ordering of least to most “severe”, in general with categorical variables it is a structure we would like avoid. Instead, we use “indicator variable” or <strong>dummy variable</strong> coding.
+With dummy variable coding, you represent the categorical variable with a set of binary (0 or 1) variables which indicate specific categories. For example, the previous regression model is replaced with the following:</p>
+<p><span class="math inline">\(AOSI=\beta_0+\beta_1Mullen+\beta_2HRneg+\beta_3LRasd+\beta_4LRneg+\epsilon\)</span><br />
+<span class="math inline">\(\mbox{E}(\epsilon)=0\)</span>, <span class="math inline">\(Var(\epsilon)=\sigma^2\)</span>, and all <span class="math inline">\(\epsilon\)</span> are independent.</p>
+<p>where <span class="math inline">\(HRneg=1\)</span> if <span class="math inline">\(Diagnosis=HR:Negative\)</span> and <span class="math inline">\(HRneg=0\)</span> otherwise, with <span class="math inline">\(LRasd\)</span> and <span class="math inline">\(LRneg\)</span> defined similarly. Thus, <span class="math inline">\(Diagnosis=HR:ASD\)</span> is denoted by <span class="math inline">\(HRneg=0, LRasd=0\)</span>, and <span class="math inline">\(LRneg=0\)</span>. HR:ASD is referred to as the <strong>reference group</strong>. As a result, for each subject, <strong>only one of these variables will equal 1 and the others will equal 0.</strong> This structure allows group-specific comparisons; see the ANOVA and ANCOVA section of this chapter for more detail. We can see that <span class="math inline">\(\beta_0\)</span> denotes the mean AOSI total score for a subject with Mullen composite score of 0 and a diagnosis of HR:ASD, and <span class="math inline">\(\beta_1\)</span> denotes the change in the mean AOSI total score when Mullen composite score increases by 1 unit and diagnosis is help constant, at 12 months. For the diagnosis groups, <span class="math inline">\(\beta_2\)</span> denotes the change in the mean AOSI total score when diagnosis changes from HR:ASD to HR:Neg and Mullen composite score is held constant, at 12 months, with <span class="math inline">\(\beta_3\)</span> and <span class="math inline">\(\beta_4\)</span> having the same interpretations for LR:ASD and LR:Neg respectively.</p>
+<p>Now, we fit this model to the data. When using the lm() function to fit a model with categorical predictors, if the predictor is coded as a character variable or a factor variable, R will automatically do dummy variable coding as shown below. To view the reference level used, view the <strong>xlevels</strong> object from the saved model fit object; the first value is what R is using as the reference level. This can also be seen in the fit results table; the reference level will not have regression coefficient results as detailed previously.</p>
+<div class="sourceCode" id="cb405"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb405-1" title="1"><span class="co"># Fit the model to data and save results as object</span></a>
+<a class="sourceLine" id="cb405-2" title="2">aosi_ex_<span class="dv">2</span>_fit &lt;-<span class="st"> </span><span class="kw">lm</span>(V12.aosi.total_score_<span class="dv">1</span>_<span class="dv">18</span><span class="op">~</span>V12.mullen.composite_standard_score</a>
+<a class="sourceLine" id="cb405-3" title="3">   <span class="op">+</span>GROUP, <span class="dt">data=</span>full_data)</a>
+<a class="sourceLine" id="cb405-4" title="4"><span class="kw">summary</span>(aosi_ex_<span class="dv">2</span>_fit)</a></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = V12.aosi.total_score_1_18 ~ V12.mullen.composite_standard_score + 
+##     GROUP, data = full_data)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -6.2913 -2.3751 -0.6146  2.1165 16.3076 
+## 
+## Coefficients:
+##                                     Estimate Std. Error t value Pr(&gt;|t|)
+## (Intercept)                         12.85779    1.13129  11.366  &lt; 2e-16
+## V12.mullen.composite_standard_score -0.05988    0.01157  -5.176 3.27e-07
+## GROUPHR_neg                         -1.95569    0.44015  -4.443 1.09e-05
+## GROUPLR_ASD                         -3.16309    1.98818  -1.591    0.112
+## GROUPLR_neg                         -2.53927    0.49520  -5.128 4.18e-07
+##                                        
+## (Intercept)                         ***
+## V12.mullen.composite_standard_score ***
+## GROUPHR_neg                         ***
+## GROUPLR_ASD                            
+## GROUPLR_neg                         ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 3.377 on 507 degrees of freedom
+##   (75 observations deleted due to missingness)
+## Multiple R-squared:  0.1354, Adjusted R-squared:  0.1285 
+## F-statistic: 19.84 on 4 and 507 DF,  p-value: 3.439e-15</code></pre>
+<div class="sourceCode" id="cb407"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb407-1" title="1">aosi_ex_<span class="dv">2</span>_fit<span class="op">$</span>xlevels</a></code></pre></div>
+<pre><code>## $GROUP
+## [1] &quot;HR_ASD&quot; &quot;HR_neg&quot; &quot;LR_ASD&quot; &quot;LR_neg&quot;</code></pre>
+<p>To set your own reference level for the variable, first you must make sure it is a factor variable. You can make it one using factor() (see tutorials “Objects and Functions” and “dplyr”). Once the variable is a factor, you can set the reference level using <strong>relevel()</strong>, with the syntax relevel(variable, ref=…) where the reference level value is place in the ref= argument. In the example below, we set the reference level to LR:ASD per the model above.</p>
+<div class="sourceCode" id="cb409"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb409-1" title="1"><span class="co"># Set reference level</span></a>
+<a class="sourceLine" id="cb409-2" title="2">full_data_<span class="dv">2</span> &lt;-<span class="st"> </span>full_data <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb409-3" title="3"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">GROUP=</span><span class="kw">factor</span>(GROUP) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb409-4" title="4"><span class="st">           </span><span class="kw">relevel</span>(<span class="dt">ref=</span><span class="st">&quot;LR_ASD&quot;</span>))</a>
+<a class="sourceLine" id="cb409-5" title="5"></a>
+<a class="sourceLine" id="cb409-6" title="6">full_data_<span class="dv">2</span><span class="op">$</span>GROUP <span class="co"># is a factor, LR_ASD is the first level</span></a></code></pre></div>
+<pre><code>##   [1] HR_ASD HR_ASD HR_ASD HR_ASD HR_neg HR_neg HR_ASD HR_ASD HR_neg HR_ASD
+##  [11] HR_neg HR_neg HR_neg HR_neg LR_neg HR_neg HR_ASD HR_neg HR_neg HR_neg
+##  [21] HR_neg HR_neg HR_neg HR_ASD HR_ASD HR_neg HR_neg LR_neg LR_neg HR_neg
+##  [31] HR_neg LR_neg LR_neg HR_neg LR_neg HR_neg LR_neg HR_neg HR_ASD HR_neg
+##  [41] LR_neg LR_neg LR_neg HR_neg HR_neg HR_neg HR_neg HR_neg LR_neg LR_neg
+##  [51] LR_neg LR_neg LR_neg LR_neg HR_ASD HR_neg LR_neg LR_neg HR_neg HR_neg
+##  [61] HR_neg LR_neg HR_ASD HR_ASD HR_ASD LR_neg HR_neg HR_neg HR_neg HR_ASD
+##  [71] HR_ASD LR_neg LR_neg HR_ASD LR_neg LR_neg HR_neg HR_neg HR_neg HR_neg
+##  [81] HR_neg HR_neg HR_neg HR_neg LR_neg HR_neg HR_ASD HR_neg HR_ASD HR_neg
+##  [91] HR_neg LR_neg HR_neg HR_neg HR_neg LR_neg HR_neg HR_neg HR_neg HR_neg
+## [101] HR_neg HR_neg LR_neg HR_neg HR_neg HR_neg LR_neg HR_neg HR_neg HR_neg
+## [111] HR_neg HR_neg HR_neg HR_neg HR_neg HR_ASD HR_neg HR_neg HR_neg HR_neg
+## [121] HR_ASD HR_neg HR_ASD HR_neg HR_neg HR_neg HR_neg LR_neg HR_neg HR_neg
+## [131] HR_neg HR_ASD LR_neg LR_neg LR_neg LR_neg LR_neg LR_neg LR_neg LR_neg
+## [141] LR_neg HR_neg HR_neg HR_ASD HR_neg HR_neg LR_neg HR_ASD HR_ASD HR_ASD
+## [151] LR_neg HR_neg HR_neg HR_neg HR_neg HR_neg HR_neg HR_ASD HR_neg HR_neg
+## [161] HR_neg HR_neg HR_neg HR_neg HR_ASD HR_neg HR_ASD HR_neg LR_neg LR_neg
+## [171] LR_neg HR_neg HR_neg HR_neg HR_ASD LR_neg HR_neg HR_neg LR_neg HR_neg
+## [181] LR_neg HR_ASD LR_neg LR_neg HR_neg HR_ASD HR_neg HR_neg LR_neg LR_neg
+## [191] HR_neg HR_neg LR_neg LR_neg LR_neg LR_neg HR_neg LR_neg HR_neg HR_neg
+## [201] HR_neg HR_neg HR_neg LR_ASD HR_neg LR_neg LR_neg HR_neg HR_neg HR_neg
+## [211] HR_neg HR_neg HR_neg HR_neg LR_neg LR_neg LR_neg LR_neg LR_neg HR_neg
+## [221] HR_neg HR_neg HR_ASD HR_neg LR_neg HR_ASD LR_neg LR_neg LR_neg LR_neg
+## [231] HR_neg HR_ASD HR_neg LR_neg HR_neg HR_neg HR_ASD LR_ASD LR_neg HR_ASD
+## [241] LR_neg LR_neg LR_neg LR_neg HR_ASD HR_neg HR_ASD HR_neg HR_neg HR_neg
+## [251] HR_neg LR_neg HR_neg HR_neg HR_ASD HR_neg LR_neg HR_neg LR_neg HR_neg
+## [261] HR_neg HR_ASD HR_ASD HR_ASD HR_ASD HR_ASD HR_neg HR_ASD LR_neg LR_neg
+## [271] LR_neg LR_neg HR_neg LR_neg LR_neg HR_neg HR_neg HR_neg HR_ASD HR_neg
+## [281] HR_neg HR_neg HR_ASD LR_neg LR_neg HR_neg HR_ASD HR_neg HR_ASD HR_ASD
+## [291] HR_neg HR_neg HR_neg LR_neg HR_ASD HR_ASD HR_neg LR_neg HR_neg HR_neg
+## [301] HR_neg HR_neg HR_neg HR_neg HR_neg HR_neg HR_neg HR_neg HR_neg HR_neg
+## [311] HR_neg HR_neg HR_neg HR_neg HR_neg HR_neg HR_neg HR_ASD HR_ASD HR_neg
+## [321] HR_neg HR_neg HR_neg HR_neg HR_ASD HR_neg HR_neg HR_neg HR_neg HR_neg
+## [331] HR_neg HR_neg HR_neg HR_neg HR_ASD HR_neg HR_neg LR_neg HR_neg HR_neg
+## [341] HR_neg HR_neg HR_neg HR_neg HR_neg LR_neg HR_ASD LR_neg LR_neg HR_neg
+## [351] HR_neg HR_ASD LR_neg HR_neg HR_neg HR_neg HR_neg HR_neg HR_ASD HR_neg
+## [361] HR_neg HR_neg HR_ASD HR_neg HR_neg HR_neg HR_neg HR_neg HR_neg HR_neg
+## [371] HR_neg LR_neg LR_neg HR_ASD HR_neg HR_neg HR_neg HR_neg HR_neg HR_neg
+## [381] HR_ASD HR_ASD LR_neg HR_neg HR_ASD HR_neg HR_ASD HR_neg HR_neg HR_neg
+## [391] LR_neg HR_neg LR_neg LR_neg LR_neg LR_neg LR_neg HR_neg LR_neg LR_neg
+## [401] LR_neg LR_neg HR_neg LR_neg LR_neg LR_neg LR_neg HR_ASD LR_neg LR_neg
+## [411] HR_neg HR_ASD HR_neg HR_ASD HR_neg HR_neg LR_neg HR_ASD HR_ASD HR_neg
+## [421] HR_neg HR_neg HR_neg HR_neg HR_neg HR_neg HR_neg LR_neg HR_neg LR_neg
+## [431] LR_neg LR_neg LR_neg LR_neg LR_neg LR_neg HR_neg LR_neg HR_neg HR_neg
+## [441] HR_neg HR_ASD HR_neg HR_neg HR_neg HR_neg HR_neg HR_neg HR_ASD HR_ASD
+## [451] HR_neg HR_neg HR_ASD LR_neg LR_neg HR_ASD LR_neg HR_neg HR_ASD LR_neg
+## [461] HR_neg HR_neg HR_neg HR_neg HR_neg LR_neg HR_ASD LR_neg LR_neg HR_neg
+## [471] HR_neg LR_neg HR_neg LR_neg HR_neg HR_neg LR_neg LR_neg LR_neg LR_neg
+## [481] HR_neg LR_neg HR_neg LR_neg HR_neg HR_neg HR_neg LR_ASD HR_neg HR_ASD
+## [491] HR_ASD HR_neg HR_neg HR_ASD HR_neg HR_ASD HR_neg HR_neg HR_neg HR_ASD
+## [501] HR_neg HR_neg HR_neg HR_neg HR_neg LR_neg HR_ASD HR_neg LR_neg LR_neg
+## [511] LR_neg LR_neg HR_ASD HR_ASD LR_neg HR_neg HR_neg HR_ASD HR_neg HR_neg
+## [521] HR_neg LR_neg LR_neg LR_neg HR_neg HR_neg HR_ASD LR_neg HR_neg LR_neg
+## [531] HR_neg LR_neg HR_neg LR_neg LR_neg LR_neg HR_neg HR_neg LR_neg HR_neg
+## [541] LR_neg HR_ASD LR_neg HR_neg LR_neg HR_neg LR_neg HR_ASD HR_ASD LR_neg
+## [551] HR_neg HR_neg HR_neg LR_neg LR_neg HR_neg HR_neg HR_ASD HR_neg HR_neg
+## [561] HR_neg HR_neg HR_neg HR_neg HR_neg HR_neg HR_neg LR_neg LR_neg HR_neg
+## [571] LR_neg LR_neg HR_neg LR_neg LR_neg HR_neg LR_neg HR_ASD HR_neg HR_neg
+## [581] LR_neg HR_neg LR_neg HR_neg LR_neg LR_neg LR_neg
+## Levels: LR_ASD HR_ASD HR_neg LR_neg</code></pre>
+<div class="sourceCode" id="cb411"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb411-1" title="1"><span class="co"># Fit the model to data and save results as object</span></a>
+<a class="sourceLine" id="cb411-2" title="2">aosi_ex_<span class="dv">2</span>_<span class="dv">2</span>_fit &lt;-<span class="st"> </span><span class="kw">lm</span>(V12.aosi.total_score_<span class="dv">1</span>_<span class="dv">18</span><span class="op">~</span>V12.mullen.composite_standard_score</a>
+<a class="sourceLine" id="cb411-3" title="3">   <span class="op">+</span>GROUP, <span class="dt">data=</span>full_data_<span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb411-4" title="4"><span class="kw">summary</span>(aosi_ex_<span class="dv">2</span>_<span class="dv">2</span>_fit)</a></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = V12.aosi.total_score_1_18 ~ V12.mullen.composite_standard_score + 
+##     GROUP, data = full_data_2)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -6.2913 -2.3751 -0.6146  2.1165 16.3076 
+## 
+## Coefficients:
+##                                     Estimate Std. Error t value Pr(&gt;|t|)
+## (Intercept)                          9.69470    2.27086   4.269 2.34e-05
+## V12.mullen.composite_standard_score -0.05988    0.01157  -5.176 3.27e-07
+## GROUPHR_ASD                          3.16309    1.98818   1.591    0.112
+## GROUPHR_neg                          1.20740    1.95985   0.616    0.538
+## GROUPLR_neg                          0.62383    1.97034   0.317    0.752
+##                                        
+## (Intercept)                         ***
+## V12.mullen.composite_standard_score ***
+## GROUPHR_ASD                            
+## GROUPHR_neg                            
+## GROUPLR_neg                            
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 3.377 on 507 degrees of freedom
+##   (75 observations deleted due to missingness)
+## Multiple R-squared:  0.1354, Adjusted R-squared:  0.1285 
+## F-statistic: 19.84 on 4 and 507 DF,  p-value: 3.439e-15</code></pre>
+<div class="sourceCode" id="cb413"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb413-1" title="1">aosi_ex_<span class="dv">2</span>_<span class="dv">2</span>_fit<span class="op">$</span>xlevels <span class="co"># LR_ASD is the first level as desired</span></a></code></pre></div>
+<pre><code>## $GROUP
+## [1] &quot;LR_ASD&quot; &quot;HR_ASD&quot; &quot;HR_neg&quot; &quot;LR_neg&quot;</code></pre>
+<p>Recall when fitting the model using HR:ASD as the reference group, two of the diagnosis group coefficients were strongly significant from 0. However, with LR:ASD as the reference group, none were significant from 0 based on the coefficient estimate p-values. We will discuss later how to compute <strong>all</strong> pairwise group comparisons so that we can calculate both of these sets of results regardless of what the reference group is.</p>
+<p>When you included a categorical predictor in the model, it is common to test if all of the coefficients pertaining to the predictor’s various levels are equal to 0. This can thought of as analogous to an F test for an overall group difference when conducting an ANOVA, with the individual regression coefficient t tests akin to the pairwise “post-hoc” t tests with an ANOVA. In terms of the regression model, this F test considers the null hypothesis of <span class="math inline">\(\beta_2=\beta_3=\beta_4=0\)</span>. Recall from Example 1, an F test is used in regression when testing if more then one regression coefficient equals 0. We can conduct this test using the <strong>aov()</strong> function with the model fit object returned by lm(), and saving this output as an object. Then, use summary() with this object to view the hypothesis test results, as shown in the example below. Note that as with lm(), the object returned by aov() includes many other components, though summary() will print the results we heed for this example. These additional components are accessed using $ as the object returned is a list. Notice that both return the same hypothesis test results; same test statistic, degrees of freedom, and p-value.</p>
+<div class="sourceCode" id="cb415"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb415-1" title="1"><span class="co"># Using 1st model with HR:ASD as reference level</span></a>
+<a class="sourceLine" id="cb415-2" title="2">f_test_fit_<span class="dv">1</span> &lt;-<span class="st"> </span><span class="kw">aov</span>(aosi_ex_<span class="dv">2</span>_fit)</a>
+<a class="sourceLine" id="cb415-3" title="3"><span class="kw">summary</span>(f_test_fit_<span class="dv">1</span>)</a></code></pre></div>
+<pre><code>##                                      Df Sum Sq Mean Sq F value   Pr(&gt;F)
+## V12.mullen.composite_standard_score   1    588   587.6  51.533 2.52e-12
+## GROUP                                 3    317   105.8   9.278 5.55e-06
+## Residuals                           507   5781    11.4                 
+##                                        
+## V12.mullen.composite_standard_score ***
+## GROUP                               ***
+## Residuals                              
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 75 observations deleted due to missingness</code></pre>
+<div class="sourceCode" id="cb417"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb417-1" title="1"><span class="co"># Using 2nd model with LR:ASD as reference level</span></a>
+<a class="sourceLine" id="cb417-2" title="2">f_test_fit_<span class="dv">2</span> &lt;-<span class="st"> </span><span class="kw">aov</span>(aosi_ex_<span class="dv">2</span>_<span class="dv">2</span>_fit)</a>
+<a class="sourceLine" id="cb417-3" title="3"><span class="kw">summary</span>(f_test_fit_<span class="dv">2</span>)</a></code></pre></div>
+<pre><code>##                                      Df Sum Sq Mean Sq F value   Pr(&gt;F)
+## V12.mullen.composite_standard_score   1    588   587.6  51.533 2.52e-12
+## GROUP                                 3    317   105.8   9.278 5.55e-06
+## Residuals                           507   5781    11.4                 
+##                                        
+## V12.mullen.composite_standard_score ***
+## GROUP                               ***
+## Residuals                              
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 75 observations deleted due to missingness</code></pre>
+<div class="sourceCode" id="cb419"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb419-1" title="1"><span class="co"># Some other components stored in f_test_fit_2</span></a>
+<a class="sourceLine" id="cb419-2" title="2">f_test_fit_<span class="dv">2</span> <span class="co"># provides Sum of Squares table</span></a></code></pre></div>
+<pre><code>## Call:
+##    aov(formula = aosi_ex_2_2_fit)
+## 
+## Terms:
+##                 V12.mullen.composite_standard_score    GROUP Residuals
+## Sum of Squares                              587.580  317.369  5780.855
+## Deg. of Freedom                                   1        3       507
+## 
+## Residual standard error: 3.376697
+## Estimated effects may be unbalanced
+## 75 observations deleted due to missingness</code></pre>
+<p>Often, we are also interested in calculating and comparing <strong>least-squared means</strong>. Recall our linear regression model in this example is the following:</p>
+<p><span class="math inline">\(AOSI=\beta_0+\beta_1Mullen+\beta_2LRneg+\beta_3HRasd+\beta_4HRneg+\epsilon\)</span><br />
+</p>
+<p>Due to the use of dummy variable coding, the means for AOSI total score in the different diagnosis groups are the following:</p>
+<ol style="list-style-type: decimal">
+<li><p>for LR: ASD Positive, <span class="math inline">\(\beta_0+\beta_1Mullen\)</span></p></li>
+<li><p>for LR: ASD Negative, <span class="math inline">\(\beta_0+\beta_1Mullen+\beta_2\)</span></p></li>
+<li><p>for HR: ASD Positive, <span class="math inline">\(\beta_0+\beta_1Mullen+\beta_3\)</span></p></li>
+<li><p>for HR: ASD Negative, <span class="math inline">\(\beta_0+\beta_1Mullen+\beta_4\)</span></p></li>
+</ol>
+<p>We see that we have means within ASD diagnosis groups that are also based on their values of the other predictors in the model, in this case just Mullen composite score. To calculate the least-squared means for each diagnosis group, we simply plug-in specific values for Mullen composite score. Usually the mean or median value in the sample is used. In this sense, we are reporting the mean AOSI total scores for each ASD diagnosis group, controlled for the other predictors in the model. More specifically, we are reporting the mean AOSI total scores for each ASD diagnosis group, at the mean/median values of the other predictors. To calculate these in R, you require the <strong>lsmeans</strong> package. Then, you use the <strong>lsmeans()</strong> function with the object from lm() as an argument, along with ~x where x is the name of the categorical variable in the model. To see what values for the other predictors for the least-squared means calculations (in this example, Mullen composite score) are being used, specify the function <strong>ref.grid()</strong> with the object from lm() as an argument. When ref.grid() is called here, we can see that Mullen composite score = 101.1 is used (the mean Mullen score, see code below). Thus the estimated least-squared mean for LR:ASD Positive is <span class="math inline">\(\hat{\beta}_0+\hat{\beta}_1*101.1\)</span>, with the other estimated least-squared means defined similarly. You have additional options when calculating these means; see the documentation for the lsmeans package for more details.</p>
+<div class="sourceCode" id="cb421"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb421-1" title="1"><span class="kw">library</span>(lsmeans)</a>
+<a class="sourceLine" id="cb421-2" title="2"><span class="kw">ref.grid</span>(aosi_ex_<span class="dv">2</span>_<span class="dv">2</span>_fit)</a></code></pre></div>
+<pre><code>## &#39;emmGrid&#39; object with variables:
+##     V12.mullen.composite_standard_score = 101.1
+##     GROUP = LR_ASD, HR_ASD, HR_neg, LR_neg</code></pre>
+<div class="sourceCode" id="cb423"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb423-1" title="1"><span class="kw">lsmeans</span>(aosi_ex_<span class="dv">2</span>_<span class="dv">2</span>_fit, <span class="op">~</span>GROUP)</a></code></pre></div>
+<pre><code>##  GROUP  lsmean    SE  df lower.CL upper.CL
+##  LR_ASD   3.64 1.950 507   -0.189     7.47
+##  HR_ASD   6.80 0.391 507    6.035     7.57
+##  HR_neg   4.85 0.201 507    4.454     5.24
+##  LR_neg   4.26 0.285 507    3.706     4.82
+## 
+## Confidence level used: 0.95</code></pre>
+<div class="sourceCode" id="cb425"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb425-1" title="1"><span class="kw">mean</span>(full_data_<span class="dv">2</span><span class="op">$</span>V12.mullen.composite_standard_score, <span class="dt">na.rm=</span>T) </a></code></pre></div>
+<pre><code>## [1] 101.1749</code></pre>
+<div class="sourceCode" id="cb427"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb427-1" title="1"><span class="co"># Equals 101. R is using mean Mullen composite score in calculations</span></a></code></pre></div>
+</div>
+<div id="diagnostics" class="section level3">
+<h3><span class="header-section-number">8.2.6</span> Diagnostics</h3>
+<p>Recall that the main assumptions when fitting a regression model to our data are the following:</p>
+<ol style="list-style-type: decimal">
+<li>Mean of <span class="math inline">\(Y\)</span> given <span class="math inline">\(X\)</span> is a linear function of <span class="math inline">\(X\)</span></li>
+<li>Across values of <span class="math inline">\(X\)</span>, the error terms have equal variances (called <em>homoskedasticity</em>)</li>
+<li>Across values of <span class="math inline">\(X\)</span>, the error terms are normally distributed or the sample size is large enough for the large sample approximation to be accurate</li>
+<li>All error terms in data are independent</li>
+</ol>
+<p>which need to verified in our data. A sub-optimal method to verify 1) is to view a scatterplot of <span class="math inline">\(Y\)</span> by <span class="math inline">\(X\)</span>, with some linear smoother such as LOESS (see Chapter 5). We are looking for evidence of a non-linear relationship using this linear smoother. However, this is sub-optimal because if other predictors as included in the model such as <span class="math inline">\(Z\)</span>, simply looking at <span class="math inline">\(Y\)</span> by <span class="math inline">\(X\)</span> does not provide information about the the relationship between <span class="math inline">\(Y\)</span> and <span class="math inline">\(X\)</span> and <span class="math inline">\(Z\)</span> jointly. An example is provided below with the AOSI total score by Mullen composite score example. Verifying 4) is done based on the study design from which the data originated from.</p>
+<div class="sourceCode" id="cb428"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb428-1" title="1"><span class="kw">ggplot</span>(<span class="dt">data=</span>full_data, <span class="kw">aes</span>(<span class="dt">x=</span>V12.mullen.composite_standard_score, <span class="dt">y=</span>V12.aosi.total_score_<span class="dv">1</span>_<span class="dv">18</span>))<span class="op">+</span></a>
+<a class="sourceLine" id="cb428-2" title="2"><span class="st">  </span><span class="kw">geom_point</span>()<span class="op">+</span></a>
+<a class="sourceLine" id="cb428-3" title="3"><span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">method=</span><span class="st">&quot;loess&quot;</span>)<span class="op">+</span></a>
+<a class="sourceLine" id="cb428-4" title="4"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x=</span><span class="st">&quot;Mullen Composite Standard Score&quot;</span>, </a>
+<a class="sourceLine" id="cb428-5" title="5">       <span class="dt">y=</span><span class="st">&quot;AOSI Total Score&quot;</span>, </a>
+<a class="sourceLine" id="cb428-6" title="6">       <span class="dt">title=</span><span class="st">&quot;Scatterplot of Mullen Composite Standard Score </span><span class="ch">\n</span><span class="st">and AOSI Total Score at Month 12&quot;</span>)</a></code></pre></div>
+<p><img src="_main_files/figure-html/diag_1-1.png" width="672" /></p>
+<p>To verify 2), we need to look at the residuals for the various subjects and visualize their variance. Consider Example 1 from before, where the model was:</p>
+<p><span class="math inline">\(AOSI=\beta_0+\beta_1Mullen+\beta_2Age+\epsilon\)</span><br />
+<span class="math inline">\(\mbox{E}(\epsilon)=0\)</span>, <span class="math inline">\(Var(\epsilon)=\sigma^2\)</span>, and all <span class="math inline">\(\epsilon\)</span> are independent.</p>
+<p>Let <span class="math inline">\(\hat{\beta_0}, \hat{\beta_1}, \mbox{ and } \hat{\beta_2}\)</span> denote the estimated regression parameters, and <span class="math inline">\(\widehat{AOSI}\)</span> denote a predicted value of AOSI. One way of predicting AOSI from our model is the following:</p>
+<p><span class="math inline">\(\widehat{AOSI}=\hat{\beta_0}+\hat{\beta_1}Mullen+\hat{\beta_2}Age\)</span></p>
+<p>which we denote as the <strong>fitted value</strong> for AOSI. The difference between the subject’s predicted value from the model and their observed value from the data is denoted by:</p>
+<p><span class="math inline">\(\hat{\epsilon}=AOSI-\widehat{AOSI}\)</span></p>
+<p>and represents the “error” of our model, often referred to as the <strong>residual</strong>. To verify 2), we need a scatterplot of each subject’s residual by their fitted value, and observed their variance in the plot. To access the residuals, we can use the object created by lm(); one of the components stored is a vector of the residuals. Similarly, the fitted values can also be extracted from this object. In the example below, a dataset containing these residuals and fitted values is created using the function <strong>data.frame()</strong>. When given a set of set of vectors, this function will create a data frame with these vectors as columns/variables. Then, ggplot2 can be used to plot the residuals by the fitted values.</p>
+<div class="sourceCode" id="cb429"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb429-1" title="1">fit &lt;-<span class="st"> </span><span class="kw">lm</span>(V12.aosi.total_score_<span class="dv">1</span>_<span class="dv">18</span><span class="op">~</span>V12.mullen.composite_standard_score</a>
+<a class="sourceLine" id="cb429-2" title="2">   <span class="op">+</span>V12.mullen.Candidate_Age, <span class="dt">data=</span>full_data)</a>
+<a class="sourceLine" id="cb429-3" title="3"></a>
+<a class="sourceLine" id="cb429-4" title="4">fit_data &lt;-<span class="st"> </span><span class="kw">data.frame</span>(fit<span class="op">$</span>residuals, fit<span class="op">$</span>fitted.values)</a>
+<a class="sourceLine" id="cb429-5" title="5"></a>
+<a class="sourceLine" id="cb429-6" title="6"><span class="kw">ggplot</span>(<span class="dt">data=</span>fit_data, <span class="kw">aes</span>(<span class="dt">y=</span>fit.residuals, <span class="dt">x=</span>fit.fitted.values))<span class="op">+</span></a>
+<a class="sourceLine" id="cb429-7" title="7"><span class="st">  </span><span class="kw">geom_point</span>()<span class="op">+</span></a>
+<a class="sourceLine" id="cb429-8" title="8"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x=</span><span class="st">&quot;Fitted Value&quot;</span>, </a>
+<a class="sourceLine" id="cb429-9" title="9">       <span class="dt">y=</span><span class="st">&quot;Residual&quot;</span>, </a>
+<a class="sourceLine" id="cb429-10" title="10">       <span class="dt">title=</span><span class="st">&quot;Scatterplot of residual by fitted value for AOSI regression model.&quot;</span>)</a></code></pre></div>
+<p><img src="_main_files/figure-html/diag_2-1.png" width="672" /></p>
+<p>To verify the assumptions of the model, we are looking for the spread of the data to be constant across the x-axis; essentially, we want the variance of the residuals to be constant across all fitted values. More explicitly, we would like a plot similar to Case 1 in the image below; for Case 2, the residual variance is higher in the middle range of fitted values.</p>
+<p><img src="diagnostics_plot.jpg" /></p>
+<p>To verify 3), we need to visualize the distribution of the residuals and compare it to a normal distribution. This is commonly done by creating a <strong>QQ plot</strong> of the residuals. Ideally, the data points should lie directly on the 45 degree line provided in the plot; deviation from this line indicates some deviation from the normal distribution. Often times, the lower and upper tails of the data will deviate from the line.</p>
+<div class="sourceCode" id="cb430"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb430-1" title="1"><span class="kw">qqnorm</span>(<span class="dt">y=</span>fit_data<span class="op">$</span>fit.residuals)</a>
+<a class="sourceLine" id="cb430-2" title="2"><span class="kw">qqline</span>(<span class="dt">y=</span>fit_data<span class="op">$</span>fit.residuals, <span class="dt">datax =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
+<p><img src="_main_files/figure-html/diag_3-1.png" width="672" /></p>
+<p>In the AOSI total score by Mullen composite score example, the middle section of the data points fall on or very close to the line while there is noticable deviation at the upper and lower tails. The size of this deviation may be cause for concern, however due to large sample size (about 500 subjects), a large sample approximation to the normal distribution can be used. As a result, the deviation at the tails does not invalidate the regression model used.</p>
+</div>
+<div id="anova-and-ancova" class="section level3">
+<h3><span class="header-section-number">8.2.7</span> ANOVA and ANCOVA</h3>
+<p>One of the most common statistical analyses done is <strong>ANOVA</strong>. We have already discussed this analysis method in Chapter 7. Here, we show how ANOVA is equivalent to a specific case of linear regression. We also define and discuss <strong>ANCOVA</strong>. Note that ANCOVA is defined differently across certain scientific disciplines; the definition used here is one that is common in statistics. The main message of this section is that ANOVA and ANCOVA are simply special cases of a linear regression model.</p>
+<p>For ANOVA, we have observations from two or more groups. For example suppose we are interested in comparing AOSI total score at 12 months across diagnosis group at month 24. Suppose the diagnosis group categories are High Risk: ASD Negative, High Risk: ASD Positive, Low Risk: ASD Positive and Low Risk: ASD Negative. We want to compare the mean Mullen composite scores at 24 months across these groups. Consider the following linear regression model:</p>
+<p><span class="math inline">\(AOSI=\beta_0+\beta_1LRneg+\beta_2HRasd+\beta_3HRneg+\epsilon\)</span><br />
+<span class="math inline">\(\mbox{E}(\epsilon)=0\)</span>, <span class="math inline">\(Var(\epsilon)=\sigma^2\)</span>, and all <span class="math inline">\(\epsilon\)</span> are independent.</p>
+<p>where <span class="math inline">\(LRneg, HRasd,\)</span> and <span class="math inline">\(HRneg\)</span> are the dummy variables defined in Example 2 above. From this model, we can write down the mean AOSI scores for each group by setting the dummy variable to 1 for this group, and the others to 0(recall Low Risk: ASD Positive is the reference group from this model).</p>
+<p><span class="math inline">\(\mbox{E}(AOSI|\mbox{LR:ASD Positive})=\beta_0\)</span> (all dummy variables =0)</p>
+<p><span class="math inline">\(\mbox{E}(AOSI|\mbox{LR:ASD Negative})=\beta_0+\beta_1\)</span></p>
+<p><span class="math inline">\(\mbox{E}(AOSI|\mbox{HR:ASD Positive})=\beta_0+\beta_2\)</span></p>
+<p><span class="math inline">\(\mbox{E}(AOSI|\mbox{HR:ASD Negative})=\beta_0+\beta_3\)</span></p>
+<p>We can see that if we want to compare the means between LR: ASD Negative and LR:ASD Positive, we compare <span class="math inline">\(\beta_0+\beta_1-(\beta_0)=\beta_1\)</span> to 0. If <span class="math inline">\(\beta_1=0\)</span>, then the two groups’ means are equal and otherwise they are different. Similarly, to compare HR: ASD Positive and LR:ASD Positive, we compare <span class="math inline">\(\beta_2\)</span> to 0 and to compare HR: ASD Negative and LR:ASD Positive, we compare <span class="math inline">\(\beta_3\)</span> to 0. In fact, every pairwise group comparison results in comparing one of <span class="math inline">\(\beta_1, \beta_2\)</span>, and <span class="math inline">\(\beta_3\)</span> to 0. Further, we can see from the four means above that if all groups have the same mean, <span class="math inline">\(\beta_1=\beta_2=\beta_3=0\)</span>. This is exactly the same framework as ANOVA; from this linear regression model, we can compare all of the groups’ means, as well as do all pairwise comparisons.</p>
+<p>Recall that we are assuming each subject’s residuals are independent and that each residual follows a normal distribution with the same variance. These assumptions are the same as the assumptions in ANOVA: independent observations, normally distributed, and equal variance across the groups. Finally, recall that in ANOVA, the overall group test for equal means uses a F distribution and that the pairwise tests use a T distribution. This is the same as in the above regression model. Since testing <span class="math inline">\(\beta_1=\beta_2=\beta_3=0\)</span> is testing multiple regression parameters, we have learned that the test uses a F distribution. As discussed before, it turns out that testing if a single regression coefficients equals 0 uses a T distribution.</p>
+<p>We can see the equality between ANOVA and the above regression model by running both analyses in R. When running a linear regression, for testing the null hypothesis of <span class="math inline">\(\beta_1=\beta_2=\beta_3=0\)</span>, we see a test statistic value of 16.68 which has an F distribution with 3 and 599 degrees of freedom. When running ANOVA, we see the corresponding test statistic is exactly the same.</p>
+<div class="sourceCode" id="cb431"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb431-1" title="1"><span class="co"># Regression</span></a>
+<a class="sourceLine" id="cb431-2" title="2">lm_V_ANOVA_fit &lt;-<span class="st"> </span><span class="kw">lm</span>(V12.aosi.total_score_<span class="dv">1</span>_<span class="dv">18</span><span class="op">~</span>GROUP, <span class="dt">data=</span>full_data_<span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb431-3" title="3">f_test_fit_lm_V_ANOVA &lt;-<span class="st"> </span><span class="kw">aov</span>(lm_V_ANOVA_fit)</a>
+<a class="sourceLine" id="cb431-4" title="4"></a>
+<a class="sourceLine" id="cb431-5" title="5"><span class="kw">summary</span>(f_test_fit_lm_V_ANOVA)</a></code></pre></div>
+<pre><code>##              Df Sum Sq Mean Sq F value   Pr(&gt;F)    
+## GROUP         3    599  199.81   16.68 2.39e-10 ***
+## Residuals   508   6086   11.98                     
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 75 observations deleted due to missingness</code></pre>
+<div class="sourceCode" id="cb433"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb433-1" title="1"><span class="co"># ANOVA</span></a>
+<a class="sourceLine" id="cb433-2" title="2">ANOVA_fit &lt;-<span class="st"> </span><span class="kw">aov</span>(V12.aosi.total_score_<span class="dv">1</span>_<span class="dv">18</span><span class="op">~</span>GROUP, <span class="dt">data=</span>full_data_<span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb433-3" title="3"><span class="kw">summary</span>(ANOVA_fit)</a></code></pre></div>
+<pre><code>##              Df Sum Sq Mean Sq F value   Pr(&gt;F)    
+## GROUP         3    599  199.81   16.68 2.39e-10 ***
+## Residuals   508   6086   11.98                     
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 75 observations deleted due to missingness</code></pre>
+<p>To end the linear regression section, we discuss ANCOVA. With an ANCOVA analysis, you have an outcome variable <span class="math inline">\(Y\)</span>, categorical predictor <span class="math inline">\(X\)</span>, and continuous predictor <span class="math inline">\(Z\)</span>. The ANCOVA model is the following:</p>
+<p><span class="math inline">\(Y=\beta_0+\beta_1X+\beta_2Z+\beta_3X*Z+\epsilon\)</span><br />
+<span class="math inline">\(\mbox{E}(\epsilon)=0\)</span>, <span class="math inline">\(Var(\epsilon)=\sigma^2\)</span>, and all <span class="math inline">\(\epsilon\)</span> are independent.</p>
+<p>where <span class="math inline">\(X*Z\)</span> is called an <strong>interactiom term</strong>. Let us unpack this model. Suppose <span class="math inline">\(X\)</span> takes one of the two categories 0 or 1. For those with <span class="math inline">\(X=0\)</span>, their model is:</p>
+<p><span class="math inline">\(Y=\beta_0+\beta_2Z+\epsilon\)</span><br />
+<span class="math inline">\(\mbox{E}(\epsilon)=0\)</span>, <span class="math inline">\(Var(\epsilon)=\sigma^2\)</span>, and all <span class="math inline">\(\epsilon\)</span> are independent.</p>
+<p>Since <span class="math inline">\(Z\)</span> is continuous, we can see that the subjects in this category have an intercept of <span class="math inline">\(\beta_0\)</span> and a slope of <span class="math inline">\(\beta_2\)</span>. For those with <span class="math inline">\(X=1\)</span>, their model is:</p>
+<p><span class="math inline">\(Y=\beta_0+\beta_1+\beta_2Z+\beta_3Z+\epsilon\)</span><br />
+<span class="math inline">\(\mbox{E}(\epsilon)=0\)</span>, <span class="math inline">\(Var(\epsilon)=\sigma^2\)</span>, and all <span class="math inline">\(\epsilon\)</span> are independent.</p>
+<p>We can see that their intercept is <span class="math inline">\(\beta_0+\beta_1\)</span> and their slope is <span class="math inline">\(\beta_2+\beta_3\)</span>. Thus with ANCOVA, are allowing a different linear relationship between <span class="math inline">\(Y\)</span> and <span class="math inline">\(Z\)</span> in our model, based on values of <span class="math inline">\(X\)</span>.</p>
+<p>As an example, consider modeling an outcome of AOSI total score at 12 months with ASD diagnosis at 24 months (positive or negative) and Mullen composite score at 12 months with an ANCOVA model. The corresponding linear regression model is</p>
+<p><span class="math inline">\(AOSI=\beta_0+\beta_1ASDpos+\beta_2Mullen+\beta_3ASDpos*Mullen+\epsilon\)</span><br />
+<span class="math inline">\(\mbox{E}(\epsilon)=0\)</span>, <span class="math inline">\(Var(\epsilon)=\sigma^2\)</span>, and all <span class="math inline">\(\epsilon\)</span> are independent.</p>
+<p>We can see that the trend (or “slope”) between AOSI total score and Mullen composite score at 12 months is <span class="math inline">\(\beta_2\)</span> for ASD negative children and <span class="math inline">\(\beta_2+\beta_3\)</span> for ASD positive children. Let’s fit this model to the data.</p>
+<div class="sourceCode" id="cb435"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb435-1" title="1"><span class="co"># Regression</span></a>
+<a class="sourceLine" id="cb435-2" title="2">lm_ANCOVA_fit &lt;-<span class="st"> </span><span class="kw">lm</span>(V12.aosi.total_score_<span class="dv">1</span>_<span class="dv">18</span><span class="op">~</span>SSM_ASD_v24<span class="op">+</span>V12.mullen.composite_standard_score<span class="op">+</span>V12.mullen.composite_standard_score<span class="op">*</span>SSM_ASD_v24, <span class="dt">data=</span>full_data_<span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb435-3" title="3"></a>
+<a class="sourceLine" id="cb435-4" title="4"><span class="kw">summary</span>(lm_ANCOVA_fit)</a></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = V12.aosi.total_score_1_18 ~ SSM_ASD_v24 + V12.mullen.composite_standard_score + 
+##     V12.mullen.composite_standard_score * SSM_ASD_v24, data = full_data_2)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -8.0012 -2.3956 -0.6443  1.9384 16.6981 
+## 
+## Coefficients:
+##                                                        Estimate Std. Error
+## (Intercept)                                             9.45201    1.31543
+## SSM_ASD_v24YES_ASD                                      9.65831    2.73602
+## V12.mullen.composite_standard_score                    -0.04770    0.01270
+## SSM_ASD_v24YES_ASD:V12.mullen.composite_standard_score -0.08101    0.02860
+##                                                        t value Pr(&gt;|t|)
+## (Intercept)                                              7.185  2.4e-12
+## SSM_ASD_v24YES_ASD                                       3.530 0.000453
+## V12.mullen.composite_standard_score                     -3.755 0.000193
+## SSM_ASD_v24YES_ASD:V12.mullen.composite_standard_score  -2.832 0.004805
+##                                                           
+## (Intercept)                                            ***
+## SSM_ASD_v24YES_ASD                                     ***
+## V12.mullen.composite_standard_score                    ***
+## SSM_ASD_v24YES_ASD:V12.mullen.composite_standard_score ** 
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 3.365 on 508 degrees of freedom
+##   (75 observations deleted due to missingness)
+## Multiple R-squared:  0.1399, Adjusted R-squared:  0.1348 
+## F-statistic: 27.54 on 3 and 508 DF,  p-value: &lt; 2.2e-16</code></pre>
+<p>We see that all of the regression parameters are highly significant from 0 based on the p-values and the fitted model is:</p>
+<p><span class="math inline">\(AOSI=9.45+9.66ASDpos-0.05Mullen-0.08ASDpos*Mullen+\epsilon\)</span></p>
+<p>This implies that ASD positive children have a slightly more negative association between AOSI and Mullen then ASD negative children (due to the -0.08 interaction term estimate) and that ASD positive children have a much higher AOSI baseline (baseline meaning Mullen composite score equalling 0). We can better visualize these findings by creating a scatterplot of AOSI total score and Mullen composite score at month 12, with a separate line of “best fit” for each ASD diagnosis.</p>
+<div class="sourceCode" id="cb437"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb437-1" title="1"><span class="kw">ggplot</span>(<span class="dt">mapping=</span><span class="kw">aes</span>(<span class="dt">x=</span>V12.mullen.composite_standard_score, </a>
+<a class="sourceLine" id="cb437-2" title="2">                   <span class="dt">y=</span>V12.aosi.total_score_<span class="dv">1</span>_<span class="dv">18</span>,</a>
+<a class="sourceLine" id="cb437-3" title="3">                   <span class="dt">group=</span>SSM_ASD_v24, </a>
+<a class="sourceLine" id="cb437-4" title="4">                   <span class="dt">color=</span>SSM_ASD_v24),</a>
+<a class="sourceLine" id="cb437-5" title="5">      <span class="dt">data=</span>full_data_<span class="dv">2</span>)<span class="op">+</span></a>
+<a class="sourceLine" id="cb437-6" title="6"><span class="st">  </span><span class="kw">geom_point</span>()<span class="op">+</span></a>
+<a class="sourceLine" id="cb437-7" title="7"><span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">method =</span><span class="st">&quot;lm&quot;</span>)<span class="op">+</span></a>
+<a class="sourceLine" id="cb437-8" title="8"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x=</span><span class="st">&quot;Mullen composite score at 12 months&quot;</span>,</a>
+<a class="sourceLine" id="cb437-9" title="9">       <span class="dt">y=</span><span class="st">&quot;AOSI total score at 12 months&quot;</span>,</a>
+<a class="sourceLine" id="cb437-10" title="10">       <span class="dt">title=</span><span class="st">&quot;ANCOVA example: AOSI by Mullen by ASD Diagnosis at 24 months&quot;</span>,</a>
+<a class="sourceLine" id="cb437-11" title="11">       <span class="dt">color=</span><span class="st">&quot;ASD Diagnosis&quot;</span>) </a></code></pre></div>
+<p><img src="_main_files/figure-html/ANCOVA_line-1.png" width="672" /></p>
+<div class="sourceCode" id="cb438"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb438-1" title="1"><span class="co"># legend is created by color= argument, so use color= argument in labs() to change lend title</span></a></code></pre></div>
+</div>
+</div>
+<div id="logistic-regression" class="section level2">
+<h2><span class="header-section-number">8.3</span> Logistic regression</h2>
+<p>While linear regression can be used with a continuous outcome, it may be of interest to analyze the assocication between a binary outcome (only two possible outcomes) and a set of covariates. In this case, logistic regression can be used. Logistic regression is very similar to linear regression, with the main difference being that the probability of a specific outcome is being modeled instead of the outcome’s mean value.</p>
+<div id="methodology-1" class="section level3">
+<h3><span class="header-section-number">8.3.1</span> Methodology</h3>
+<p>Suppose that outcome variable <span class="math inline">\(Y\)</span> is binary, taking either 0 or 1 as a value, with <span class="math inline">\(X\)</span> and <span class="math inline">\(Z\)</span> being covariates (continuous or categorical). Suppose we model the relationship between <span class="math inline">\(Y\)</span> and the covariates using a linear regression model:</p>
+<p><span class="math inline">\(Y=\beta_0+\beta_1X+\beta_2Z+\epsilon\)</span></p>
+<p><span class="math inline">\(\mbox{E}(Y|X,Z)=\beta_0+\beta_1X+\beta_2Z\)</span></p>
+<p><span class="math inline">\(\mbox{E}(\epsilon)=0\)</span>, <span class="math inline">\(Var(\epsilon)=\sigma^2\)</span>, and all <span class="math inline">\(\epsilon\)</span> are independent.</p>
+<p>This creates a few complications. First, since the mean of a binary variable is the probability the variable equals 1, this model implies</p>
+<p><span class="math inline">\(\mbox{Pr}(Y=1|X,Z)=\beta_0+\beta_1X+\beta_2Z\)</span>.</p>
+<p>However, a probability must be between 0 and 1. Thus, we need to add limits to this model so that for every value of <span class="math inline">\(X\)</span> and <span class="math inline">\(Z\)</span>, <span class="math inline">\(\beta_0+\beta_1X+\beta_2Z\)</span> is between 0 and 1. We would like to avoid these complications. Furthermore, we need <span class="math inline">\(Y\)</span> to be equal to 0 or 1. However, <span class="math inline">\(\epsilon\)</span> is continuous. Thus, we need to add limits to this model to ensure <span class="math inline">\(\beta_0+\beta_1X+\beta_2Z+\epsilon\)</span> is always either 0 or 1 for every possible value of <span class="math inline">\(X, Z\)</span>, and <span class="math inline">\(\epsilon\)</span>. Again, we would like to avoid these complications in our model.</p>
+<p>Instead, with logistic regression we model the following:</p>
+<p>Denote <span class="math inline">\(\mbox{Pr}(Y=1|X,Z)\)</span> by <span class="math inline">\(p_{x,z}\)</span>.<br />
+Assume <span class="math inline">\(\mbox{logit}(p_{x,z})=\beta_0+\beta_1X+\beta_2Z\)</span>
+where <span class="math inline">\(\mbox{logit}(x)=\mbox{log}[x/(1-x)]\)</span> where log() indicates the natural log</p>
+<p>Notice that we are not specifying a model for <span class="math inline">\(Y\)</span> itself as a function of predictors <span class="math inline">\(X\)</span> and <span class="math inline">\(Z\)</span>, nor are we specifying a model for the mean of <span class="math inline">\(Y\)</span>. Instead, we are specifying a model for the <strong>logit of the probability <span class="math inline">\(Y\)</span> is 1 given predictors <span class="math inline">\(X\)</span> and <span class="math inline">\(Z\)</span></strong>. Thus, we interpret the regression parameters <span class="math inline">\((\beta_0, \beta_1, \ldots)\)</span> with respect to the logit. How can we interpret this logit term? We define the odds for <span class="math inline">\(Y\)</span> by</p>
+<p><span class="math inline">\(\Pr(Y=1)/\Pr(Y=0)\)</span>
+<span class="math inline">\(=\Pr(Y=1)/[1-\Pr(Y=1)]\)</span></p>
+<p>which is between 0 and infinity, with higher/lower odds reflecting a higher/lower probability of <span class="math inline">\(Y\)</span> equalling 1. Furthermore, log(<span class="math inline">\(x\)</span>) is between negative infinity and positive infinity for any value of <span class="math inline">\(x&gt;0\)</span> and is an <strong>increasing function</strong> of x (as <span class="math inline">\(x\)</span> increases/decreases, log(<span class="math inline">\(x\)</span>) increases/decreases; see plot below).</p>
+<div class="sourceCode" id="cb439"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb439-1" title="1"><span class="kw">curve</span>(<span class="kw">log</span>(x), <span class="dt">from=</span><span class="fl">0.001</span>, <span class="dt">to=</span><span class="dv">100</span>, <span class="dt">xlab=</span><span class="st">&quot;x&quot;</span>, <span class="dt">ylab=</span><span class="st">&quot;log(x)&quot;</span>)</a></code></pre></div>
+<p><img src="_main_files/figure-html/log_ex_plot-1.png" width="672" /></p>
+<p>As a result, we are actually modelling the <strong>log of the odds of <span class="math inline">\(Y\)</span> given <span class="math inline">\(X\)</span> and <span class="math inline">\(Z\)</span></strong>. Specifically, <span class="math inline">\(\beta_0\)</span> denotes the log odds of <span class="math inline">\(Y=1\)</span> when <span class="math inline">\(X\)</span> and <span class="math inline">\(Z\)</span> are 0, <span class="math inline">\(\beta_1\)</span> denotes the change in the log odds of <span class="math inline">\(Y=1\)</span> when <span class="math inline">\(X\)</span> increases by 1 unit and <span class="math inline">\(Z\)</span> is constant, and <span class="math inline">\(\beta_2\)</span> denotes the change in the log odds of <span class="math inline">\(Y=1\)</span> when <span class="math inline">\(Z\)</span> increases by 1 unit and <span class="math inline">\(X\)</span> is constant. This has a useful interpretation as explained above and it is a continuous value that can be any number. Thus, this model is used for regression with binary outcomes.</p>
+<p>The assumptions that we make when using this model are the following
+1) All observations are independent
+2) The linear form is correct (i.e., the log odds is a linear function of <span class="math inline">\(X\)</span> and <span class="math inline">\(Z\)</span>)</p>
+<p>As in linear regression, the validity of 1) is based on the study design from which the data originated from. The validity of 2) is hard to check in data due to the outcome being discrete (so a scatterplot would not be very informative).</p>
+</div>
+<div id="example-1-continuous-covariates" class="section level3">
+<h3><span class="header-section-number">8.3.2</span> Example 1: Continuous Covariates</h3>
+<p>For examples of logistic regression, we consider outcome variable <span class="math inline">\(ASD\)</span> which is 1 if a child has been clinically diagnosed with ASD at 24 months and 0 otherwise. Suppose we want to analyze the association between ASD status at 24 months and AOSI total score at 12 months, controlling for Mullen composite score at 12 months. Essentially, this would be measuring the association between ASD status and AOSI score beyond AOSI’s association with ASD through its association with Mullen composite score. The logistic regression model is:</p>
+<p><span class="math inline">\(\mbox{logit}[\Pr(\mbox{ASD at 24 months}|AOSI_{12}, Mullen_{12})]=\beta_0+\beta_1AOSI_{12}+\beta_2Mullen_{12}\)</span></p>
+<p>To fit the logistic regression model to the data, the <strong>glm()</strong> function is used. It operates exactly like lm(), however you also need to specify <strong>family=binomial</strong> as an argument. This tells R you want to fit a logistic regression model. Note that your outcome variable has to either 1) be coded as 0 or 1, or 2) be a factor variable with two levels when using glm(). Often times, the variable will be a character variable which will result in an error in R. This can be fixed by using factor() with glm(); this will not change the actual variable in the dataset (it will still be a character). However when fitting the logistic regression model, it will be considered a factor variable as desired. After saving the output returned by glm() as an object, you can use the summary() function with this object to return the main results.</p>
+<div class="sourceCode" id="cb440"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb440-1" title="1"><span class="co"># Fit logistic regression model</span></a>
+<a class="sourceLine" id="cb440-2" title="2">logistic_fit_<span class="dv">1</span> &lt;-<span class="st"> </span><span class="kw">glm</span>(SSM_ASD_v24<span class="op">~</span>V12.aosi.total_score_<span class="dv">1</span>_<span class="dv">18</span><span class="op">+</span></a>
+<a class="sourceLine" id="cb440-3" title="3"><span class="st">                        </span>V12.mullen.composite_standard_score, <span class="dt">data=</span>full_data,</a>
+<a class="sourceLine" id="cb440-4" title="4">                      <span class="dt">family=</span>binomial) </a></code></pre></div>
+<pre><code>## Error in eval(family$initialize): y values must be 0 &lt;= y &lt;= 1</code></pre>
+<div class="sourceCode" id="cb442"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb442-1" title="1"><span class="co"># creates error, SSM_ASD_v24 is a character variable</span></a>
+<a class="sourceLine" id="cb442-2" title="2"></a>
+<a class="sourceLine" id="cb442-3" title="3">logistic_fit_<span class="dv">1</span> &lt;-<span class="st"> </span><span class="kw">glm</span>(<span class="kw">factor</span>(SSM_ASD_v24)<span class="op">~</span>V12.aosi.total_score_<span class="dv">1</span>_<span class="dv">18</span><span class="op">+</span></a>
+<a class="sourceLine" id="cb442-4" title="4"><span class="st">                        </span>V12.mullen.composite_standard_score, <span class="dt">data=</span>full_data,</a>
+<a class="sourceLine" id="cb442-5" title="5">                      <span class="dt">family=</span>binomial)</a>
+<a class="sourceLine" id="cb442-6" title="6"><span class="co"># no error due to use of factor()</span></a>
+<a class="sourceLine" id="cb442-7" title="7"><span class="kw">summary</span>(logistic_fit_<span class="dv">1</span>)</a></code></pre></div>
+<pre><code>## 
+## Call:
+## glm(formula = factor(SSM_ASD_v24) ~ V12.aosi.total_score_1_18 + 
+##     V12.mullen.composite_standard_score, family = binomial, data = full_data)
+## 
+## Deviance Residuals: 
+##     Min       1Q   Median       3Q      Max  
+## -2.0002  -0.5847  -0.4436  -0.3207   2.6519  
+## 
+## Coefficients:
+##                                      Estimate Std. Error z value Pr(&gt;|z|)
+## (Intercept)                          1.946041   1.021964   1.904   0.0569
+## V12.aosi.total_score_1_18            0.136239   0.033790   4.032 5.53e-05
+## V12.mullen.composite_standard_score -0.044525   0.009891  -4.502 6.74e-06
+##                                        
+## (Intercept)                         .  
+## V12.aosi.total_score_1_18           ***
+## V12.mullen.composite_standard_score ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## (Dispersion parameter for binomial family taken to be 1)
+## 
+##     Null deviance: 453.79  on 511  degrees of freedom
+## Residual deviance: 398.41  on 509  degrees of freedom
+##   (75 observations deleted due to missingness)
+## AIC: 404.41
+## 
+## Number of Fisher Scoring iterations: 5</code></pre>
+<p>There is strong evidence that both AOSI total score and Mullen composite score at 12 months are associated with ASD diagnosis at 24 months, with AOSI being positively associated and Mullen negatively associated. Note that with logistic regression, the test statistic corresponding to the hypothesis test of the regression coefficient equalling 0 is approximately standard normal (often denoted by Z), with the approximation’s accuracy improving as the sample size increases. Thus, R denotes the test statistic value by “z value” and corresponding p-value by “Pr(&gt;|z|)”. The other pieces of the output are not as often used, though AIC is sometimes mentioned as a measure of how well the model “fits” the data (similar to how R-squared is sometimes used).</p>
+</div>
+<div id="example-2-categorical-covariates" class="section level3">
+<h3><span class="header-section-number">8.3.3</span> Example 2: Categorical Covariates</h3>
+<p>Now, suppose we use AOSI total score at 12 months and study site as covariates in the model. As with linear regression, since study site is categorical, we will use dummy variable coding. The resulting logistic regression model is</p>
+<p><span class="math inline">\(\mbox{logit}[\Pr(\mbox{ASD at 24 months}|AOSI_{12}, Site)]=\beta_0+\beta_1AOSI_{12}+\beta_2Site_{SEA}+\)</span></p>
+<p><span class="math inline">\(\beta_3Site_{STL}+\beta_4Site_{UNC}\)</span></p>
+<p>where <span class="math inline">\(Site_{SEA}, Site_{STL},\)</span> and <span class="math inline">\(Site_{UNC}\)</span> are dummy variables for Seattle, St. Louis, and UNC respectively with Philadelphia as the reference group. We can see that <span class="math inline">\(\beta_0\)</span> denotes the log odds of ASD at month 24 when AOSI total score at month 12 is 0 and the study site is Philadelphia (the reference group). Furthermore, <span class="math inline">\(\beta_1\)</span> denotes the change in the log odds of ASD at month 24 when AOSI total score increases by 1 unit and study site is held constant, <span class="math inline">\(\beta_2\)</span> denotes the change in the log odds of ASD at month 24 when study site changes from Philadelphia to Seattle and AOSI total score at 12 months is constant, etc. We now fit this model to the data; recall for categorical covariates, R will automatically do dummy variable coding.</p>
+<div class="sourceCode" id="cb444"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb444-1" title="1"><span class="co"># Fit logistic regression model</span></a>
+<a class="sourceLine" id="cb444-2" title="2">logistic_fit_<span class="dv">2</span> &lt;-<span class="st"> </span><span class="kw">glm</span>(SSM_ASD_v24<span class="op">~</span>V12.aosi.total_score_<span class="dv">1</span>_<span class="dv">18</span><span class="op">+</span>Study_Site,</a>
+<a class="sourceLine" id="cb444-3" title="3">                      <span class="dt">data=</span>full_data,</a>
+<a class="sourceLine" id="cb444-4" title="4">                      <span class="dt">family=</span>binomial) </a></code></pre></div>
+<pre><code>## Error in eval(family$initialize): y values must be 0 &lt;= y &lt;= 1</code></pre>
+<div class="sourceCode" id="cb446"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb446-1" title="1"><span class="co"># creates error, SSM_ASD_v24 is a character variable</span></a>
+<a class="sourceLine" id="cb446-2" title="2"></a>
+<a class="sourceLine" id="cb446-3" title="3">logistic_fit_<span class="dv">2</span> &lt;-<span class="st"> </span><span class="kw">glm</span>(<span class="kw">factor</span>(SSM_ASD_v24)<span class="op">~</span>V12.aosi.total_score_<span class="dv">1</span>_<span class="dv">18</span><span class="op">+</span>Study_Site,</a>
+<a class="sourceLine" id="cb446-4" title="4">                      <span class="dt">data=</span>full_data,</a>
+<a class="sourceLine" id="cb446-5" title="5">                      <span class="dt">family=</span>binomial)</a>
+<a class="sourceLine" id="cb446-6" title="6"><span class="co"># no error due to use of factor()</span></a>
+<a class="sourceLine" id="cb446-7" title="7"><span class="kw">summary</span>(logistic_fit_<span class="dv">2</span>)</a></code></pre></div>
+<pre><code>## 
+## Call:
+## glm(formula = factor(SSM_ASD_v24) ~ V12.aosi.total_score_1_18 + 
+##     Study_Site, family = binomial, data = full_data)
+## 
+## Deviance Residuals: 
+##     Min       1Q   Median       3Q      Max  
+## -1.8216  -0.5982  -0.4783  -0.3929   2.3559  
+## 
+## Coefficients:
+##                           Estimate Std. Error z value Pr(&gt;|z|)    
+## (Intercept)               -2.71066    0.32923  -8.233  &lt; 2e-16 ***
+## V12.aosi.total_score_1_18  0.18013    0.03168   5.687  1.3e-08 ***
+## Study_SiteSEA              0.19587    0.34450   0.569    0.570    
+## Study_SiteSTL             -0.07735    0.35943  -0.215    0.830    
+## Study_SiteUNC              0.00763    0.35218   0.022    0.983    
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## (Dispersion parameter for binomial family taken to be 1)
+## 
+##     Null deviance: 453.79  on 511  degrees of freedom
+## Residual deviance: 419.48  on 507  degrees of freedom
+##   (75 observations deleted due to missingness)
+## AIC: 429.48
+## 
+## Number of Fisher Scoring iterations: 4</code></pre>
+<p>There is strong evidence of AOSI total score at 12 months being positively associated with ASD at 24 months, controlling for study site.</p>
+</div>
+<div id="prediction" class="section level3">
+<h3><span class="header-section-number">8.3.4</span> Prediction</h3>
+<p>Along with conducting inference on associations, logistic regression is often used for prediction of binary outcomes. Recall, with logistic regression, we are modelling the probability of the outcome. Specifically, the logistic regression model is</p>
+<p><span class="math inline">\(\mbox{logit}(p_{x,z})=\beta_0+\beta_1X+\beta_2Z\)</span>
+where we denote <span class="math inline">\(\mbox{Pr}(Y=1|X,Z)\)</span> by <span class="math inline">\(p_{x,z}\)</span>.</p>
+<p>With some algebra, from this model, we can express a function for the probability of the outcome with the following:</p>
+<p><span class="math inline">\(\Pr(Y=1|X,Z)=\frac{e^{\beta_0+\beta_1X+\beta_2Z}}{1+e^{\beta_0+\beta_1X+\beta_2Z}}\)</span></p>
+<p>where <span class="math inline">\(e^x\)</span> is the exponential function. As a result, after estimating the regression parameters (denoted by <span class="math inline">\((\hat{\beta_0}, \hat{\beta_1}, \hat{\beta_2})\)</span>, we obtain the following estimate for the probabillity of the outcome, denoted by <span class="math inline">\(\widehat{\Pr(Y=1|X,Z)}\)</span>:</p>
+<p><span class="math inline">\(\widehat{Pr(Y=1|X,Z)}=\frac{e^{\hat{\beta_0}+\hat{\beta_1}X+\hat{\beta_2}Z}}{1+e^{\hat{\beta_0}+\hat{\beta_1}X+\hat{\beta_2}Z}}\)</span>.</p>
+<p>So for each subject, we have an estimate of the likelihood of an outcome of <span class="math inline">\(Y=1\)</span> based on their predictors <span class="math inline">\(X\)</span> and <span class="math inline">\(Z\)</span>. Using this estimate, we can predict each subject’s outcome by setting a threshold for this estimated probability. For example, we could decide if a subject’s probability of <span class="math inline">\(Y=1\)</span> is above <span class="math inline">\(50\%\)</span>, we will predict <span class="math inline">\(Y=1\)</span> and otherwise predict <span class="math inline">\(Y=0\)</span>.</p>
+<p>Let’s consider the example where we predict ASD at 24 months from AOSI total score at 12 months. For simplicity, we do not include study site as predictor. First, let’s fit the corresponding logistic regression model in R to the data.</p>
+<div class="sourceCode" id="cb448"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb448-1" title="1"><span class="co"># Fit logistic regression model</span></a>
+<a class="sourceLine" id="cb448-2" title="2">logistic_fit_pred &lt;-<span class="st"> </span><span class="kw">glm</span>(<span class="kw">factor</span>(SSM_ASD_v24)<span class="op">~</span>V12.aosi.total_score_<span class="dv">1</span>_<span class="dv">18</span>,</a>
+<a class="sourceLine" id="cb448-3" title="3">                      <span class="dt">data=</span>full_data,</a>
+<a class="sourceLine" id="cb448-4" title="4">                      <span class="dt">family=</span>binomial) </a>
+<a class="sourceLine" id="cb448-5" title="5"></a>
+<a class="sourceLine" id="cb448-6" title="6"><span class="kw">summary</span>(logistic_fit_pred)</a></code></pre></div>
+<pre><code>## 
+## Call:
+## glm(formula = factor(SSM_ASD_v24) ~ V12.aosi.total_score_1_18, 
+##     family = binomial, data = full_data)
+## 
+## Deviance Residuals: 
+##     Min       1Q   Median       3Q      Max  
+## -1.7430  -0.6077  -0.4732  -0.3988   2.3400  
+## 
+## Coefficients:
+##                           Estimate Std. Error z value Pr(&gt;|z|)    
+## (Intercept)               -2.67093    0.23679 -11.280  &lt; 2e-16 ***
+## V12.aosi.total_score_1_18  0.17923    0.03149   5.691 1.27e-08 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## (Dispersion parameter for binomial family taken to be 1)
+## 
+##     Null deviance: 453.79  on 511  degrees of freedom
+## Residual deviance: 420.13  on 510  degrees of freedom
+##   (75 observations deleted due to missingness)
+## AIC: 424.13
+## 
+## Number of Fisher Scoring iterations: 4</code></pre>
+<p>Rounding the estimates, we see that the formula for the estimated probability of ASD at 24 months is</p>
+<p><span class="math inline">\(\widehat{\Pr(\mbox{ASD at 24 months}}|AOSI_{12})=\frac{e^{\hat{\beta_0}+\hat{\beta_1}AOSI_{12}}}{1+e^{\hat{\beta_0}+\hat{\beta_1}AOSI_{12}}}\)</span>
+<span class="math inline">\(=\frac{e^{-2.67+0.18AOSI_{12}}}{1+e^{-2.67+0.18AOSI_{12}}}\)</span></p>
+<p>From this estimated model, we can have R calculate each subject’s estimated probabilities of ASD at 24 months (done by plugging in their AOSI total score at 12 months into the formula) using the <strong>predict()</strong> function. The fit object from the glm() function is passed into predict(), along with the argument <strong>type=“response”</strong> to specify R to return the estimated probabilities.</p>
+<div class="sourceCode" id="cb450"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb450-1" title="1"><span class="co"># Obtain estimated probabilities from model fit</span></a>
+<a class="sourceLine" id="cb450-2" title="2">logistic_est_probs &lt;-<span class="st"> </span><span class="kw">predict</span>(logistic_fit_pred, <span class="dt">type=</span><span class="st">&quot;response&quot;</span>)</a></code></pre></div>
+<p>From these probabilities, we can predict ASD diagnosis. Let’s use a threshold of 0.5 and save the corresponding predictions. We will also see the breakdown of the predicted ASD diagnosis using <strong>table()</strong> (see Chapter 6 for more information on this function).</p>
+<div class="sourceCode" id="cb451"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb451-1" title="1"><span class="co"># Obtain predictions from model fit using a 50% threshold</span></a>
+<a class="sourceLine" id="cb451-2" title="2">logistic_predict &lt;-<span class="st"> </span><span class="kw">ifelse</span>(logistic_est_probs<span class="op">&gt;</span><span class="fl">0.5</span>, <span class="st">&quot;YES_ASD&quot;</span>, <span class="st">&quot;NO_ASD&quot;</span>)</a>
+<a class="sourceLine" id="cb451-3" title="3"><span class="kw">table</span>(logistic_predict)</a></code></pre></div>
+<pre><code>## logistic_predict
+##  NO_ASD YES_ASD 
+##     502      10</code></pre>
+<div class="sourceCode" id="cb453"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb453-1" title="1"><span class="kw">table</span>(full_data<span class="op">$</span>SSM_ASD_v24)</a></code></pre></div>
+<pre><code>## 
+##  NO_ASD YES_ASD 
+##     489      98</code></pre>
+<p>Now, let us compare the predicted ASD diagnoses to the actual diagnoses in the data. This is commonly done using a <strong>confusion matrix</strong>. While this can be done manually, the package <strong>caret</strong> has a function called <strong>confusionMatrix()</strong> which creates and formats a confusion matrix with a single function. Make sure you first install the caret package. We now create the confusion matrix for the above ASD prediction model. Note that some subjects have a missing AOSI total score at 12 months; with logistic regression, any subjects with missing outcome or covariate values are removed from the analysis. Thus, the estimated probabilities are only computed for the subjects used in the analysis, which only consists of those with complete data for the variables in the model. When using confusionMatrix(), you must include 1) the vector of predicted outcomes (created above), 2) the vector of actual outcomes (created by pulling out the outcome variable from the dataset used when fitting the logistic regression model), and 3) the value of the outcome that denotes a “positive” result (ex. diagnosis of ASD) as arguments. See below for the example with the ASD logistic regression results. Note that these vectors supplied to confusionMatrix() must be of <strong>factor</strong> type. This can be satisfied by using the function factor() with the vectors (see example below). Note that confusionMatrix() also computes measures such as sensitivity, specificty, positive predictive value (PPV), negative predictive value (NPV), etc. It also prints what is being used as the “positive” result at the bottom of the output.</p>
+<div class="sourceCode" id="cb455"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb455-1" title="1"><span class="co"># load caret</span></a>
+<a class="sourceLine" id="cb455-2" title="2"><span class="kw">library</span>(caret)</a>
+<a class="sourceLine" id="cb455-3" title="3"></a>
+<a class="sourceLine" id="cb455-4" title="4"><span class="co"># Remove subjects with missing AOSI total score from data set</span></a>
+<a class="sourceLine" id="cb455-5" title="5">full_data_complete &lt;-<span class="st"> </span>full_data <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb455-6" title="6"><span class="st">  </span><span class="kw">filter</span>(<span class="kw">is.na</span>(V12.aosi.total_score_<span class="dv">1</span>_<span class="dv">18</span>)<span class="op">==</span><span class="dv">0</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb455-7" title="7"><span class="st">  </span><span class="kw">select</span>(SSM_ASD_v24, V12.aosi.total_score_<span class="dv">1</span>_<span class="dv">18</span>)</a>
+<a class="sourceLine" id="cb455-8" title="8"></a>
+<a class="sourceLine" id="cb455-9" title="9"><span class="co"># create confusion matrix</span></a>
+<a class="sourceLine" id="cb455-10" title="10"><span class="kw">confusionMatrix</span>(<span class="dt">data=</span><span class="kw">factor</span>(logistic_predict), </a>
+<a class="sourceLine" id="cb455-11" title="11">                <span class="dt">reference =</span> <span class="kw">factor</span>(full_data_complete<span class="op">$</span>SSM_ASD_v24),</a>
+<a class="sourceLine" id="cb455-12" title="12">                <span class="dt">positive =</span> <span class="st">&quot;YES_ASD&quot;</span>)</a></code></pre></div>
+<pre><code>## Confusion Matrix and Statistics
+## 
+##           Reference
+## Prediction NO_ASD YES_ASD
+##    NO_ASD     422      80
+##    YES_ASD      7       3
+##                                           
+##                Accuracy : 0.8301          
+##                  95% CI : (0.7947, 0.8616)
+##     No Information Rate : 0.8379          
+##     P-Value [Acc &gt; NIR] : 0.7085          
+##                                           
+##                   Kappa : 0.0307          
+##                                           
+##  Mcnemar&#39;s Test P-Value : 1.171e-14       
+##                                           
+##             Sensitivity : 0.036145        
+##             Specificity : 0.983683        
+##          Pos Pred Value : 0.300000        
+##          Neg Pred Value : 0.840637        
+##              Prevalence : 0.162109        
+##          Detection Rate : 0.005859        
+##    Detection Prevalence : 0.019531        
+##       Balanced Accuracy : 0.509914        
+##                                           
+##        &#39;Positive&#39; Class : YES_ASD         
+## </code></pre>
+<p>To do this prediction analysis, we used a <span class="math inline">\(50\%\)</span> threshold. However we could choose a different probability threshold. For example, if an outcome has a high cost involved (ex. a serious disease), an estimated probability below <span class="math inline">\(50\%\)</span> may be enough to predict <span class="math inline">\(Y=1\)</span>. Thus, we may want to see how the prediction model preforms across the various thresholds we could choose (<span class="math inline">\(0\%\)</span> to <span class="math inline">\(100\%\)</span>). This is usually done by constructing an ROC curve. When created in R, an ROC curve has specificity on the x-axis and sensitivity on the y-axis. For each threshold, there will be a corresponding confusion matrix and thus a corresponding specificity and sensitivity For our example, with a threshold of <span class="math inline">\(50\%\)</span> we had a specificity of 0.98 and a sensitivity of 0.04, or (0.98, 0.04) as an x,y pair. Let us see the confusion matrix in our ASD example with the logistic regression prediction model if we used a threshold of <span class="math inline">\(40\%\)</span> instead.</p>
+<div class="sourceCode" id="cb457"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb457-1" title="1"><span class="co"># Obtain predictions from model fit using a 50% threshold</span></a>
+<a class="sourceLine" id="cb457-2" title="2">logistic_predict &lt;-<span class="st"> </span><span class="kw">ifelse</span>(logistic_est_probs<span class="op">&gt;</span><span class="fl">0.4</span>, <span class="st">&quot;YES_ASD&quot;</span>, <span class="st">&quot;NO_ASD&quot;</span>)</a>
+<a class="sourceLine" id="cb457-3" title="3"><span class="kw">ftable</span>(logistic_predict)</a></code></pre></div>
+<pre><code>## logistic_predict NO_ASD YES_ASD
+##                                
+##                     489      23</code></pre>
+<div class="sourceCode" id="cb459"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb459-1" title="1"><span class="kw">ftable</span>(full_data<span class="op">$</span>SSM_ASD_v24)</a></code></pre></div>
+<pre><code>##  NO_ASD YES_ASD
+##                
+##     489      98</code></pre>
+<div class="sourceCode" id="cb461"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb461-1" title="1"><span class="co"># load caret</span></a>
+<a class="sourceLine" id="cb461-2" title="2"><span class="kw">library</span>(caret)</a>
+<a class="sourceLine" id="cb461-3" title="3"></a>
+<a class="sourceLine" id="cb461-4" title="4"><span class="co"># Remove subjects with missing AOSI total score from data set</span></a>
+<a class="sourceLine" id="cb461-5" title="5">full_data_complete &lt;-<span class="st"> </span>full_data <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb461-6" title="6"><span class="st">  </span><span class="kw">filter</span>(<span class="kw">is.na</span>(V12.aosi.total_score_<span class="dv">1</span>_<span class="dv">18</span>)<span class="op">==</span><span class="dv">0</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb461-7" title="7"><span class="st">  </span><span class="kw">select</span>(SSM_ASD_v24, V12.aosi.total_score_<span class="dv">1</span>_<span class="dv">18</span>)</a>
+<a class="sourceLine" id="cb461-8" title="8"></a>
+<a class="sourceLine" id="cb461-9" title="9"><span class="co"># create confusion matrix</span></a>
+<a class="sourceLine" id="cb461-10" title="10"><span class="kw">confusionMatrix</span>(<span class="dt">data=</span><span class="kw">factor</span>(logistic_predict), </a>
+<a class="sourceLine" id="cb461-11" title="11">                <span class="dt">reference =</span> <span class="kw">factor</span>(full_data_complete<span class="op">$</span>SSM_ASD_v24),</a>
+<a class="sourceLine" id="cb461-12" title="12">                <span class="dt">positive =</span> <span class="st">&quot;YES_ASD&quot;</span>)</a></code></pre></div>
+<pre><code>## Confusion Matrix and Statistics
+## 
+##           Reference
+## Prediction NO_ASD YES_ASD
+##    NO_ASD     416      73
+##    YES_ASD     13      10
+##                                           
+##                Accuracy : 0.832           
+##                  95% CI : (0.7968, 0.8634)
+##     No Information Rate : 0.8379          
+##     P-Value [Acc &gt; NIR] : 0.6667          
+##                                           
+##                   Kappa : 0.1273          
+##                                           
+##  Mcnemar&#39;s Test P-Value : 1.99e-10        
+##                                           
+##             Sensitivity : 0.12048         
+##             Specificity : 0.96970         
+##          Pos Pred Value : 0.43478         
+##          Neg Pred Value : 0.85072         
+##              Prevalence : 0.16211         
+##          Detection Rate : 0.01953         
+##    Detection Prevalence : 0.04492         
+##       Balanced Accuracy : 0.54509         
+##                                           
+##        &#39;Positive&#39; Class : YES_ASD         
+## </code></pre>
+<p>We see that for a <span class="math inline">\(40\%\)</span> threshold, we have specificity, sensitivity pair of (0.97, 0.12). You can imagine repeating these calculations for each threshold between <span class="math inline">\(0\%\)</span> and <span class="math inline">\(100\%\)</span>, and plotting the corresponding specificity, sensitivity points. This plot is an ROC curve. In R, can you create an ROC curve from your logistic regression prediction model using the <strong>pROC</strong> package (which must be installed) which includes the <strong>roc()</strong> function. To create an ROC curve, 1) specify the outcome vector from the dataset used to create the prediction model as the response= argument then 2) specify the vector of estimated probabilities from the prediction model using the predictor= argument. To also calculate AUC (Area Under the Curve), specify the auc=TRUE argument. You must save the output created by roc() as an object, and then use the function <strong>plot()</strong> with this object to visualize the ROC curve. You can see that the output from roc() is a list which holds a variety of results related to ROC curves (sensitivities, specificities, thresholds corresponding to these, etc.) This is similar to how lm() and glm() worked; first you compute the output of interest and save it as an R object, and use a different function to visualize the main results (summary() was used with lm() and glm()). See the example below based on the ASD logistic regression model.</p>
+<div class="sourceCode" id="cb463"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb463-1" title="1"><span class="co"># load pROC package</span></a>
+<a class="sourceLine" id="cb463-2" title="2"><span class="kw">library</span>(pROC)</a>
+<a class="sourceLine" id="cb463-3" title="3"></a>
+<a class="sourceLine" id="cb463-4" title="4"><span class="co"># Remove subjects with missing AOSI total score from data set</span></a>
+<a class="sourceLine" id="cb463-5" title="5">full_data_complete &lt;-<span class="st"> </span>full_data <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb463-6" title="6"><span class="st">  </span><span class="kw">filter</span>(<span class="kw">is.na</span>(V12.aosi.total_score_<span class="dv">1</span>_<span class="dv">18</span>)<span class="op">==</span><span class="dv">0</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb463-7" title="7"><span class="st">  </span><span class="kw">select</span>(SSM_ASD_v24, V12.aosi.total_score_<span class="dv">1</span>_<span class="dv">18</span>)</a>
+<a class="sourceLine" id="cb463-8" title="8"></a>
+<a class="sourceLine" id="cb463-9" title="9"><span class="co"># create ROC curve matrix</span></a>
+<a class="sourceLine" id="cb463-10" title="10">roc_object &lt;-<span class="st"> </span><span class="kw">roc</span>(<span class="dt">response =</span> full_data_complete<span class="op">$</span>SSM_ASD_v24,</a>
+<a class="sourceLine" id="cb463-11" title="11">    <span class="dt">predictor=</span>logistic_est_probs,</a>
+<a class="sourceLine" id="cb463-12" title="12">    <span class="dt">auc=</span><span class="ot">TRUE</span>,</a>
+<a class="sourceLine" id="cb463-13" title="13">    <span class="dt">auc.polygon=</span><span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb463-14" title="14"></a>
+<a class="sourceLine" id="cb463-15" title="15"><span class="kw">plot</span>(roc_object, <span class="dt">print.auc=</span><span class="ot">TRUE</span>, <span class="dt">grid=</span><span class="ot">TRUE</span>, <span class="dt">print.thres=</span><span class="st">&quot;best&quot;</span>, <span class="dt">print.thres.best.method=</span><span class="st">&quot;closest.topleft&quot;</span>)</a></code></pre></div>
+<p><img src="_main_files/figure-html/logistic_roc-1.png" width="672" /></p>
+<div class="sourceCode" id="cb464"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb464-1" title="1"><span class="co"># Print out each threshold and its corresponding sensitivity and specificity</span></a>
+<a class="sourceLine" id="cb464-2" title="2"><span class="kw">cbind</span>(<span class="dt">thresholds=</span>roc_object<span class="op">$</span>thresholds,</a>
+<a class="sourceLine" id="cb464-3" title="3">      <span class="dt">sensitivities=</span>roc_object<span class="op">$</span>sensitivities,</a>
+<a class="sourceLine" id="cb464-4" title="4">      <span class="dt">specificities=</span>roc_object<span class="op">$</span>specificities)</a></code></pre></div>
+<pre><code>##       thresholds sensitivities specificities
+##  [1,]       -Inf    1.00000000    0.00000000
+##  [2,] 0.07057592    0.98795181    0.05128205
+##  [3,] 0.08326787    0.96385542    0.16550117
+##  [4,] 0.09800015    0.90361446    0.30769231
+##  [5,] 0.11501009    0.78313253    0.44289044
+##  [6,] 0.13452975    0.69879518    0.59440559
+##  [7,] 0.15677255    0.61445783    0.69696970
+##  [8,] 0.18191642    0.54216867    0.76223776
+##  [9,] 0.21008421    0.40963855    0.82983683
+## [10,] 0.24132236    0.32530120    0.87645688
+## [11,] 0.27558004    0.28915663    0.91142191
+## [12,] 0.31269154    0.20481928    0.94405594
+## [13,] 0.35236505    0.16867470    0.96037296
+## [14,] 0.39418119    0.12048193    0.96969697
+## [15,] 0.43760346    0.08433735    0.97902098
+## [16,] 0.48200136    0.03614458    0.98368298
+## [17,] 0.52668471    0.02409639    0.99067599
+## [18,] 0.57094550    0.01204819    0.99533800
+## [19,] 0.65330585    0.01204819    0.99766900
+## [20,] 0.74740883    0.00000000    0.99766900
+## [21,]        Inf    0.00000000    1.00000000</code></pre>
+<p>You can see the ROC curve also includes a 45 degree line. This 45 degree line denotes where specificity and sensitivity as always the same. An equal specificity and sensitivity would result if you simply predict subjects’ outcomes completely at random (i.e., flip a coin to decide each person’s prediction). As a result, we would want our prediction model to be “better” then the “completely random” prediction model based on its distance from this 45 degree line. The main way of measuring this distance is using area under the curve (AUC). As the name suggests, AUC measures how much space there is under the ROC curve. You can see that the 45 degree line would have an AUC of 0.50, thus we would like our prediction model to have an AUC much higher then 0.50. How much higher? There various rules of thumb that people have created, such as it should be higher then 0.70. However, as with all rules of thumb, this should not be strictly for every analysis.</p>
+<p>One may also be interested in what threshold provides the “best” prediction performance. There are are many ways of defining what is “best”, though a common method is to mark the threshold corresponding the lop left point on the ROC curve as the “best” performance. This method weights sensitivity and specificity equally. In R, this “best”" threshold is added to the ROC curve plot by including the arguments <strong>print.thres=“best”</strong> and <strong>print.thres.best.method=“closest.topleft”</strong> into the plot() function call. This adds a labeled point on the graph at the top left point on the ROC curve with the following label (from left tot right); 1) the probabilitiy threshold, 2) corresponding specificity and 3) corresponding sensitivity where 2) and 3) are in parentheses.</p>
+<div class="sourceCode" id="cb466"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb466-1" title="1"><span class="kw">plot</span>(roc_object, <span class="dt">print.auc=</span><span class="ot">TRUE</span>, <span class="dt">grid=</span><span class="ot">TRUE</span>, <span class="dt">print.thres=</span><span class="st">&quot;best&quot;</span>, <span class="dt">print.thres.best.method=</span><span class="st">&quot;closest.topleft&quot;</span>)</a></code></pre></div>
+<p><img src="_main_files/figure-html/logistic_roc_best_thres-1.png" width="672" /></p>
+</div>
+</div>
+<div id="mixed-models" class="section level2">
+<h2><span class="header-section-number">8.4</span> Mixed Models</h2>
+<div id="motivation-1" class="section level3">
+<h3><span class="header-section-number">8.4.1</span> Motivation</h3>
+<p>Recall in our discussion of linear regression, we assumed that each observation’s residual was independent and had the same variance (denoted <span class="math inline">\(\sigma^2\)</span>). However, there will be datasets where this assumption will be problematic. The most common example is where you have multiple observations from the same subject. As a result, it is likely that these residuals are correlated. Furthermore, we may want to model subject-specific variance instead of assuming the same variance for all subjects. This is generally done using <strong>mixed models</strong>.</p>
+<p>Suppose we are interested in the relationship between outcome <span class="math inline">\(Y\)</span> and covariates <span class="math inline">\(X\)</span> and <span class="math inline">\(Z\)</span>. Suppose further that we have <span class="math inline">\(n\)</span> subjects, each of which have <span class="math inline">\(m\)</span> observations. We will let <span class="math inline">\(Y_{ij}, X_{ij}\)</span>, and <span class="math inline">\(Z_{ij}\)</span> denote <span class="math inline">\(Y, X\)</span>, and <span class="math inline">\(Z\)</span> for subject <span class="math inline">\(i\)</span> at observation <span class="math inline">\(j\)</span> respectively. The <strong>random intercept-only mixed model</strong> corresponding to this is the following:</p>
+<p><span class="math inline">\(Y_{ij}=\beta_{0}+\beta_{1}X_{ij}+\beta_{2}Z_{ij}+\phi_{i}+\epsilon_{ij}\)</span></p>
+<p>where <span class="math inline">\(\phi_i\)</span> are independent across index <span class="math inline">\(i\)</span> and <span class="math inline">\(\epsilon_{ij}\)</span> are independent across <span class="math inline">\(i\)</span>.</p>
+<p>The <span class="math inline">\(\epsilon_{ij}\)</span> are observation-specific residuals, <span class="math inline">\(\phi_{i}\)</span> are referred to as the <strong>random intercept</strong>, and <span class="math inline">\(\beta_{0}, \beta_{1}\)</span>, and <span class="math inline">\(\beta_{2}\)</span> are referred to as the <strong>fixed effects</strong>. When <span class="math inline">\(X\)</span> and <span class="math inline">\(Z\)</span> are 0, we have <span class="math inline">\(Y_{ij}=\beta_{0}+\phi_{i}+\epsilon_{ij}\)</span>. We can see that <span class="math inline">\(b_i\)</span> represents subject-specific differences in the outcome when <span class="math inline">\(X\)</span> and <span class="math inline">\(Z\)</span> are 0, beyond the differences in residuals (see below for a more detailed explanation). Recall with the previously detailed regression methods, we did not model observation/subject-specific means; observations with the same <span class="math inline">\(X\)</span> and <span class="math inline">\(Z\)</span> had the same mean in our model.</p>
+<p>It is generally assumed that both the residuals and random effects has mean 0. As a result, we have the following model for the mean outcome across the population with covariate values <span class="math inline">\(X\)</span> and <span class="math inline">\(Z\)</span>:</p>
+<p><span class="math inline">\(\mbox{E}(Y|X,Z)=\beta_{0}+\beta_{1}X+\beta_{2}Z\)</span></p>
+<p>which is the same as for linear regression. We can model <strong>subject-specific</strong> means by conditioning on their random effects.</p>
+<p><span class="math inline">\(\mbox{E}(Y_{i,j}|X_{ij},Z_{ij},b_i)=\beta_{0}+\beta_{1}X_{ij}+\beta_{2}Z_{ij}+b_i.\)</span></p>
+<p>Recall with linear regeression, we did not have this separate model for each subject’s mean. That is, the mean outcomes for two subjects with the same covariate values were modeled equivalently. These random effects allow for the mean outcomes for these two subjects to be modeled differently.</p>
+<p>Notice that for subject <span class="math inline">\(i\)</span>, one way their observations across index <span class="math inline">\(j\)</span> are tied together is by random effect <span class="math inline">\(\phi_{i}\)</span>. As a result, one way we have incorporated the correlation within subjects is through <span class="math inline">\(\phi_{i}\)</span>. A second way we can incorporate this correlation is through correlated <span class="math inline">\(\epsilon_{ij}\)</span>. We have already assumed that the <span class="math inline">\(\phi_{i}\)</span> are independent; we now need to specify the dependence structure for <span class="math inline">\(\epsilon_{ij}\)</span>. There are various options we can specify. The most general structure is to make no assumptions at all; this is called <strong>unstructured</strong>. The most extreme structure is to assume the <span class="math inline">\(\epsilon_{ij}\)</span> are independent across <span class="math inline">\(i\)</span> and <span class="math inline">\(j\)</span> (subjects and observations). Notice this is the same assumption as was made for the <span class="math inline">\(\epsilon\)</span> in the linear regression model. This structure is commonly referred to as the <strong>independence</strong> structure. Note that even if we assuming independent <span class="math inline">\(\epsilon_{ij}\)</span>, within-subject correlation is still being represented with <span class="math inline">\(\phi_i\)</span>.</p>
+<p>Along with decomposing the means into population-level and subject-level, we can also decompose the variance of the outcome. Since we are considering multiple subjects, each of which having multiple observations, you could consider how the outcome varies both <strong>between the subjects</strong> as well as <strong>between the observations within a given subject</strong>. These are referred to as the <strong>between-subject variance</strong> and <strong>within-subject variance</strong>. More specifically, you could imagine a dataset where the subjects have similar data when comparing one another, however within each subject the data from time point to time point varies greatly. In this case, the between-subject variance would be low while the within-subject variance would be high. For example, consider the data below. We can see that the boxplots between the subjects are similar (between-subject variance), though within a given subject there is noticable variation in their outcomes across their observations (within-subject variance). Mixed models allow these two <strong>variance components</strong> to be modeled separately based on the chosen covariance structures for the random effects and the residuals. <strong>Please consult a statistican for detail on how to specify and estimate these components explicitly with your mixed model.</strong></p>
+<p><img src="_main_files/figure-html/between_within_ex-1.png" width="672" /></p>
+<p>Now, we have only considered a subject-specific intercept. However, we can also consider subject-specific effects with respect to the model’s covariate <span class="math inline">\(X\)</span> and <span class="math inline">\(Z\)</span>. Consider the following model:</p>
+<p><span class="math inline">\(Y_{ij}=\beta_{0}+\beta_{1}X_{ij}+\beta_{2}Z_{ij}+\phi_{0i}+\phi_{1i}X_{ij}+\epsilon_{ij}\)</span></p>
+<p>where <span class="math inline">\(\phi_{0i}\)</span> and <span class="math inline">\(\phi_{1i}\)</span> are independent across index <span class="math inline">\(i\)</span> and <span class="math inline">\(\epsilon_{ij}\)</span> are independent across <span class="math inline">\(i\)</span>.</p>
+<p>This is referred to as a <strong>random slope</strong> model. We can also specify a <span class="math inline">\(\phi\)</span> for variable <span class="math inline">\(Z\)</span>. Now, <span class="math inline">\(\phi_{0i}\)</span> represents the random intercept, <span class="math inline">\(\beta_{1}\)</span> represents the population level changes in the mean outcome when <span class="math inline">\(X\)</span> increases by 1 controlling for <span class="math inline">\(Z\)</span>, and <span class="math inline">\(\phi_{1i}\)</span> represents subject-specific differences in the mean outcome change when <span class="math inline">\(X\)</span> increases by 1 controlling for <span class="math inline">\(Z\)</span> from this population level change. We have discussed specifying a dependence structure for <span class="math inline">\(\epsilon_{ij}\)</span> within each subject; we can also specify a dependence structure for <span class="math inline">\(\phi_{0i}\)</span> and <span class="math inline">\(\phi_{1i}\)</span> within subject <span class="math inline">\(i\)</span>. In seems likely that these <strong>random effects</strong> are independent between subjects, however are correlated within a subject. These structures are the same as was discussed for <span class="math inline">\(\epsilon_{ij}\)</span>; <strong>unstructured</strong>, <strong>independence</strong>, among others.</p>
+<p>As you can see, there are many things that go into a mixed model. You must specify the fixed effects, the random effects (intercept, slopes, etc.), and the dependence structures for <span class="math inline">\(\epsilon_{ij}\)</span> and your random effects. Generally, <strong>unstructured</strong> is chosen for <span class="math inline">\(\epsilon_{ij}\)</span> and for the random effects. However, due to it’s generality, unstructured has many parameters. This can be a problem depending on the size of the data set, causing these parameters to be estimated inaccurately and with high variance. As a result, a more specified structure may be required or advantageous.</p>
+</div>
+<div id="example-mullen-composite-and-visit" class="section level3">
+<h3><span class="header-section-number">8.4.2</span> Example: Mullen composite and Visit</h3>
+<p>When running a mixed model in R, the data must be <strong>long</strong> form. That is, each observation for a subject must be a separate row in your data. The R code below converts the dataset to long form (this is the same code as was used in the long form example in Chapter 4).</p>
+<div class="sourceCode" id="cb467"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb467-1" title="1">mixed_model_data &lt;-<span class="st"> </span>full_data <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb467-2" title="2"><span class="st">  </span><span class="kw">select</span>(Identifiers, GROUP,</a>
+<a class="sourceLine" id="cb467-3" title="3">         V36.mullen.composite_standard_score<span class="op">:</span>V12.mullen.composite_standard_score)</a>
+<a class="sourceLine" id="cb467-4" title="4"></a>
+<a class="sourceLine" id="cb467-5" title="5">vars_to_convert &lt;-<span class="st"> </span><span class="kw">names</span>(mixed_model_data)[<span class="kw">c</span>(<span class="op">-</span><span class="dv">1</span>,<span class="op">-</span><span class="dv">2</span>)]</a>
+<a class="sourceLine" id="cb467-6" title="6"></a>
+<a class="sourceLine" id="cb467-7" title="7">mixed_model_data &lt;-<span class="st"> </span>mixed_model_data <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb467-8" title="8"><span class="st">  </span><span class="kw">gather</span>(variable, var_value, vars_to_convert) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb467-9" title="9"><span class="st">  </span><span class="kw">separate</span>(variable,<span class="kw">c</span>(<span class="st">&quot;Visit&quot;</span>,<span class="st">&quot;Variable&quot;</span>),<span class="dt">sep=</span><span class="dv">3</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb467-10" title="10"><span class="st">  </span><span class="kw">spread</span>(<span class="dt">key=</span>Variable, <span class="dt">value=</span>var_value) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb467-11" title="11"><span class="st">  </span>plyr<span class="op">::</span><span class="kw">rename</span>(<span class="kw">c</span>(<span class="st">&quot;.mullen.composite_standard_score&quot;</span>=<span class="st">&quot;Mullen_Composite_Score&quot;</span>)) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb467-12" title="12"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">ASD_Diag =</span> <span class="kw">factor</span>(<span class="kw">ifelse</span>(<span class="kw">grepl</span>(<span class="st">&quot;ASD&quot;</span>, GROUP), <span class="st">&quot;ASD_Pos&quot;</span>, <span class="st">&quot;ASD_Neg&quot;</span>)),</a>
+<a class="sourceLine" id="cb467-13" title="13">         <span class="dt">Visit=</span><span class="kw">factor</span>(Visit),</a>
+<a class="sourceLine" id="cb467-14" title="14">         <span class="dt">Visit_Num=</span><span class="kw">as.numeric</span>(Visit)<span class="op">-</span><span class="dv">1</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb467-15" title="15"><span class="st">  </span><span class="kw">arrange</span>(Identifiers, Visit)</a></code></pre></div>
+<p>Now, let us fit model Mullen composite score as the outcome and visit number (1st, 2nd, 3rd, or 4th) and ASD diagnosis (positive or negative) as covariates. Note that in order for the intercept in the model to be interpretable, we code visit so that 0 reflects the first visit, 1 reflects the second visit, etc. We fit the following random intercept-only model:</p>
+<p><span class="math inline">\(Mullen_{ij}=\beta_{0}+\beta_{1}Visit_{ij}+\beta_{2}Group_{ij}+\phi_{i}+\epsilon_{ij}\)</span></p>
+<p>where <span class="math inline">\(\phi_i\)</span> are independent across index <span class="math inline">\(i\)</span> and <span class="math inline">\(\epsilon_{ij}\)</span> are independent across <span class="math inline">\(i\)</span>.</p>
+<p>To fit this model in R, we can either use the <strong>lme4</strong> package or the <strong>nlme</strong> package. The <strong>nlme</strong> package is more flexible, so it is covered here. The function used from this package is called <strong>lme()</strong>, and it works similarly to the <strong>lm()</strong>. The arguments are as follows, in order of appearance in the function:</p>
+<p>fixed: Works the same as the model argument in lm(). Here you specify the fixed effects of the model using the usual y~x notation</p>
+<p>data: Specify the dataset</p>
+<p>random: Here you specify the random effects for your model using the ~ notation. To specify a random intercept, use random = ~ 1|ID where ID is the identifier variable. You must have a variable identifying the subjects in your data when running a mixed model. To specify a random intercept and a random slope for variable x, use random = ~ 1+x|ID. To include more random slopes, just add +z+… where z is one of the other covariate.</p>
+<p>correlation: specify the dependence structure for the residuals (recall the Motivation section). The default is the independence structure with equal variances for each observation’s residual within a subject. For unstructured, specify correlation=corSymm()).</p>
+<p>Note that lme() uses unstructured covariance for the random effects by default (changing this structure is not covered here as unstructured is generally sufficient for the random effects).</p>
+<p>Let us fit the example model detailed above in R. As with the previous regression analyses, we save the output into an object; this unables us to see all of the different computations that R does for the mixed model.</p>
+<div class="sourceCode" id="cb468"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb468-1" title="1"><span class="kw">library</span>(nlme)</a>
+<a class="sourceLine" id="cb468-2" title="2">mixed_fit &lt;-</a>
+<a class="sourceLine" id="cb468-3" title="3"><span class="st">  </span><span class="kw">lme</span>(Mullen_Composite_Score<span class="op">~</span>Visit_Num <span class="op">+</span><span class="st"> </span>ASD_Diag, </a>
+<a class="sourceLine" id="cb468-4" title="4">    <span class="dt">data=</span>mixed_model_data,</a>
+<a class="sourceLine" id="cb468-5" title="5">    <span class="dt">random =</span> <span class="op">~</span><span class="dv">1</span><span class="op">|</span>Identifiers,</a>
+<a class="sourceLine" id="cb468-6" title="6">    <span class="dt">na.action =</span> na.omit)</a></code></pre></div>
+<p>We must make sure all of our variables are either numeric or factor variables. This can either be done by changing the dataset itself, or by specifying as.numeric() and factor() in the lme() function. By default, R will output an error if the variables in the model have any missing values. This can be changed using <strong>na.action = na.omit</strong>, which removes observations with missing values from the analysis (was used above).</p>
+<p>As with the previous regression analyses, we can use <strong>summary()</strong> with the saved object to see important results from the model fit (estimates, standard errors, etc.). It also prints out</p>
+<ol style="list-style-type: decimal">
+<li>Model fit statistics (AIC, BIC, log likelihood)</li>
+<li>Standard deviations and correlations for your random effects</li>
+<li>Standard deviations and correlations for your residuals (depending on the chosen structure)</li>
+<li>The number of observations used in the dataset as well as number of subjects (referred to as “Number of Groups”).</li>
+</ol>
+<p>To view the dependence structure (also called <strong>covariance matrix</strong>) of the random effects, use <strong>getVarCov()</strong> with the saved outputted from lme(). Note that since we only have a single random effect (the random intercept), this matrix is only a single entry: the variance (standard deviation is also reported) of the random intercept. To view the dependence structure of a subject’s residuals, add the arguments <strong>type=“conditional”</strong> and specify the subject of interest with the argument <strong>individuals=“…”</strong> where … is replaced by the value of the ID variable corresonding to this subject. By default, R assumes all subjects has the same dependence structure for their residuals so you should see the same result when you change the value of the ID variable. Futher, recall that by default, R specifies independence structure with equal variance across observations for the residuals (see Motivation section). The results from our example fit this structure as seen below.</p>
+<div class="sourceCode" id="cb469"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb469-1" title="1"><span class="kw">summary</span>(mixed_fit)</a></code></pre></div>
+<pre><code>## Linear mixed-effects model fit by REML
+##  Data: mixed_model_data 
+##        AIC      BIC    logLik
+##   15192.52 15220.14 -7591.262
+## 
+## Random effects:
+##  Formula: ~1 | Identifiers
+##         (Intercept) Residual
+## StdDev:    7.442339 13.07822
+## 
+## Fixed effects: Mullen_Composite_Score ~ Visit_Num + ASD_Diag 
+##                     Value Std.Error   DF   t-value p-value
+## (Intercept)     101.63063 0.6213158 1264 163.57322   0e+00
+## Visit_Num         1.14286 0.3058513 1264   3.73667   2e-04
+## ASD_DiagASD_Pos -15.21819 1.1648815  585 -13.06415   0e+00
+##  Correlation: 
+##                 (Intr) Vst_Nm
+## Visit_Num       -0.640       
+## ASD_DiagASD_Pos -0.292 -0.036
+## 
+## Standardized Within-Group Residuals:
+##          Min           Q1          Med           Q3          Max 
+## -3.103657320 -0.570984559 -0.004197719  0.595802345  3.191924873 
+## 
+## Number of Observations: 1852
+## Number of Groups: 587</code></pre>
+<div class="sourceCode" id="cb471"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb471-1" title="1"><span class="kw">getVarCov</span>(mixed_fit)</a></code></pre></div>
+<pre><code>## Random effects variance covariance matrix
+##             (Intercept)
+## (Intercept)      55.388
+##   Standard Deviations: 7.4423</code></pre>
+<div class="sourceCode" id="cb473"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb473-1" title="1"><span class="kw">getVarCov</span>(mixed_fit, <span class="dt">type=</span><span class="st">&quot;conditional&quot;</span>, <span class="dt">individuals=</span><span class="st">&quot;1&quot;</span>)</a></code></pre></div>
+<pre><code>## Identifiers 1 
+## Conditional variance covariance matrix
+##        1      2      3      4
+## 1 171.04   0.00   0.00   0.00
+## 2   0.00 171.04   0.00   0.00
+## 3   0.00   0.00 171.04   0.00
+## 4   0.00   0.00   0.00 171.04
+##   Standard Deviations: 13.078 13.078 13.078 13.078</code></pre>
+<p>Now, let’s unpack these results so we completely understand our fitted model. First, let’s discussion the regression parameter results. From our estimates, the fitted model based on the data is</p>
+<p><span class="math inline">\(Mullen_{ij}=86.41+1.14Visit_{ij}-15.22Group_{ij}+\phi_{i}+\epsilon_{ij}\)</span>.</p>
+<p>Note that all regression parameters are highly significant from 0 based on the reported p-values (all three are ~0). We can view each subject’s random intercept (<span class="math inline">\(\phi_{i}\)</span>) using <strong>random.effects()</strong> with the lme object. What is returned is a matrix; we print out only the first 10 subjects’ random intercepts.</p>
+<div class="sourceCode" id="cb475"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb475-1" title="1"><span class="kw">random.effects</span>(mixed_fit)[<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>,]</a></code></pre></div>
+<pre><code>##  [1]  -4.8683584 -11.0760256  -2.7521082  -3.4649297   0.3931966
+##  [6]  -7.1861067   4.5842258   0.4928088   0.2574965   3.4879100</code></pre>
+<p>We can see then that the first subject in the dataset (Identifier PHI0000) has the following model:</p>
+<p><span class="math inline">\(Mullen_{1j}=86.41+1.14Visit_{1j}-15.22Group_{1j}-4.86+\epsilon_{1j}\)</span>. Note that when fitting this model, the visit variable reflected the order of the visit (1st=0, 2nd=1, 3rd=2, 4th=3) and was fit linearly as a continuous variable. Thus, 1.14 reflects a 1.14 unit increase in the mean Mullen composite score as the child goes from one visit to the next, controlling for ASD diagonsis at Month 24. This may not be the optimal coding for visit, especially since the gap in months between the visits is not uniform. This coding was only done for simplicity to facilitate an illustration of mixed models. We can also see from the results of summary() that ASD negative is the reference level, and that a change to ASD positive, holding visit number constant, decreases mean Mullen composite score by 15.22 units.</p>
+<p>The intercepts in the model can be interpreted as follows. Suppose the child is ASD negative, i.e., <span class="math inline">\(Group_{ij}=0\)</span>. Then their model is</p>
+<p><span class="math inline">\(Mullen_{ij}=86.41+1.14Visit_{ij}+\phi_i+\epsilon_{1j}\)</span>.</p>
+<p>The total intercept for subject <span class="math inline">\(i\)</span> is <span class="math inline">\(86.41+\phi_i\)</span>, where we assume the mean of <span class="math inline">\(\phi_i\)</span> is 0. Thus, we see that the fixed intercept of <span class="math inline">\(86.41\)</span> can be viewed as the “population-level” baseline, with <span class="math inline">\(\phi_i\)</span> being subject <span class="math inline">\(i\)</span>’s deviation in their baseline from the population. In this case, since a visit at 6 months is reflected by <span class="math inline">\(Visit_{ij}=0\)</span>, “baseline” refers to the mean Mullen composite score at the 6 month visit. We see for subject 1, their predicted random intercept is -4.86, implying that this subject has a baseline mean which is 4.86 units below the population’s baseline mean.</p>
+<p>Suppose the child is ASD positive, i.e., <span class="math inline">\(Group_{ij}=1\)</span>. Then their model is</p>
+<p><span class="math inline">\(Mullen_{ij}=86.41+1.14Visit_{ij}-15.22+\phi_i+\epsilon_{1j}\)</span>.</p>
+<p>Thus, we see that <span class="math inline">\(\phi_i\)</span> has the same interpretation, and the population-level baseline in this case is 86.41-15.22. That is, the ASD negative and ASD positive populations have different “baselines” as reflected by the regression parameter <span class="math inline">\(\beta_2\)</span>. We can plot each subject’s fitted model (i.e., ignoring their residuals <span class="math inline">\(\epsilon_{ij}\)</span>) and visualize these interpretations for all subjects with the following code.</p>
+<div class="sourceCode" id="cb477"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb477-1" title="1">mixed_effect_data_complete &lt;-<span class="st"> </span>mixed_fit<span class="op">$</span>data[<span class="kw">complete.cases</span>(mixed_fit<span class="op">$</span>data),]</a>
+<a class="sourceLine" id="cb477-2" title="2">mixed_effect_data_complete &lt;-<span class="st"> </span><span class="kw">data.frame</span>(mixed_effect_data_complete, <span class="kw">predict</span>(mixed_fit, <span class="dt">newdata =</span> mixed_effect_data_complete))</a>
+<a class="sourceLine" id="cb477-3" title="3"></a>
+<a class="sourceLine" id="cb477-4" title="4"><span class="kw">ggplot</span>(<span class="dt">data=</span>mixed_effect_data_complete, <span class="dt">mapping=</span><span class="kw">aes</span>(<span class="dt">x=</span>Visit, </a>
+<a class="sourceLine" id="cb477-5" title="5">                                          <span class="dt">y=</span>predict.mixed_fit.,</a>
+<a class="sourceLine" id="cb477-6" title="6">                                          <span class="dt">color=</span>ASD_Diag,</a>
+<a class="sourceLine" id="cb477-7" title="7">                                          <span class="dt">group=</span>Identifiers))<span class="op">+</span></a>
+<a class="sourceLine" id="cb477-8" title="8"><span class="st">  </span><span class="kw">geom_point</span>()<span class="op">+</span></a>
+<a class="sourceLine" id="cb477-9" title="9"><span class="st">  </span><span class="kw">geom_line</span>()<span class="op">+</span></a>
+<a class="sourceLine" id="cb477-10" title="10"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">y=</span><span class="st">&quot;Fitted Value: Mullen Composite&quot;</span>, </a>
+<a class="sourceLine" id="cb477-11" title="11">       <span class="dt">title=</span><span class="st">&quot;Mixed model fitted values without interaction term&quot;</span>)</a></code></pre></div>
+<pre><code>## Error in FUN(X[[i]], ...): object &#39;predict.mixed_fit.&#39; not found</code></pre>
+<p><img src="_main_files/figure-html/nlme_fit_random_effects_2-1.png" width="672" /></p>
+<p>To create this plot, we had to do the following
+1) Remove all missing values from the dataset used to fit our mixed model. Recall when fitting the mixed model, we had R remove all subjects with missing values from the analysis
+2) Add the fitted values from the estimated model to this dataset. To obtain the fitted values from the mixed model, we use the <strong>predict()</strong> function as with logistic regression. Recall mixed_fit is the name of the object which contains the mixed model output
+3) Call ggplot() to create the plot. We colored the subjects by their ASD diagnosis for better visualization (color=ASD_Diag), and had to specify each subject as a “group” so that R connected each subject’s points with a line (group=Identifiers). Finally, we called both geom_point() and geom_line() to create a scatterplot with connected points</p>
+<p>Note that no interaction terms between visit and ASD diagnosis were included It may make sense to include an interaction term between these variables; this would imply that the change in Mullen composite score over time is different between the ASD diagnosis groups. That model would be the following:</p>
+<p><span class="math inline">\(Mullen_{ij}=\beta_{0}+\beta_{1}Visit_{ij}+\beta_{2}Group_{ij}+\beta_{3}Group_{ij}*Visit_{ij}+\phi_{i}+\epsilon_{ij}\)</span>
+where <span class="math inline">\(\phi_i\)</span> are independent across index <span class="math inline">\(i\)</span> and <span class="math inline">\(\epsilon_{ij}\)</span> are independent across <span class="math inline">\(i\)</span>.</p>
+<p>We see that for a child who is ASD negative, their model is
+<span class="math inline">\(Mullen_{ij}=\beta_{0}+\beta_{1}Visit_{ij}+\phi_{i}+\epsilon_{ij}\)</span></p>
+<p>implying that their intercept is <span class="math inline">\(\beta_{0}+\phi_{i}\)</span> and their slope with respect to visit number is <span class="math inline">\(\beta_1\)</span>. For a child who is ASD positive, their model is</p>
+<p><span class="math inline">\(Mullen_{ij}=\beta_{0}+\beta_{1}Visit_{ij}+\beta_{2}+\beta_{3}Visit_{ij}+\phi_{i}+\epsilon_{ij}\)</span></p>
+<p>so we see that their intercept is <span class="math inline">\(\beta_{0}+\beta_{2}+\phi_{i}\)</span> and their slope is <span class="math inline">\(\beta_1+\beta_3\)</span>. Thus, the difference in the trends with visit between ASD positive is ASD negative is <span class="math inline">\(\beta_3\)</span>. Without this interaction term, this difference was not modeled. We fit this model to the data and create the same fitted values plot as was done above.</p>
+<div class="sourceCode" id="cb479"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb479-1" title="1"><span class="co"># Fit model</span></a>
+<a class="sourceLine" id="cb479-2" title="2">mixed_fit_interact &lt;-</a>
+<a class="sourceLine" id="cb479-3" title="3"><span class="st">  </span><span class="kw">lme</span>(Mullen_Composite_Score<span class="op">~</span>Visit_Num <span class="op">+</span><span class="st"> </span>ASD_Diag <span class="op">+</span><span class="st"> </span>Visit_Num<span class="op">*</span>ASD_Diag, </a>
+<a class="sourceLine" id="cb479-4" title="4">    <span class="dt">data=</span>mixed_model_data,</a>
+<a class="sourceLine" id="cb479-5" title="5">    <span class="dt">random =</span> <span class="op">~</span><span class="dv">1</span><span class="op">|</span>Identifiers,</a>
+<a class="sourceLine" id="cb479-6" title="6">    <span class="dt">na.action =</span> na.omit)</a>
+<a class="sourceLine" id="cb479-7" title="7"></a>
+<a class="sourceLine" id="cb479-8" title="8"><span class="co"># Print out results</span></a>
+<a class="sourceLine" id="cb479-9" title="9"><span class="kw">summary</span>(mixed_fit_interact)</a></code></pre></div>
+<pre><code>## Linear mixed-effects model fit by REML
+##  Data: mixed_model_data 
+##        AIC      BIC    logLik
+##   15084.22 15117.35 -7536.108
+## 
+## Random effects:
+##  Formula: ~1 | Identifiers
+##         (Intercept) Residual
+## StdDev:    7.851045 12.49571
+## 
+## Fixed effects: Mullen_Composite_Score ~ Visit_Num + ASD_Diag + Visit_Num * ASD_Diag 
+##                              Value Std.Error   DF   t-value p-value
+## (Intercept)               99.64991 0.6398681 1263 155.73507  0.0000
+## Visit_Num                  2.66635 0.3250264 1263   8.20348  0.0000
+## ASD_DiagASD_Pos           -3.89798 1.5796181  585  -2.46767  0.0139
+## Visit_Num:ASD_DiagASD_Pos -8.02574 0.7498930 1263 -10.70251  0.0000
+##  Correlation: 
+##                           (Intr) Vst_Nm ASD_DA
+## Visit_Num                 -0.660              
+## ASD_DiagASD_Pos           -0.405  0.267       
+## Visit_Num:ASD_DiagASD_Pos  0.286 -0.433 -0.669
+## 
+## Standardized Within-Group Residuals:
+##           Min            Q1           Med            Q3           Max 
+## -3.3559289829 -0.5953731509  0.0003434236  0.5877083391  3.1766641043 
+## 
+## Number of Observations: 1852
+## Number of Groups: 587</code></pre>
+<div class="sourceCode" id="cb481"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb481-1" title="1"><span class="co"># Create plot</span></a>
+<a class="sourceLine" id="cb481-2" title="2">mixed_effect_data_complete &lt;-<span class="st"> </span>mixed_fit_interact<span class="op">$</span>data[<span class="kw">complete.cases</span>(mixed_fit_interact<span class="op">$</span>data),]</a>
+<a class="sourceLine" id="cb481-3" title="3">mixed_effect_data_complete &lt;-<span class="st"> </span><span class="kw">data.frame</span>(mixed_effect_data_complete, <span class="kw">predict</span>(mixed_fit_interact))</a>
+<a class="sourceLine" id="cb481-4" title="4"></a>
+<a class="sourceLine" id="cb481-5" title="5"><span class="kw">ggplot</span>(<span class="dt">data=</span>mixed_effect_data_complete, <span class="dt">mapping=</span><span class="kw">aes</span>(<span class="dt">x=</span>Visit, </a>
+<a class="sourceLine" id="cb481-6" title="6">                                          <span class="dt">y=</span>predict.mixed_fit_interact.,</a>
+<a class="sourceLine" id="cb481-7" title="7">                                          <span class="dt">color=</span>ASD_Diag,</a>
+<a class="sourceLine" id="cb481-8" title="8">                                          <span class="dt">group=</span>Identifiers))<span class="op">+</span></a>
+<a class="sourceLine" id="cb481-9" title="9"><span class="st">  </span><span class="kw">geom_point</span>()<span class="op">+</span></a>
+<a class="sourceLine" id="cb481-10" title="10"><span class="st">  </span><span class="kw">geom_line</span>()<span class="op">+</span></a>
+<a class="sourceLine" id="cb481-11" title="11"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">y=</span><span class="st">&quot;Fitted Value: Mullen Composite&quot;</span>, </a>
+<a class="sourceLine" id="cb481-12" title="12">       <span class="dt">title=</span><span class="st">&quot;Mixed model fitted values with interaction term&quot;</span>)</a></code></pre></div>
+<p><img src="_main_files/figure-html/nlme_fit_2-1.png" width="672" /></p>
+<p>Now, we see ASD negative children have an increasing Mullen composite over time on average while ASD positive children have a decreasing Mullen composite over time on average.</p>
+<p>Finally, in order to illustrate a simpele example of a random slope model, we now include visit as a random effect to the interaction term model discussed above. This will model subject-specific slopes across time (recall in plot above, slopes were the same within a diagnosis group). The corresponding model is</p>
+<p><span class="math inline">\(Mullen_{ij}=\beta_{0}+\beta_{1}Visit_{ij}+\beta_{2}Group_{ij}+\beta_{3}Group_{ij}*Visit_{ij}+\phi_{0,i}+\phi_{1,i}*Visit_{ij}+\epsilon_{ij}\)</span>
+where <span class="math inline">\((\phi_{0,i}, \phi_{1,i})\)</span> is independent across index <span class="math inline">\(i\)</span> and <span class="math inline">\(\epsilon_{ij}\)</span> are independent across <span class="math inline">\(i\)</span>. Note that for index <span class="math inline">\(i\)</span>, we are <strong>not</strong> assuming <span class="math inline">\(\phi_{0,i}\)</span> and <span class="math inline">\(\phi_{1,i}\)</span> are independent; only that the random effects are independent <strong>between subjects</strong> and not <strong>within subjects</strong>. We can see that the slope with respect to time for subject <span class="math inline">\(i\)</span> is <span class="math inline">\(\beta_{1}+\beta_{3}Group_{ij}+\phi_{1,i}*Visit_{ij}\)</span>.</p>
+<p>We fit this model to the data with an unstructured covariance structure for the random effects.</p>
+<div class="sourceCode" id="cb482"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb482-1" title="1"><span class="co">## Fit model</span></a>
+<a class="sourceLine" id="cb482-2" title="2">mixed_fit_interact_rand_slope &lt;-</a>
+<a class="sourceLine" id="cb482-3" title="3"><span class="st">  </span><span class="kw">lme</span>(Mullen_Composite_Score<span class="op">~</span>Visit_Num <span class="op">+</span><span class="st"> </span>ASD_Diag <span class="op">+</span><span class="st"> </span>Visit_Num<span class="op">*</span>ASD_Diag, </a>
+<a class="sourceLine" id="cb482-4" title="4">    <span class="dt">data=</span>mixed_model_data,</a>
+<a class="sourceLine" id="cb482-5" title="5">    <span class="dt">random =</span> <span class="op">~</span><span class="dv">1</span><span class="op">+</span>Visit_Num<span class="op">|</span>Identifiers,</a>
+<a class="sourceLine" id="cb482-6" title="6">    <span class="dt">na.action =</span> na.omit)</a>
+<a class="sourceLine" id="cb482-7" title="7"></a>
+<a class="sourceLine" id="cb482-8" title="8"><span class="co">## Print out results</span></a>
+<a class="sourceLine" id="cb482-9" title="9"><span class="kw">summary</span>(mixed_fit_interact_rand_slope)</a></code></pre></div>
+<pre><code>## Linear mixed-effects model fit by REML
+##  Data: mixed_model_data 
+##        AIC      BIC    logLik
+##   14924.86 14969.04 -7454.431
+## 
+## Random effects:
+##  Formula: ~1 + Visit_Num | Identifiers
+##  Structure: General positive-definite, Log-Cholesky parametrization
+##             StdDev    Corr  
+## (Intercept)  6.256243 (Intr)
+## Visit_Num    5.483750 -0.188
+## Residual    10.694466       
+## 
+## Fixed effects: Mullen_Composite_Score ~ Visit_Num + ASD_Diag + Visit_Num * ASD_Diag 
+##                              Value Std.Error   DF   t-value p-value
+## (Intercept)               99.67841 0.5430283 1263 183.56026  0.0000
+## Visit_Num                  2.74016 0.3867271 1263   7.08552  0.0000
+## ASD_DiagASD_Pos           -3.79570 1.3408253  585  -2.83087  0.0048
+## Visit_Num:ASD_DiagASD_Pos -8.24438 0.9162890 1263  -8.99758  0.0000
+##  Correlation: 
+##                           (Intr) Vst_Nm ASD_DA
+## Visit_Num                 -0.581              
+## ASD_DiagASD_Pos           -0.405  0.235       
+## Visit_Num:ASD_DiagASD_Pos  0.245 -0.422 -0.574
+## 
+## Standardized Within-Group Residuals:
+##          Min           Q1          Med           Q3          Max 
+## -2.828231978 -0.557034760  0.008772265  0.551159808  3.156926759 
+## 
+## Number of Observations: 1852
+## Number of Groups: 587</code></pre>
+<div class="sourceCode" id="cb484"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb484-1" title="1"><span class="co">## Create plot</span></a>
+<a class="sourceLine" id="cb484-2" title="2">mixed_effect_data_complete &lt;-<span class="st"> </span>mixed_fit_interact_rand_slope<span class="op">$</span>data[</a>
+<a class="sourceLine" id="cb484-3" title="3">  <span class="kw">complete.cases</span>(mixed_fit_interact_rand_slope<span class="op">$</span>data),]</a>
+<a class="sourceLine" id="cb484-4" title="4">mixed_effect_data_complete &lt;-<span class="st"> </span></a>
+<a class="sourceLine" id="cb484-5" title="5"><span class="st">  </span><span class="kw">data.frame</span>(mixed_effect_data_complete, <span class="st">&quot;predicted_value&quot;</span>=<span class="kw">predict</span>(mixed_fit_interact_rand_slope, <span class="dt">newdata =</span> mixed_effect_data_complete))</a>
+<a class="sourceLine" id="cb484-6" title="6"><span class="co"># Notice above, we create variable &quot;predicted_value&quot; to hold each subject&#39;s fitted values, including random effect realizations, in dataset called mixed_effect_data_complete (&quot;complete&quot; meaning all subjects with missing data for variables in model are removed from dataset to be used in plot)</span></a>
+<a class="sourceLine" id="cb484-7" title="7"></a>
+<a class="sourceLine" id="cb484-8" title="8"><span class="kw">ggplot</span>(<span class="dt">data=</span>mixed_effect_data_complete, <span class="dt">mapping=</span><span class="kw">aes</span>(<span class="dt">x=</span>Visit, </a>
+<a class="sourceLine" id="cb484-9" title="9">                                          <span class="dt">y=</span>predicted_value,</a>
+<a class="sourceLine" id="cb484-10" title="10">                                          <span class="dt">color=</span>ASD_Diag,</a>
+<a class="sourceLine" id="cb484-11" title="11">                                          <span class="dt">group=</span>Identifiers))<span class="op">+</span></a>
+<a class="sourceLine" id="cb484-12" title="12"><span class="st">  </span><span class="kw">geom_point</span>()<span class="op">+</span></a>
+<a class="sourceLine" id="cb484-13" title="13"><span class="st">  </span><span class="kw">geom_line</span>()<span class="op">+</span></a>
+<a class="sourceLine" id="cb484-14" title="14"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">y=</span><span class="st">&quot;Fitted Value: Mullen Composite&quot;</span>, </a>
+<a class="sourceLine" id="cb484-15" title="15">       <span class="dt">title=</span><span class="st">&quot;Mixed model fitted values with interaction term</span><span class="ch">\n</span><span class="st">and random slope for visit&quot;</span>)</a></code></pre></div>
+<p><img src="_main_files/figure-html/nlme_fit_3-1.png" width="672" /></p>
+<div class="sourceCode" id="cb485"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb485-1" title="1"><span class="co"># Use of \n forces new line for plot title</span></a></code></pre></div>
+<p>We see that for most subjects, their slopes follow the general trend for their diagnosis group. Since this model is a little more complicated, let’s dig into the output provided in the <strong>summary()</strong> command. Since the previous models are simpler, understanding these results will teach the concepts to understand all of the output for other models.</p>
+<p>First, we see a table with AIC, BIC, and negative loglikelihood (logLik) results for the model. These three measures are different ways of quantifying the “goodness of fit” for our model with respect to the analyzed dataset. For all three, higher implies a better correspondance between the data and the data one woudl expect to see under the chosen mixed model. For logLik, higher corresponds to “less negative”/closer to zero.</p>
+<p>Next, we see a table entitled “Random effects:” with standard deviation and correlation values. This table provides the estimated standard deviation for each of the random effects and the estimated correlation for each pair of random effects (i.e., the correlation between the random intercept and random slope for visit in this example). Notice that for the earlier mixed models with only a single random intercept, the correlation entry was not provided as these models only had one random effect. We then see a table entitled “Fixed effects:”, which includes the usual calculations for the fixed effects (i.e., beta coefficients). The following table entitled “Correlation:” provides the estimated correlations between each pair of estimates for the fixed effects (between the estimates <strong>not</strong> the fixed effects themselves). These are generally not important. Finally, we are provided a summary of the spread of the residuals.</p>
+</div>
+<div id="interpreting-results-time-dependent-covariates" class="section level3">
+<h3><span class="header-section-number">8.4.3</span> Interpreting results: time dependent covariates</h3>
+<p>Recall in the examples above, the covariates in our models either 1) changed predictably over time (visit number) or 2) were constant over time (ASD diagnosis at 24 months). However, for covariates that change randomly over time (for example Vineland scores), interpreting the regression parameters requires more thought. Such covariates are referred to as <strong>time dependent covariates</strong>. Further, although random intercepts were discussed here, one can also include random effects tied to your model’s covariates. Such random effects are referred to as <strong>random slopes</strong>. Interpreting these models beyond the scope of these tutorials, so always consult a statistican if you are 1) think of including time dependent covariates and/or 2) including random effects on covariates (i.e., random slopes) in your mixed model. In general, if you have data which includes multiple observations for a given subject or if you are considering the use of any mxed model, <strong>please consult a statistican</strong>.</p>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="statistical-fundamentals.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="documenting-your-results-with-r-markdown.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": false,
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+},
+"search": true
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
