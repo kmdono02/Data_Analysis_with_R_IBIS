@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>10 Loops and Functional Programming | Data Analysis and Processing with R based on IBIS data</title>
+  <meta name="description" content="10 Loops and Functional Programming | Data Analysis and Processing with R based on IBIS data" />
+  <meta name="generator" content="bookdown 0.13 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="10 Loops and Functional Programming | Data Analysis and Processing with R based on IBIS data" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:image" content="mushroom.jpg" />
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="10 Loops and Functional Programming | Data Analysis and Processing with R based on IBIS data" />
+  
+  
+  <meta name="twitter:image" content="mushroom.jpg" />
+
+<meta name="author" content="Kevin Donovan" />
+
+
+<meta name="date" content="2019-10-21" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="documenting-your-results-with-r-markdown.html"/>
+
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Index</a><ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#preface"><i class="fa fa-check"></i><b>1.1</b> Preface</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="introducing-r-and-rstudio.html"><a href="introducing-r-and-rstudio.html"><i class="fa fa-check"></i><b>2</b> Introducing R and Rstudio</a><ul>
+<li class="chapter" data-level="2.1" data-path="introducing-r-and-rstudio.html"><a href="introducing-r-and-rstudio.html#intro"><i class="fa fa-check"></i><b>2.1</b> Intro</a></li>
+<li class="chapter" data-level="2.2" data-path="introducing-r-and-rstudio.html"><a href="introducing-r-and-rstudio.html#why-use-r-for-data-analysis"><i class="fa fa-check"></i><b>2.2</b> Why use R for data analysis?</a></li>
+<li class="chapter" data-level="2.3" data-path="introducing-r-and-rstudio.html"><a href="introducing-r-and-rstudio.html#r-and-rstudio-what-is-the-difference"><i class="fa fa-check"></i><b>2.3</b> R and RStudio: What is the difference?</a></li>
+<li class="chapter" data-level="2.4" data-path="introducing-r-and-rstudio.html"><a href="introducing-r-and-rstudio.html#installing-r-and-rstudio"><i class="fa fa-check"></i><b>2.4</b> Installing R and RStudio</a></li>
+<li class="chapter" data-level="2.5" data-path="introducing-r-and-rstudio.html"><a href="introducing-r-and-rstudio.html#the-interface-of-rstudio"><i class="fa fa-check"></i><b>2.5</b> The interface of RStudio</a><ul>
+<li class="chapter" data-level="2.5.1" data-path="introducing-r-and-rstudio.html"><a href="introducing-r-and-rstudio.html#console"><i class="fa fa-check"></i><b>2.5.1</b> Console</a></li>
+<li class="chapter" data-level="2.5.2" data-path="introducing-r-and-rstudio.html"><a href="introducing-r-and-rstudio.html#scripts"><i class="fa fa-check"></i><b>2.5.2</b> Scripts</a></li>
+<li class="chapter" data-level="2.5.3" data-path="introducing-r-and-rstudio.html"><a href="introducing-r-and-rstudio.html#rmd-files"><i class="fa fa-check"></i><b>2.5.3</b> RMD Files</a></li>
+<li class="chapter" data-level="2.5.4" data-path="introducing-r-and-rstudio.html"><a href="introducing-r-and-rstudio.html#environment"><i class="fa fa-check"></i><b>2.5.4</b> Environment</a></li>
+<li class="chapter" data-level="2.5.5" data-path="introducing-r-and-rstudio.html"><a href="introducing-r-and-rstudio.html#plots-packages-and-help"><i class="fa fa-check"></i><b>2.5.5</b> Plots, Packages, and Help</a></li>
+</ul></li>
+<li class="chapter" data-level="2.6" data-path="introducing-r-and-rstudio.html"><a href="introducing-r-and-rstudio.html#file-directories-in-r"><i class="fa fa-check"></i><b>2.6</b> File Directories in R</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="objects-and-functions.html"><a href="objects-and-functions.html"><i class="fa fa-check"></i><b>3</b> Objects and Functions</a><ul>
+<li class="chapter" data-level="3.1" data-path="objects-and-functions.html"><a href="objects-and-functions.html#intro-1"><i class="fa fa-check"></i><b>3.1</b> Intro</a></li>
+<li class="chapter" data-level="3.2" data-path="objects-and-functions.html"><a href="objects-and-functions.html#functions"><i class="fa fa-check"></i><b>3.2</b> Functions</a></li>
+<li class="chapter" data-level="3.3" data-path="objects-and-functions.html"><a href="objects-and-functions.html#objects"><i class="fa fa-check"></i><b>3.3</b> Objects</a></li>
+<li class="chapter" data-level="3.4" data-path="objects-and-functions.html"><a href="objects-and-functions.html#object-classes-and-types"><i class="fa fa-check"></i><b>3.4</b> Object classes and types</a><ul>
+<li class="chapter" data-level="3.4.1" data-path="objects-and-functions.html"><a href="objects-and-functions.html#vectors"><i class="fa fa-check"></i><b>3.4.1</b> Vectors</a></li>
+<li class="chapter" data-level="3.4.2" data-path="objects-and-functions.html"><a href="objects-and-functions.html#matricies"><i class="fa fa-check"></i><b>3.4.2</b> Matricies</a></li>
+<li class="chapter" data-level="3.4.3" data-path="objects-and-functions.html"><a href="objects-and-functions.html#lists"><i class="fa fa-check"></i><b>3.4.3</b> Lists</a></li>
+<li class="chapter" data-level="3.4.4" data-path="objects-and-functions.html"><a href="objects-and-functions.html#data-frames"><i class="fa fa-check"></i><b>3.4.4</b> Data Frames</a></li>
+<li class="chapter" data-level="3.4.5" data-path="objects-and-functions.html"><a href="objects-and-functions.html#types"><i class="fa fa-check"></i><b>3.4.5</b> Types</a></li>
+</ul></li>
+<li class="chapter" data-level="3.5" data-path="objects-and-functions.html"><a href="objects-and-functions.html#subsetting"><i class="fa fa-check"></i><b>3.5</b> Subsetting</a></li>
+<li class="chapter" data-level="3.6" data-path="objects-and-functions.html"><a href="objects-and-functions.html#base-r"><i class="fa fa-check"></i><b>3.6</b> Base R</a></li>
+<li class="chapter" data-level="3.7" data-path="objects-and-functions.html"><a href="objects-and-functions.html#environment-1"><i class="fa fa-check"></i><b>3.7</b> Environment</a></li>
+<li class="chapter" data-level="3.8" data-path="objects-and-functions.html"><a href="objects-and-functions.html#putting-it-all-together-read.csv"><i class="fa fa-check"></i><b>3.8</b> Putting It All Together: read.csv</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="using-dplyr.html"><a href="using-dplyr.html"><i class="fa fa-check"></i><b>4</b> Using dplyr</a><ul>
+<li class="chapter" data-level="4.1" data-path="using-dplyr.html"><a href="using-dplyr.html#intro-2"><i class="fa fa-check"></i><b>4.1</b> Intro</a></li>
+<li class="chapter" data-level="4.2" data-path="using-dplyr.html"><a href="using-dplyr.html#dplyr-functions"><i class="fa fa-check"></i><b>4.2</b> dplyr Functions</a><ul>
+<li class="chapter" data-level="4.2.1" data-path="using-dplyr.html"><a href="using-dplyr.html#select-filter-and-arrange"><i class="fa fa-check"></i><b>4.2.1</b> Select, filter, and arrange</a></li>
+<li class="chapter" data-level="4.2.2" data-path="using-dplyr.html"><a href="using-dplyr.html#mutate-and-summarize"><i class="fa fa-check"></i><b>4.2.2</b> Mutate and summarize</a></li>
+<li class="chapter" data-level="4.2.3" data-path="using-dplyr.html"><a href="using-dplyr.html#spread-gather-separate-and-unite"><i class="fa fa-check"></i><b>4.2.3</b> Spread, Gather, Separate and Unite</a></li>
+<li class="chapter" data-level="4.2.4" data-path="using-dplyr.html"><a href="using-dplyr.html#renaming-variables"><i class="fa fa-check"></i><b>4.2.4</b> Renaming variables</a></li>
+<li class="chapter" data-level="4.2.5" data-path="using-dplyr.html"><a href="using-dplyr.html#using-the-pipe"><i class="fa fa-check"></i><b>4.2.5</b> Using the pipe</a></li>
+<li class="chapter" data-level="4.2.6" data-path="using-dplyr.html"><a href="using-dplyr.html#editing-factor-variables-recode-and-relevel"><i class="fa fa-check"></i><b>4.2.6</b> Editing factor variables: recode() and relevel()</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="creating-graphs-with-ggplot2.html"><a href="creating-graphs-with-ggplot2.html"><i class="fa fa-check"></i><b>5</b> Creating Graphs With ggplot2</a><ul>
+<li class="chapter" data-level="5.1" data-path="creating-graphs-with-ggplot2.html"><a href="creating-graphs-with-ggplot2.html#base-r-vs.-ggplot2"><i class="fa fa-check"></i><b>5.1</b> Base R vs. ggplot2</a></li>
+<li class="chapter" data-level="5.2" data-path="creating-graphs-with-ggplot2.html"><a href="creating-graphs-with-ggplot2.html#ggplot2"><i class="fa fa-check"></i><b>5.2</b> ggplot2</a><ul>
+<li class="chapter" data-level="5.2.1" data-path="creating-graphs-with-ggplot2.html"><a href="creating-graphs-with-ggplot2.html#introduction"><i class="fa fa-check"></i><b>5.2.1</b> Introduction</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="creating-graphs-with-ggplot2.html"><a href="creating-graphs-with-ggplot2.html#ggplot-aesthetics"><i class="fa fa-check"></i><b>5.3</b> ggplot Aesthetics</a><ul>
+<li class="chapter" data-level="5.3.1" data-path="creating-graphs-with-ggplot2.html"><a href="creating-graphs-with-ggplot2.html#scatterplot"><i class="fa fa-check"></i><b>5.3.1</b> Scatterplot</a></li>
+<li class="chapter" data-level="5.3.2" data-path="creating-graphs-with-ggplot2.html"><a href="creating-graphs-with-ggplot2.html#colors-in-r"><i class="fa fa-check"></i><b>5.3.2</b> Colors in R</a></li>
+<li class="chapter" data-level="5.3.3" data-path="creating-graphs-with-ggplot2.html"><a href="creating-graphs-with-ggplot2.html#line-of-best-fit"><i class="fa fa-check"></i><b>5.3.3</b> Line of best fit</a></li>
+<li class="chapter" data-level="5.3.4" data-path="creating-graphs-with-ggplot2.html"><a href="creating-graphs-with-ggplot2.html#box-and-whisker"><i class="fa fa-check"></i><b>5.3.4</b> Box and whisker</a></li>
+<li class="chapter" data-level="5.3.5" data-path="creating-graphs-with-ggplot2.html"><a href="creating-graphs-with-ggplot2.html#barchart"><i class="fa fa-check"></i><b>5.3.5</b> Barchart</a></li>
+<li class="chapter" data-level="5.3.6" data-path="creating-graphs-with-ggplot2.html"><a href="creating-graphs-with-ggplot2.html#other-aesthetics"><i class="fa fa-check"></i><b>5.3.6</b> Other aesthetics</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="creating-graphs-with-ggplot2.html"><a href="creating-graphs-with-ggplot2.html#additional-customization"><i class="fa fa-check"></i><b>5.4</b> Additional customization</a><ul>
+<li class="chapter" data-level="5.4.1" data-path="creating-graphs-with-ggplot2.html"><a href="creating-graphs-with-ggplot2.html#titles-and-labels"><i class="fa fa-check"></i><b>5.4.1</b> Titles and Labels</a></li>
+<li class="chapter" data-level="5.4.2" data-path="creating-graphs-with-ggplot2.html"><a href="creating-graphs-with-ggplot2.html#colors"><i class="fa fa-check"></i><b>5.4.2</b> Colors</a></li>
+<li class="chapter" data-level="5.4.3" data-path="creating-graphs-with-ggplot2.html"><a href="creating-graphs-with-ggplot2.html#sizes-and-shapes"><i class="fa fa-check"></i><b>5.4.3</b> Sizes and shapes</a></li>
+<li class="chapter" data-level="5.4.4" data-path="creating-graphs-with-ggplot2.html"><a href="creating-graphs-with-ggplot2.html#themes"><i class="fa fa-check"></i><b>5.4.4</b> Themes</a></li>
+<li class="chapter" data-level="5.4.5" data-path="creating-graphs-with-ggplot2.html"><a href="creating-graphs-with-ggplot2.html#reversing-the-axes"><i class="fa fa-check"></i><b>5.4.5</b> Reversing the axes</a></li>
+<li class="chapter" data-level="5.4.6" data-path="creating-graphs-with-ggplot2.html"><a href="creating-graphs-with-ggplot2.html#facets"><i class="fa fa-check"></i><b>5.4.6</b> Facets</a></li>
+<li class="chapter" data-level="5.4.7" data-path="creating-graphs-with-ggplot2.html"><a href="creating-graphs-with-ggplot2.html#exporting-your-plot"><i class="fa fa-check"></i><b>5.4.7</b> Exporting your plot</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="working-with-tables-in-r.html"><a href="working-with-tables-in-r.html"><i class="fa fa-check"></i><b>6</b> Working with Tables in R</a><ul>
+<li class="chapter" data-level="6.1" data-path="working-with-tables-in-r.html"><a href="working-with-tables-in-r.html#intro-3"><i class="fa fa-check"></i><b>6.1</b> Intro</a></li>
+<li class="chapter" data-level="6.2" data-path="working-with-tables-in-r.html"><a href="working-with-tables-in-r.html#creating-basic-tables-table-and-xtabs"><i class="fa fa-check"></i><b>6.2</b> Creating Basic Tables: table() and xtabs()</a></li>
+<li class="chapter" data-level="6.3" data-path="working-with-tables-in-r.html"><a href="working-with-tables-in-r.html#tabular-data-analysis"><i class="fa fa-check"></i><b>6.3</b> Tabular Data Analysis</a><ul>
+<li class="chapter" data-level="6.3.1" data-path="working-with-tables-in-r.html"><a href="working-with-tables-in-r.html#tests-for-independence"><i class="fa fa-check"></i><b>6.3.1</b> Tests for Independence</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="statistical-fundamentals.html"><a href="statistical-fundamentals.html"><i class="fa fa-check"></i><b>7</b> Statistical Fundamentals</a><ul>
+<li class="chapter" data-level="7.1" data-path="statistical-fundamentals.html"><a href="statistical-fundamentals.html#intro-4"><i class="fa fa-check"></i><b>7.1</b> Intro</a></li>
+<li class="chapter" data-level="7.2" data-path="statistical-fundamentals.html"><a href="statistical-fundamentals.html#statistical-inference"><i class="fa fa-check"></i><b>7.2</b> Statistical Inference</a><ul>
+<li class="chapter" data-level="7.2.1" data-path="statistical-fundamentals.html"><a href="statistical-fundamentals.html#parameter-estimation-mean-median-tutorial-quantiles"><i class="fa fa-check"></i><b>7.2.1</b> Parameter Estimation: Mean, Median, tutorial, Quantiles</a></li>
+<li class="chapter" data-level="7.2.2" data-path="statistical-fundamentals.html"><a href="statistical-fundamentals.html#accounting-for-estimation-variance-and-hypothesis-testing"><i class="fa fa-check"></i><b>7.2.2</b> Accounting for estimation variance and hypothesis testing</a></li>
+<li class="chapter" data-level="7.2.3" data-path="statistical-fundamentals.html"><a href="statistical-fundamentals.html#confidence-intervals"><i class="fa fa-check"></i><b>7.2.3</b> Confidence intervals</a></li>
+<li class="chapter" data-level="7.2.4" data-path="statistical-fundamentals.html"><a href="statistical-fundamentals.html#hypothesis-testing"><i class="fa fa-check"></i><b>7.2.4</b> Hypothesis testing</a></li>
+<li class="chapter" data-level="7.2.5" data-path="statistical-fundamentals.html"><a href="statistical-fundamentals.html#hypothesis-testing-with-means"><i class="fa fa-check"></i><b>7.2.5</b> Hypothesis Testing with Means</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="regression-analysis-methods.html"><a href="regression-analysis-methods.html"><i class="fa fa-check"></i><b>8</b> Regression Analysis Methods</a><ul>
+<li class="chapter" data-level="8.1" data-path="regression-analysis-methods.html"><a href="regression-analysis-methods.html#intro-5"><i class="fa fa-check"></i><b>8.1</b> Intro</a></li>
+<li class="chapter" data-level="8.2" data-path="regression-analysis-methods.html"><a href="regression-analysis-methods.html#linear-regression"><i class="fa fa-check"></i><b>8.2</b> Linear Regression</a><ul>
+<li class="chapter" data-level="8.2.1" data-path="regression-analysis-methods.html"><a href="regression-analysis-methods.html#motivation"><i class="fa fa-check"></i><b>8.2.1</b> Motivation</a></li>
+<li class="chapter" data-level="8.2.2" data-path="regression-analysis-methods.html"><a href="regression-analysis-methods.html#methodology"><i class="fa fa-check"></i><b>8.2.2</b> Methodology</a></li>
+<li class="chapter" data-level="8.2.3" data-path="regression-analysis-methods.html"><a href="regression-analysis-methods.html#overview"><i class="fa fa-check"></i><b>8.2.3</b> Overview</a></li>
+<li class="chapter" data-level="8.2.4" data-path="regression-analysis-methods.html"><a href="regression-analysis-methods.html#example-1-continuous-predictors"><i class="fa fa-check"></i><b>8.2.4</b> Example 1: Continuous predictors</a></li>
+<li class="chapter" data-level="8.2.5" data-path="regression-analysis-methods.html"><a href="regression-analysis-methods.html#example-2-categorical-predictors"><i class="fa fa-check"></i><b>8.2.5</b> Example 2: Categorical predictors</a></li>
+<li class="chapter" data-level="8.2.6" data-path="regression-analysis-methods.html"><a href="regression-analysis-methods.html#diagnostics"><i class="fa fa-check"></i><b>8.2.6</b> Diagnostics</a></li>
+<li class="chapter" data-level="8.2.7" data-path="regression-analysis-methods.html"><a href="regression-analysis-methods.html#anova-and-ancova"><i class="fa fa-check"></i><b>8.2.7</b> ANOVA and ANCOVA</a></li>
+</ul></li>
+<li class="chapter" data-level="8.3" data-path="regression-analysis-methods.html"><a href="regression-analysis-methods.html#logistic-regression"><i class="fa fa-check"></i><b>8.3</b> Logistic regression</a><ul>
+<li class="chapter" data-level="8.3.1" data-path="regression-analysis-methods.html"><a href="regression-analysis-methods.html#methodology-1"><i class="fa fa-check"></i><b>8.3.1</b> Methodology</a></li>
+<li class="chapter" data-level="8.3.2" data-path="regression-analysis-methods.html"><a href="regression-analysis-methods.html#example-1-continuous-covariates"><i class="fa fa-check"></i><b>8.3.2</b> Example 1: Continuous Covariates</a></li>
+<li class="chapter" data-level="8.3.3" data-path="regression-analysis-methods.html"><a href="regression-analysis-methods.html#example-2-categorical-covariates"><i class="fa fa-check"></i><b>8.3.3</b> Example 2: Categorical Covariates</a></li>
+<li class="chapter" data-level="8.3.4" data-path="regression-analysis-methods.html"><a href="regression-analysis-methods.html#prediction"><i class="fa fa-check"></i><b>8.3.4</b> Prediction</a></li>
+</ul></li>
+<li class="chapter" data-level="8.4" data-path="regression-analysis-methods.html"><a href="regression-analysis-methods.html#mixed-models"><i class="fa fa-check"></i><b>8.4</b> Mixed Models</a><ul>
+<li class="chapter" data-level="8.4.1" data-path="regression-analysis-methods.html"><a href="regression-analysis-methods.html#motivation-1"><i class="fa fa-check"></i><b>8.4.1</b> Motivation</a></li>
+<li class="chapter" data-level="8.4.2" data-path="regression-analysis-methods.html"><a href="regression-analysis-methods.html#example-mullen-composite-and-visit"><i class="fa fa-check"></i><b>8.4.2</b> Example: Mullen composite and Visit</a></li>
+<li class="chapter" data-level="8.4.3" data-path="regression-analysis-methods.html"><a href="regression-analysis-methods.html#interpreting-results-time-dependent-covariates"><i class="fa fa-check"></i><b>8.4.3</b> Interpreting results: time dependent covariates</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="documenting-your-results-with-r-markdown.html"><a href="documenting-your-results-with-r-markdown.html"><i class="fa fa-check"></i><b>9</b> Documenting your results with R Markdown</a><ul>
+<li class="chapter" data-level="9.1" data-path="documenting-your-results-with-r-markdown.html"><a href="documenting-your-results-with-r-markdown.html#intro-6"><i class="fa fa-check"></i><b>9.1</b> Intro</a></li>
+<li class="chapter" data-level="9.2" data-path="documenting-your-results-with-r-markdown.html"><a href="documenting-your-results-with-r-markdown.html#starting-your-r-markdown"><i class="fa fa-check"></i><b>9.2</b> Starting Your R Markdown</a></li>
+<li class="chapter" data-level="9.3" data-path="documenting-your-results-with-r-markdown.html"><a href="documenting-your-results-with-r-markdown.html#understanding-the-r-markdown-editor"><i class="fa fa-check"></i><b>9.3</b> Understanding the R Markdown editor</a><ul>
+<li class="chapter" data-level="9.3.1" data-path="documenting-your-results-with-r-markdown.html"><a href="documenting-your-results-with-r-markdown.html#prelude"><i class="fa fa-check"></i><b>9.3.1</b> Prelude</a></li>
+<li class="chapter" data-level="9.3.2" data-path="documenting-your-results-with-r-markdown.html"><a href="documenting-your-results-with-r-markdown.html#chunk"><i class="fa fa-check"></i><b>9.3.2</b> Chunk</a></li>
+<li class="chapter" data-level="9.3.3" data-path="documenting-your-results-with-r-markdown.html"><a href="documenting-your-results-with-r-markdown.html#non-chunk"><i class="fa fa-check"></i><b>9.3.3</b> Non-chunk</a></li>
+</ul></li>
+<li class="chapter" data-level="9.4" data-path="documenting-your-results-with-r-markdown.html"><a href="documenting-your-results-with-r-markdown.html#creating-your-document-from-the-r-markdown-file"><i class="fa fa-check"></i><b>9.4</b> Creating your document from the R Markdown file</a></li>
+<li class="chapter" data-level="9.5" data-path="documenting-your-results-with-r-markdown.html"><a href="documenting-your-results-with-r-markdown.html#creating-tables-with-r-markdown"><i class="fa fa-check"></i><b>9.5</b> Creating tables with R Markdown</a><ul>
+<li class="chapter" data-level="9.5.1" data-path="documenting-your-results-with-r-markdown.html"><a href="documenting-your-results-with-r-markdown.html#summary-statistics"><i class="fa fa-check"></i><b>9.5.1</b> Summary statistics</a></li>
+<li class="chapter" data-level="9.5.2" data-path="documenting-your-results-with-r-markdown.html"><a href="documenting-your-results-with-r-markdown.html#general-tables"><i class="fa fa-check"></i><b>9.5.2</b> General tables</a></li>
+</ul></li>
+<li class="chapter" data-level="9.6" data-path="documenting-your-results-with-r-markdown.html"><a href="documenting-your-results-with-r-markdown.html#practice-with-r-markdown"><i class="fa fa-check"></i><b>9.6</b> Practice with R Markdown</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="loops-and-functional-programming.html"><a href="loops-and-functional-programming.html"><i class="fa fa-check"></i><b>10</b> Loops and Functional Programming</a><ul>
+<li class="chapter" data-level="10.1" data-path="loops-and-functional-programming.html"><a href="loops-and-functional-programming.html#intro-7"><i class="fa fa-check"></i><b>10.1</b> Intro</a></li>
+<li class="chapter" data-level="10.2" data-path="loops-and-functional-programming.html"><a href="loops-and-functional-programming.html#loops"><i class="fa fa-check"></i><b>10.2</b> Loops</a><ul>
+<li class="chapter" data-level="10.2.1" data-path="loops-and-functional-programming.html"><a href="loops-and-functional-programming.html#example-1-running-many-regression-models"><i class="fa fa-check"></i><b>10.2.1</b> Example 1: Running many regression models</a></li>
+<li class="chapter" data-level="10.2.2" data-path="loops-and-functional-programming.html"><a href="loops-and-functional-programming.html#example-2-the-apply-functions"><i class="fa fa-check"></i><b>10.2.2</b> Example 2: The Apply Functions</a></li>
+</ul></li>
+<li class="chapter" data-level="10.3" data-path="loops-and-functional-programming.html"><a href="loops-and-functional-programming.html#functional-programming"><i class="fa fa-check"></i><b>10.3</b> Functional Programming</a><ul>
+<li class="chapter" data-level="10.3.1" data-path="loops-and-functional-programming.html"><a href="loops-and-functional-programming.html#example-regression-analysis-as-a-function-call"><i class="fa fa-check"></i><b>10.3.1</b> Example: Regression Analysis as a Function Call</a></li>
+</ul></li>
+<li class="chapter" data-level="10.4" data-path="loops-and-functional-programming.html"><a href="loops-and-functional-programming.html#simulation-studies"><i class="fa fa-check"></i><b>10.4</b> Simulation Studies</a><ul>
+<li class="chapter" data-level="10.4.1" data-path="loops-and-functional-programming.html"><a href="loops-and-functional-programming.html#setting-the-seed-reproducibility-in-simulation-studies"><i class="fa fa-check"></i><b>10.4.1</b> Setting the Seed: Reproducibility in Simulation Studies</a></li>
+</ul></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Data Analysis and Processing with R based on IBIS data</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="loops-and-functional-programming" class="section level1">
+<h1><span class="header-section-number">10</span> Loops and Functional Programming</h1>
+<div class="sourceCode" id="cb495"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb495-1" title="1"><span class="kw">library</span>(tidyverse)</a></code></pre></div>
+<div id="intro-7" class="section level2">
+<h2><span class="header-section-number">10.1</span> Intro</h2>
+<p>We have covered the foundamentals you need to complete standard statistical analyses and data processing in R, as well as to document your results. Now, we cover some more advanced techniques that can be used to make your code more efficient: loops (including the apply functions) and functional programming. Using these two tools, you can omit redundant code and make your code easier to read, quicker to write, and limit human errors when writing it. We also cover how to generate values from specified distributions, which is important when running simulation studies.</p>
+</div>
+<div id="loops" class="section level2">
+<h2><span class="header-section-number">10.2</span> Loops</h2>
+<p>Loops are a way of having R do repetitive tasks automatically in a sequential format. These are also called <strong>for loops</strong> since you specifiy a set of indicies/numbers, and R does the tasks <strong>for each value in this set, in order of the first number in the set to the last</strong>. Their format is the following:</p>
+<p>for(i in X){
+…
+}</p>
+<p>where <em>i</em> keeps track of the index, X is the set of indicies to use, and … is where you place the code to be run for each. You can use any string (without spaces) of unquoted letters instead of i. Consider the simple example:</p>
+<div class="sourceCode" id="cb496"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb496-1" title="1"><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">10</span>){</a>
+<a class="sourceLine" id="cb496-2" title="2">  <span class="kw">print</span>(i<span class="op">+</span><span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb496-3" title="3">}</a></code></pre></div>
+<pre><code>## [1] 2
+## [1] 3
+## [1] 4
+## [1] 5
+## [1] 6
+## [1] 7
+## [1] 8
+## [1] 9
+## [1] 10
+## [1] 11</code></pre>
+<p>You can see R places the current value of i, adds 1 to it, then prints out this value, and moves to the next value. The code 1:10, or seq(1,10), creates a sequence from 1 to 10, by 1. If you wanted a sequence by 1 to 10 by 2, use seq(1,10,2), etc.</p>
+<div class="sourceCode" id="cb498"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb498-1" title="1"><span class="cf">for</span>(i <span class="cf">in</span> <span class="kw">seq</span>(<span class="dv">1</span>,<span class="dv">10</span>,<span class="dv">2</span>)){</a>
+<a class="sourceLine" id="cb498-2" title="2">  <span class="kw">print</span>(i<span class="op">+</span><span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb498-3" title="3">}</a></code></pre></div>
+<pre><code>## [1] 2
+## [1] 4
+## [1] 6
+## [1] 8
+## [1] 10</code></pre>
+<div id="example-1-running-many-regression-models" class="section level3">
+<h3><span class="header-section-number">10.2.1</span> Example 1: Running many regression models</h3>
+<p>Next we consider a less trival example. Suppose we have a number of regression models to fit, with all variables in the regression models from a single dataset. We run some logistic regression models where ASD status at 24 months (positive or negative) is the outcome and each model uses a different predictor (AOSI, Mullen Composite Score, and Mullen Cognitive T Score as examples) value at 12 months. To do this, we create a list of formulas which represents the models we wish to fit, and then run glm() on each element of the list using a loop. We save the output from each model fit in another list. This is a good general format for using loops to repeat analyses where only minor components are changed; create a list or vector or matrix to hold the different components and create a list to hold the output from each run of the loop.</p>
+<div class="sourceCode" id="cb500"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb500-1" title="1">full_data &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;Data/Cross-sec_full.csv&quot;</span>, <span class="dt">stringsAsFactors=</span><span class="ot">FALSE</span>, <span class="dt">na.strings =</span> <span class="kw">c</span>(<span class="st">&quot;.&quot;</span>, <span class="st">&quot;&quot;</span>, <span class="st">&quot;&quot;</span>, <span class="st">&quot; &quot;</span>))</a>
+<a class="sourceLine" id="cb500-2" title="2">full_data &lt;-<span class="st"> </span>full_data <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb500-3" title="3"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">ASD_Status=</span><span class="kw">ifelse</span>(GROUP<span class="op">==</span><span class="st">&quot;HR_ASD&quot;</span>, <span class="st">&quot;ASD_Pos&quot;</span>, </a>
+<a class="sourceLine" id="cb500-4" title="4">                           <span class="kw">ifelse</span>(<span class="kw">is.na</span>(GROUP)<span class="op">==</span><span class="dv">1</span>, <span class="ot">NA</span>, <span class="st">&quot;ASD_Neg&quot;</span>)) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb500-5" title="5"><span class="st">           </span><span class="kw">factor</span>() <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb500-6" title="6"><span class="st">           </span><span class="kw">relevel</span>(<span class="dt">ref=</span><span class="st">&quot;ASD_Neg&quot;</span>))</a>
+<a class="sourceLine" id="cb500-7" title="7"></a>
+<a class="sourceLine" id="cb500-8" title="8"><span class="co"># Create list of formulas</span></a>
+<a class="sourceLine" id="cb500-9" title="9">frmlas &lt;-<span class="st"> </span><span class="kw">list</span>(ASD_Status<span class="op">~</span>V12.aosi.total_score_<span class="dv">1</span>_<span class="dv">18</span>,</a>
+<a class="sourceLine" id="cb500-10" title="10">               ASD_Status<span class="op">~</span>V12.mullen.composite_standard_score,</a>
+<a class="sourceLine" id="cb500-11" title="11">               ASD_Status<span class="op">~</span>V12.mullen.cognitive_t_score_sum)</a>
+<a class="sourceLine" id="cb500-12" title="12">output &lt;-<span class="st"> </span><span class="kw">list</span>() <span class="co"># create empty list to hold output</span></a>
+<a class="sourceLine" id="cb500-13" title="13"></a>
+<a class="sourceLine" id="cb500-14" title="14"><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(frmlas)){</a>
+<a class="sourceLine" id="cb500-15" title="15">  output[[i]] &lt;-<span class="st"> </span><span class="kw">glm</span>(frmlas[[i]], <span class="dt">data =</span> full_data, <span class="dt">family=</span>binomial)</a>
+<a class="sourceLine" id="cb500-16" title="16">  <span class="kw">names</span>(output)[i] &lt;-<span class="st"> </span><span class="kw">capture.output</span>(frmlas[[i]]) <span class="co"># name each entry in output list for each identification</span></a>
+<a class="sourceLine" id="cb500-17" title="17">}</a>
+<a class="sourceLine" id="cb500-18" title="18"></a>
+<a class="sourceLine" id="cb500-19" title="19"><span class="co"># Let&#39;s check the results from the first model</span></a>
+<a class="sourceLine" id="cb500-20" title="20"><span class="kw">summary</span>(output[[<span class="dv">1</span>]])</a></code></pre></div>
+<pre><code>## 
+## Call:
+## glm(formula = frmlas[[i]], family = binomial, data = full_data)
+## 
+## Deviance Residuals: 
+##     Min       1Q   Median       3Q      Max  
+## -1.7800  -0.5936  -0.4563  -0.3813   2.3804  
+## 
+## Coefficients:
+##                           Estimate Std. Error z value Pr(&gt;|z|)    
+## (Intercept)               -2.77241    0.24331 -11.394  &lt; 2e-16 ***
+## V12.aosi.total_score_1_18  0.18760    0.03201   5.861 4.59e-09 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## (Dispersion parameter for binomial family taken to be 1)
+## 
+##     Null deviance: 443.80  on 511  degrees of freedom
+## Residual deviance: 407.84  on 510  degrees of freedom
+##   (75 observations deleted due to missingness)
+## AIC: 411.84
+## 
+## Number of Fisher Scoring iterations: 4</code></pre>
+<div class="sourceCode" id="cb502"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb502-1" title="1"><span class="kw">summary</span>(output[[<span class="dv">2</span>]])</a></code></pre></div>
+<pre><code>## 
+## Call:
+## glm(formula = frmlas[[i]], family = binomial, data = full_data)
+## 
+## Deviance Residuals: 
+##     Min       1Q   Median       3Q      Max  
+## -1.5793  -0.6063  -0.4554  -0.3391   2.4886  
+## 
+## Coefficients:
+##                                      Estimate Std. Error z value Pr(&gt;|z|)
+## (Intercept)                          3.752058   0.905505   4.144 3.42e-05
+## V12.mullen.composite_standard_score -0.055758   0.009438  -5.908 3.47e-09
+##                                        
+## (Intercept)                         ***
+## V12.mullen.composite_standard_score ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## (Dispersion parameter for binomial family taken to be 1)
+## 
+##     Null deviance: 451.91  on 525  degrees of freedom
+## Residual deviance: 413.36  on 524  degrees of freedom
+##   (61 observations deleted due to missingness)
+## AIC: 417.36
+## 
+## Number of Fisher Scoring iterations: 5</code></pre>
+<div class="sourceCode" id="cb504"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb504-1" title="1"><span class="kw">summary</span>(output[[<span class="dv">3</span>]])</a></code></pre></div>
+<pre><code>## 
+## Call:
+## glm(formula = frmlas[[i]], family = binomial, data = full_data)
+## 
+## Deviance Residuals: 
+##     Min       1Q   Median       3Q      Max  
+## -1.7160  -0.5943  -0.4621  -0.3431   2.4867  
+## 
+## Coefficients:
+##                                   Estimate Std. Error z value Pr(&gt;|z|)    
+## (Intercept)                       3.555768   0.870239   4.086 4.39e-05 ***
+## V12.mullen.cognitive_t_score_sum -0.026943   0.004541  -5.934 2.96e-09 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## (Dispersion parameter for binomial family taken to be 1)
+## 
+##     Null deviance: 451.91  on 525  degrees of freedom
+## Residual deviance: 412.94  on 524  degrees of freedom
+##   (61 observations deleted due to missingness)
+## AIC: 416.94
+## 
+## Number of Fisher Scoring iterations: 5</code></pre>
+<p>This avoids having to write three glm function calls (though you still have to write the three formulas), and easily collects the output into a list to improve organizaton of the results. You can use the above looping method with any analysis you wish, including data visualization with plots.</p>
+<p>We can do a bit more with this regression example. Currently, each model’s output is saved as a separate entry in the list entitled “output”. It is often useful to summarize all of these results into a single dataset, with column representing the model being fit, the regression parameetrs estimate for each covariate, corresponding confidence intervals and p-values, etc. We can modify our loop to accomplish this task.</p>
+<div class="sourceCode" id="cb506"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb506-1" title="1"><span class="co"># Create list of formulas</span></a>
+<a class="sourceLine" id="cb506-2" title="2">frmlas &lt;-<span class="st"> </span><span class="kw">list</span>(ASD_Status<span class="op">~</span>V12.aosi.total_score_<span class="dv">1</span>_<span class="dv">18</span>,</a>
+<a class="sourceLine" id="cb506-3" title="3">               ASD_Status<span class="op">~</span>V12.mullen.composite_standard_score,</a>
+<a class="sourceLine" id="cb506-4" title="4">               ASD_Status<span class="op">~</span>V12.mullen.cognitive_t_score_sum)</a>
+<a class="sourceLine" id="cb506-5" title="5">output &lt;-<span class="st"> </span><span class="kw">list</span>() <span class="co"># create empty list to hold output</span></a>
+<a class="sourceLine" id="cb506-6" title="6">output_df_list &lt;-<span class="st"> </span><span class="kw">list</span>() <span class="co"># create empty list to hold regression output as dataset</span></a>
+<a class="sourceLine" id="cb506-7" title="7"></a>
+<a class="sourceLine" id="cb506-8" title="8"><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(frmlas)){</a>
+<a class="sourceLine" id="cb506-9" title="9">  output[[i]] &lt;-<span class="st"> </span><span class="kw">glm</span>(frmlas[[i]], <span class="dt">data =</span> full_data, <span class="dt">family=</span>binomial)</a>
+<a class="sourceLine" id="cb506-10" title="10">  <span class="kw">names</span>(output)[i] &lt;-<span class="st"> </span><span class="kw">capture.output</span>(frmlas[[i]]) <span class="co"># name each entry in output list for each identification</span></a>
+<a class="sourceLine" id="cb506-11" title="11">  <span class="co"># Now, create dataset for each regression model&#39;s output.  Recall data frames are R objects which are the standard format for dataset.  Using the data.frame() function, a data frame is created, which each argument being a column/variable in the dataset.  Using &quot;..&quot; = to specify the name of the column/variable.  When happens when you remove &quot;..&quot; = from each argument?</span></a>
+<a class="sourceLine" id="cb506-12" title="12">  output_df_list[[i]] &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="st">&quot;Model&quot;</span>=<span class="kw">capture.output</span>(frmlas[[i]]),</a>
+<a class="sourceLine" id="cb506-13" title="13">               <span class="st">&quot;Covariate&quot;</span>=<span class="kw">names</span>(output[[i]]<span class="op">$</span>coefficients),</a>
+<a class="sourceLine" id="cb506-14" title="14">               <span class="st">&quot;Beta_Estimate&quot;</span>=output[[i]]<span class="op">$</span>coefficients,</a>
+<a class="sourceLine" id="cb506-15" title="15">               <span class="st">&quot;CI_95_LL&quot;</span>=<span class="kw">confint</span>(output[[i]])[,<span class="dv">1</span>],</a>
+<a class="sourceLine" id="cb506-16" title="16">               <span class="st">&quot;CI_95_UL&quot;</span>=<span class="kw">confint</span>(output[[i]])[,<span class="dv">2</span>],</a>
+<a class="sourceLine" id="cb506-17" title="17">               <span class="st">&quot;P_val&quot;</span>=<span class="kw">summary</span>(output[[i]])<span class="op">$</span>coefficients[,<span class="dv">4</span>])</a>
+<a class="sourceLine" id="cb506-18" title="18">  </a>
+<a class="sourceLine" id="cb506-19" title="19">  <span class="co"># Look at output_df_list[[i]].  Can see we have row labels which are not useful.  This is because output[[i]]$coefficients has these row names, which were carried over when creating the data frame.  We need to remove those, i.e. set them to NULL</span></a>
+<a class="sourceLine" id="cb506-20" title="20">  <span class="kw">rownames</span>(output_df_list[[i]]) &lt;-<span class="st"> </span><span class="ot">NULL</span> </a>
+<a class="sourceLine" id="cb506-21" title="21">}</a>
+<a class="sourceLine" id="cb506-22" title="22"></a>
+<a class="sourceLine" id="cb506-23" title="23"><span class="co"># Let&#39;s paste together all of these separate data frames into a single one.  Note that we are pasting them together row-wise so we need to use rbind().  However, we also have to use the function do.call().  Why can we not simply use rnind(output_df_list)?  What exactly does do.call() do? Hint: look at documentation for function using command ?do.call .</span></a>
+<a class="sourceLine" id="cb506-24" title="24"></a>
+<a class="sourceLine" id="cb506-25" title="25">output_df_full &lt;-<span class="st"> </span><span class="kw">do.call</span>(<span class="st">&quot;rbind&quot;</span>, output_df_list)</a>
+<a class="sourceLine" id="cb506-26" title="26">output_df_full</a></code></pre></div>
+<pre><code>##                                              Model
+## 1           ASD_Status ~ V12.aosi.total_score_1_18
+## 2           ASD_Status ~ V12.aosi.total_score_1_18
+## 3 ASD_Status ~ V12.mullen.composite_standard_score
+## 4 ASD_Status ~ V12.mullen.composite_standard_score
+## 5    ASD_Status ~ V12.mullen.cognitive_t_score_sum
+## 6    ASD_Status ~ V12.mullen.cognitive_t_score_sum
+##                             Covariate Beta_Estimate    CI_95_LL
+## 1                         (Intercept)   -2.77241345 -3.26943791
+## 2           V12.aosi.total_score_1_18    0.18759712  0.12585158
+## 3                         (Intercept)    3.75205842  2.00272798
+## 4 V12.mullen.composite_standard_score   -0.05575794 -0.07478838
+## 5                         (Intercept)    3.55576763  1.87727181
+## 6    V12.mullen.cognitive_t_score_sum   -0.02694335 -0.03611077
+##      CI_95_UL        P_val
+## 1 -2.31342914 4.457601e-30
+## 2  0.25173696 4.594861e-09
+## 3  5.56455358 3.418860e-05
+## 4 -0.03767386 3.471997e-09
+## 5  5.30061841 4.389367e-05
+## 6 -0.01825424 2.959601e-09</code></pre>
+</div>
+<div id="example-2-the-apply-functions" class="section level3">
+<h3><span class="header-section-number">10.2.2</span> Example 2: The Apply Functions</h3>
+<p>R has series of functions which allow one to easily run loops over various dimensions of an object without having to write out the for loop explicitly. In this section, we discuss <strong>apply()</strong>, <strong>lapply()</strong>, and <strong>sapply()</strong> (there are others you may find useful as well which are not discussed here). Each of these works best with a specific type of object; apply() for vectors and matricies, lapply() for lists, and sapply() for lists or data frames.</p>
+<p>The apply() function applies a specified function to each row, column, or entry of a vector or matrix. For example, suppose we want to add up the values in each column of a matrix (that is, apply the function sum() to each column). We can do this easily using <strong>apply(X, MARGIN=2, FUN=sum)</strong> where X is the matrix object. If we wanted to apply the function to each row, we would specify <strong>MARGIN=1</strong>, and to apply the function to each entry use <strong>MARGIN=c(1,2)</strong>. You can use a user-created function as well.</p>
+<div class="sourceCode" id="cb508"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb508-1" title="1">x &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">c</span>(<span class="kw">rep</span>(<span class="dv">3</span>,<span class="dv">12</span>)), <span class="dt">nrow=</span><span class="dv">4</span>) <span class="co"># Create matrix</span></a>
+<a class="sourceLine" id="cb508-2" title="2"></a>
+<a class="sourceLine" id="cb508-3" title="3"><span class="kw">apply</span>(x, <span class="dt">MARGIN=</span><span class="dv">1</span>, <span class="dt">FUN=</span>sum) <span class="co"># By row</span></a></code></pre></div>
+<pre><code>## [1] 9 9 9 9</code></pre>
+<div class="sourceCode" id="cb510"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb510-1" title="1"><span class="kw">apply</span>(x, <span class="dt">MARGIN=</span><span class="dv">2</span>, <span class="dt">FUN=</span>sum) <span class="co"># By column</span></a></code></pre></div>
+<pre><code>## [1] 12 12 12</code></pre>
+<div class="sourceCode" id="cb512"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb512-1" title="1">times_<span class="dv">2</span>_sum &lt;-<span class="st"> </span><span class="cf">function</span>(x){</a>
+<a class="sourceLine" id="cb512-2" title="2">  <span class="dv">2</span><span class="op">*</span><span class="kw">sum</span>(x)</a>
+<a class="sourceLine" id="cb512-3" title="3">}</a>
+<a class="sourceLine" id="cb512-4" title="4"></a>
+<a class="sourceLine" id="cb512-5" title="5"><span class="kw">apply</span>(x, <span class="dt">MARGIN=</span><span class="dv">1</span>, <span class="dt">FUN=</span>times_<span class="dv">2</span>_sum) <span class="co"># By row</span></a></code></pre></div>
+<pre><code>## [1] 18 18 18 18</code></pre>
+<div class="sourceCode" id="cb514"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb514-1" title="1"><span class="kw">apply</span>(x, <span class="dt">MARGIN=</span><span class="dv">2</span>, <span class="dt">FUN=</span>times_<span class="dv">2</span>_sum) <span class="co"># By column</span></a></code></pre></div>
+<pre><code>## [1] 24 24 24</code></pre>
+<p>The lapply() and sapply() functions work similarly, but are designed for lists by applying a function to each component of the list. With lists, we do not have multiple dimensions, so the main arguments for lapply() and sapply() are X= and FUN= . The difference between theses two is that lapply() will print the output as a list, while sapply() will print the output in the same format as the input. Since a data frame is actually a list (with the columns/variables making up the components of the list), both will work on data frames. However, sapply() will keep the output as a data frame while lapply() will output a list. Recall at the end of Chapter 2, we used sapply() to print out the type for each each column in a data frame; you can also use it to print out various statistics for each column simply by specifying the corresponding function.</p>
+</div>
+</div>
+<div id="functional-programming" class="section level2">
+<h2><span class="header-section-number">10.3</span> Functional Programming</h2>
+<p>Functional programming is a concept that can be used frequently in standard statistical analyses and thus can be very helpful is making your code more efficient. We have already seen functions in R and how to use them throughout these tutorials; essentially, every computation that we have done has made use of a pre-built R function. However, it is very easy to create your own function. This can allow you to complete tasks which require lines of code and change a small aspect of these tasks with a single function call.</p>
+<p>To create a function, you use the following syntax:</p>
+<p>foo &lt;- function(x, y){
+…
+}</p>
+<p>foo is some name for your function, x and y (and more if you need them) are the function’s arguments, and … is the code that executes when you call the function. You can essentially use any non-quoted string of characters (again, without spaces) as argument names instead of x, y, etc. (there are some restrictions). R will automatically take the output from the last line of code in the function and have it be the output when you call your function.</p>
+<p>Consider the following trivial example where we write a function which adds 3 numbers and the divides them by 2.</p>
+<div class="sourceCode" id="cb516"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb516-1" title="1">sum_divide &lt;-<span class="st"> </span><span class="cf">function</span>(x,y,z){</a>
+<a class="sourceLine" id="cb516-2" title="2">  (x<span class="op">+</span>y<span class="op">+</span>z)<span class="op">/</span><span class="dv">3</span></a>
+<a class="sourceLine" id="cb516-3" title="3">}</a>
+<a class="sourceLine" id="cb516-4" title="4"><span class="kw">sum_divide</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>)</a></code></pre></div>
+<pre><code>## [1] 2</code></pre>
+<p>We can see that the output from this sum and division is the last line in the function’s code and is also printed out by the function call. What happens if the last line of the function’s code does <strong>NOT</strong> output something?</p>
+<div class="sourceCode" id="cb518"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb518-1" title="1">sum_divide &lt;-<span class="st"> </span><span class="cf">function</span>(x,y,z){</a>
+<a class="sourceLine" id="cb518-2" title="2">  z &lt;-<span class="st"> </span>(x<span class="op">+</span>y<span class="op">+</span>z)<span class="op">/</span><span class="dv">3</span></a>
+<a class="sourceLine" id="cb518-3" title="3">}</a>
+<a class="sourceLine" id="cb518-4" title="4"></a>
+<a class="sourceLine" id="cb518-5" title="5"><span class="kw">sum_divide</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>)</a>
+<a class="sourceLine" id="cb518-6" title="6">t &lt;-<span class="st"> </span><span class="kw">sum_divide</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>)</a>
+<a class="sourceLine" id="cb518-7" title="7">t</a></code></pre></div>
+<pre><code>## [1] 2</code></pre>
+<p>We can see then nothing is output by the function. However, if we save the function call as an object (t in this case), <strong>then</strong> even though the function does not print out anything in it’s code, the value stored in the last line of the function <strong>is</strong> stored in object t when the function is called. <strong>In general, you can forget about this difference by simply having the last line of your function call be the printing of the output of interest.</strong></p>
+<div id="example-regression-analysis-as-a-function-call" class="section level3">
+<h3><span class="header-section-number">10.3.1</span> Example: Regression Analysis as a Function Call</h3>
+<p>Let us try a useful example of function calls. Suppose we wanted to run a lengthy linear regression analysis where we will</p>
+<ol style="list-style-type: decimal">
+<li>Fit the regression model</li>
+<li>Create a scatterplot with the line of best fit</li>
+<li>Check the assumptions</li>
+</ol>
+<p>and we want to run a few such analyses for a set of regression models. We will do this by creating a single function to do all of these analyses and then change the model used with some arguments. We then run two linear regression analyses, each one computated using a single function call. As a result, we avoid repetitive code which can lead to typographic errors.</p>
+<div class="sourceCode" id="cb520"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb520-1" title="1">lm_analysis &lt;-<span class="cf">function</span>(model){</a>
+<a class="sourceLine" id="cb520-2" title="2">  model_fit &lt;-<span class="st"> </span><span class="kw">lm</span>(model, <span class="dt">data=</span>full_data)</a>
+<a class="sourceLine" id="cb520-3" title="3">  scatterplot &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data=</span>full_data,</a>
+<a class="sourceLine" id="cb520-4" title="4">                        <span class="dt">mapping=</span><span class="kw">aes_string</span>(<span class="dt">y=</span><span class="kw">as.character</span>(model[<span class="dv">2</span>]), </a>
+<a class="sourceLine" id="cb520-5" title="5">                                    <span class="dt">x=</span><span class="kw">as.character</span>(model[<span class="dv">3</span>])))<span class="op">+</span></a>
+<a class="sourceLine" id="cb520-6" title="6"><span class="st">                  </span><span class="kw">geom_point</span>()<span class="op">+</span></a>
+<a class="sourceLine" id="cb520-7" title="7"><span class="st">                  </span><span class="kw">geom_smooth</span>()</a>
+<a class="sourceLine" id="cb520-8" title="8">  </a>
+<a class="sourceLine" id="cb520-9" title="9">  <span class="co"># Create dataset of residuals and fitted values from model fit; needed for data= argument for later ggplot</span></a>
+<a class="sourceLine" id="cb520-10" title="10">  residual_fitted_data &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">residual=</span>model_fit<span class="op">$</span>residuals,</a>
+<a class="sourceLine" id="cb520-11" title="11">                                     <span class="dt">fitted_value=</span>model_fit<span class="op">$</span>fitted.values)</a>
+<a class="sourceLine" id="cb520-12" title="12">  residual_fitted_plot &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data=</span>residual_fitted_data,</a>
+<a class="sourceLine" id="cb520-13" title="13">                        <span class="dt">mapping=</span><span class="kw">aes</span>(<span class="dt">y=</span>residual, </a>
+<a class="sourceLine" id="cb520-14" title="14">                                    <span class="dt">x=</span>fitted_value))<span class="op">+</span></a>
+<a class="sourceLine" id="cb520-15" title="15"><span class="st">                  </span><span class="kw">geom_point</span>()</a>
+<a class="sourceLine" id="cb520-16" title="16"></a>
+<a class="sourceLine" id="cb520-17" title="17">  <span class="co"># Can create QQ plot using qqnorm() from previous tutorial or using ggplot</span></a>
+<a class="sourceLine" id="cb520-18" title="18">  <span class="co"># Use argument sample= to place residuals</span></a>
+<a class="sourceLine" id="cb520-19" title="19">  qqplot &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data=</span>residual_fitted_data, <span class="dt">mapping=</span><span class="kw">aes</span>(<span class="dt">sample=</span>residual))<span class="op">+</span></a>
+<a class="sourceLine" id="cb520-20" title="20"><span class="st">              </span><span class="kw">geom_qq</span>()<span class="op">+</span></a>
+<a class="sourceLine" id="cb520-21" title="21"><span class="st">              </span><span class="kw">geom_qq_line</span>()</a>
+<a class="sourceLine" id="cb520-22" title="22">  </a>
+<a class="sourceLine" id="cb520-23" title="23">  <span class="co"># Save everything as a list</span></a>
+<a class="sourceLine" id="cb520-24" title="24">  output &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">model=</span><span class="kw">as.character</span>(model),</a>
+<a class="sourceLine" id="cb520-25" title="25">                 <span class="dt">fit_obj=</span>model_fit,</a>
+<a class="sourceLine" id="cb520-26" title="26">                 <span class="dt">residual_by_fitted_value_plot=</span>residual_fitted_plot,</a>
+<a class="sourceLine" id="cb520-27" title="27">                 <span class="dt">qqplot=</span>qqplot)</a>
+<a class="sourceLine" id="cb520-28" title="28">  output <span class="co"># Have function return output when called</span></a>
+<a class="sourceLine" id="cb520-29" title="29">}</a>
+<a class="sourceLine" id="cb520-30" title="30"></a>
+<a class="sourceLine" id="cb520-31" title="31"><span class="co"># Now call function and store in object; run linear regression model with AOSI total score at 12 months as outcome and Mulen expressive language as predictor</span></a>
+<a class="sourceLine" id="cb520-32" title="32">test_function &lt;-<span class="st"> </span><span class="kw">lm_analysis</span>(<span class="dt">model=</span>V12.aosi.total_score_<span class="dv">1</span>_<span class="dv">18</span> <span class="op">~</span><span class="st"> </span>V12.mullen.cognitive_t_score_sum)</a>
+<a class="sourceLine" id="cb520-33" title="33"></a>
+<a class="sourceLine" id="cb520-34" title="34">test_function<span class="op">$</span>fit_obj <span class="co"># prints out the fit object from lm()</span></a></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = model, data = full_data)
+## 
+## Coefficients:
+##                      (Intercept)  V12.mullen.cognitive_t_score_sum  
+##                         12.83863                          -0.03895</code></pre>
+<div class="sourceCode" id="cb522"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb522-1" title="1"><span class="co"># Can easily run a different model; avoids repetitive code</span></a>
+<a class="sourceLine" id="cb522-2" title="2">test_function &lt;-<span class="st"> </span><span class="kw">lm_analysis</span>(<span class="dt">model=</span>V12.mullen.composite_standard_score <span class="op">~</span><span class="st"> </span>V12.aosi.total_score_<span class="dv">1</span>_<span class="dv">18</span>)</a>
+<a class="sourceLine" id="cb522-3" title="3"></a>
+<a class="sourceLine" id="cb522-4" title="4">test_function<span class="op">$</span>fit_obj <span class="co"># prints out the fit object from lm()</span></a></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = model, data = full_data)
+## 
+## Coefficients:
+##               (Intercept)  V12.aosi.total_score_1_18  
+##                   106.653                     -1.116</code></pre>
+<p>Note the use of aes_string() here instead of aes(). This illustrates an important concept when trying to do this form of functional programming; you will often have to use different versions of functions you usually use. The reason is the following. Suppose we want to pass in variables x and y from some dataset. You may think you can simply use xval=x and yval=y in your created function, where xval and yval are the names of this function’s arguments. However, this will generally result in an error since x and y are not separate objects, but are tied to the object data. Thus, you could use “x” and “y” instead and use a function that evaluates strings as R objects <strong>within</strong> your dataset. This is what aes_string() does. When using dplyr functions in your function, you will also have to do similar adjustments. Generally, this means using the functions <strong>select_(), filter_(), etc.</strong> though search online for more help and information on this concept. For the exceptionally curious reader about this concept, called <strong>evaluation</strong>, please see Hadley Wickham’s excellent book <a href="http://adv-r.had.co.nz/">Advanced R</a>.</p>
+</div>
+</div>
+<div id="simulation-studies" class="section level2">
+<h2><span class="header-section-number">10.4</span> Simulation Studies</h2>
+<p>When developing or learning new statistical methods, it is often necessary to implement these methods on simulated datasets. Simulated datasets are composed of values which are generated by the user based on specified distributions. As a result, the user knows the properties of the data they are analyzing and can discern how well the method of interest estimates such properties.</p>
+<p>Suppose we wanted to generate a sequence of binary values (0 or 1). A variable that is either 0 or 1 has a Bernoulli distribution. In R, to generate <span class="math inline">\(n\)</span> independent values from a Bernoulli distribution, you can use the <strong>rbinom(n, size, prob)</strong> function with <strong>size=1</strong>. The argument <strong>prob</strong> controls the probability of a 1 (“success”). When calling this function, R will output a vector of size <span class="math inline">\(n\)</span> which contains the values. We generate <span class="math inline">\(n=10\)</span> Bernoulli draws below with a 0.5 probability of a 1 for each draw.</p>
+<div class="sourceCode" id="cb524"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb524-1" title="1">x=<span class="kw">rbinom</span>(<span class="dv">10</span>, <span class="dv">1</span>, <span class="fl">0.5</span>); <span class="kw">sum</span>(x)</a></code></pre></div>
+<pre><code>## [1] 5</code></pre>
+<p>An extension of this distribution is the Binomial distribution, which models the number of “successes” (1s) among a set of independent attempts. One can think of this as modeling the number of positive diagnoses among subjects (“successes”) in a sample (“attempts”), assuming the subjects’ diagnoses are independent. Note that for a single attempt, the Bernoulli and Binomial distribution are the same. In R, to generate <span class="math inline">\(n\)</span> independent values from a Binomial distribution, you can use the <strong>rbinom(n, size, prob)</strong> function, where <strong>size</strong> reflects the number of attempts and <strong>prob</strong> reflects the probability of a “success” for each of these attempts. We generate <span class="math inline">\(n=10\)</span> independent Binomial values below with a 0.5 probability of a 1 for each attempt and 10 attempts per value (i.e., 10 trials with 10 subjects in each trial).</p>
+<div class="sourceCode" id="cb526"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb526-1" title="1">x=<span class="kw">rbinom</span>(<span class="dv">10</span>, <span class="dv">10</span>, <span class="fl">0.5</span>); <span class="kw">mean</span>(x)</a></code></pre></div>
+<pre><code>## [1] 5.5</code></pre>
+<p>There are many distributions you can chose from when generating continuous values. For example, suppose we wanted to generate n independent values from a normal distribution with mean <span class="math inline">\(\mu\)</span> and standard deviation <span class="math inline">\(\sigma\)</span>. In R, this is done using **rnorm(n, mean=<span class="math inline">\(\mu\)</span>, and sd=<span class="math inline">\(\sigma\)</span>). Below, we use <span class="math inline">\(n=100\)</span>, <span class="math inline">\(\mu=0\)</span>, <span class="math inline">\(\sigma=1\)</span>.</p>
+<div class="sourceCode" id="cb528"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb528-1" title="1">x=<span class="kw">rnorm</span>(<span class="dv">100</span>, <span class="dv">0</span>, <span class="dv">1</span>); <span class="kw">hist</span>(x)</a></code></pre></div>
+<p><img src="_main_files/figure-html/normal_ex-1.png" width="672" /></p>
+<p>For functions corresponding to distributions such as Uniform, Gamma, Poisson, etc., please consult the R documentation. Now, we consider two simple simulation examples; 1) simulated data with two groups, each of which having normally distributed data but with different means and/or standard deviations and 2) simulating data under a linear regression model. First, suppose we have subjects from two groups (~100 subjects in each group) denoted by 0 and 1 respectively. Suppose we have data from another variable for all subjects, where this variable is normally distributed with standard deviation of 1 but group 0 has a mean of 0 and group 1 has a mean of 5. We can simulate this data as follows:</p>
+<div class="sourceCode" id="cb529"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb529-1" title="1">n &lt;-<span class="st"> </span><span class="dv">200</span> <span class="co"># Set total sample size</span></a>
+<a class="sourceLine" id="cb529-2" title="2">group =<span class="st"> </span><span class="kw">rbinom</span>(n, <span class="dv">1</span>, <span class="fl">0.5</span>); <span class="kw">sum</span>(group) <span class="co"># simulate group labels</span></a></code></pre></div>
+<pre><code>## [1] 95</code></pre>
+<div class="sourceCode" id="cb531"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb531-1" title="1">Y &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="ot">NA</span>, n) <span class="co"># create object to hold normally distributed variable</span></a>
+<a class="sourceLine" id="cb531-2" title="2">Y[group<span class="op">==</span><span class="dv">0</span>] &lt;-<span class="st"> </span><span class="kw">rnorm</span>(n<span class="op">-</span><span class="kw">sum</span>(group), <span class="dv">0</span>, <span class="dv">1</span>) <span class="co"># Replace Y indicies of those in group 0 with mean 0, normally distributed values</span></a>
+<a class="sourceLine" id="cb531-3" title="3">Y[group<span class="op">==</span><span class="dv">1</span>] &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="kw">sum</span>(group), <span class="dv">5</span>, <span class="dv">1</span>) <span class="co"># Replace Y indicies of those in group 1 with mean 5, normally distributed values</span></a>
+<a class="sourceLine" id="cb531-4" title="4"></a>
+<a class="sourceLine" id="cb531-5" title="5"><span class="kw">hist</span>(Y) <span class="co"># histogram for entire sample; notice that it is bimodal</span></a></code></pre></div>
+<p><img src="_main_files/figure-html/normal_ex_groups-1.png" width="672" /></p>
+<div class="sourceCode" id="cb532"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb532-1" title="1">data &lt;-<span class="st"> </span><span class="kw">data.frame</span>(Y, <span class="kw">factor</span>(group))</a>
+<a class="sourceLine" id="cb532-2" title="2"></a>
+<a class="sourceLine" id="cb532-3" title="3"><span class="kw">ggplot</span>(<span class="dt">data=</span>data, <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x=</span>Y, <span class="dt">fill=</span>group))<span class="op">+</span></a>
+<a class="sourceLine" id="cb532-4" title="4"><span class="st">  </span><span class="kw">geom_histogram</span>()</a></code></pre></div>
+<p><img src="_main_files/figure-html/normal_ex_groups-2.png" width="672" /></p>
+<p>As a second example, consider outcome variable <span class="math inline">\(Y\)</span> and predictor <span class="math inline">\(X\)</span> where <span class="math inline">\(X\)</span> is normally distributed with mean 0 and standard deviation 1. We generated <span class="math inline">\(Y\)</span> using the following model: <span class="math inline">\(Y=1+2X+\epsilon\)</span> where <span class="math inline">\(\epsilon\)</span> is normally distributed with mean 0 and standard deviation 2. This model for <span class="math inline">\(Y\)</span> is an example of the usual linear regression model discussed in Chapter 8. We generate a sample of size 200 from these distributions below.</p>
+<div class="sourceCode" id="cb533"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb533-1" title="1">n &lt;-<span class="st"> </span><span class="dv">200</span></a>
+<a class="sourceLine" id="cb533-2" title="2">X &lt;-<span class="st"> </span><span class="kw">rnorm</span>(n, <span class="dv">0</span>, <span class="dv">1</span>) <span class="co"># predictor values</span></a>
+<a class="sourceLine" id="cb533-3" title="3">E &lt;-<span class="st"> </span><span class="kw">rnorm</span>(n, <span class="dv">0</span>, <span class="dv">2</span>) <span class="co"># Error values</span></a>
+<a class="sourceLine" id="cb533-4" title="4">Y &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="dv">1</span>,n)<span class="op">+</span><span class="dv">2</span><span class="op">*</span>X<span class="op">+</span>E <span class="co"># Outcome values</span></a>
+<a class="sourceLine" id="cb533-5" title="5">data &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="st">&quot;Y&quot;</span>=Y, <span class="st">&quot;X&quot;</span>=X)</a></code></pre></div>
+<p>Now, let us fit a linear regression model to this data with <span class="math inline">\(Y\)</span> as the outcome and <span class="math inline">\(X\)</span> as the sole predictor. We will output the estimated regression parameters (the slope and intercept) and look at the distribution of the residuals using a QQ plot. For more detail on linear regression models and residuals, please see Chaper 8.</p>
+<div class="sourceCode" id="cb534"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb534-1" title="1">lm_fit &lt;-<span class="st"> </span><span class="kw">lm</span>(Y<span class="op">~</span>X, <span class="dt">data=</span>data) </a>
+<a class="sourceLine" id="cb534-2" title="2"></a>
+<a class="sourceLine" id="cb534-3" title="3"><span class="kw">summary</span>(lm_fit)</a></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = Y ~ X, data = data)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -5.9854 -1.3656 -0.0281  1.5406  5.3681 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)   1.0317     0.1443   7.152 1.62e-11 ***
+## X             2.1575     0.1436  15.025  &lt; 2e-16 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 2.037 on 198 degrees of freedom
+## Multiple R-squared:  0.5328, Adjusted R-squared:  0.5304 
+## F-statistic: 225.8 on 1 and 198 DF,  p-value: &lt; 2.2e-16</code></pre>
+<div class="sourceCode" id="cb536"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb536-1" title="1"><span class="kw">qqnorm</span>(lm_fit<span class="op">$</span>residuals)</a>
+<a class="sourceLine" id="cb536-2" title="2"><span class="kw">qqline</span>(lm_fit<span class="op">$</span>residuals)</a></code></pre></div>
+<p><img src="_main_files/figure-html/lm_ex_fit-1.png" width="672" /></p>
+<p>As expected, we see that when we fit a linear regression model to this data, the estimated intercept and slope are very close to the corresponding true values and the predicted residuals appear to be approximately normally distributed.</p>
+<div id="setting-the-seed-reproducibility-in-simulation-studies" class="section level3">
+<h3><span class="header-section-number">10.4.1</span> Setting the Seed: Reproducibility in Simulation Studies</h3>
+<p>You will notice that each time you generate data from a specified distribution, R will output different values as you would expect. However, this makes reproducing the analysis from the simulated data impossible as the data changes everytime you run your script. In order to keep the dataset the same each time, you need to specify the <strong>seed</strong> that R uses when generating the data. For detail on seeds and on how R and other programs actually simulate the data from a specified distribution, please see <a href="https://en.wikipedia.org/wiki/Random_number_generation" class="uri">https://en.wikipedia.org/wiki/Random_number_generation</a>.</p>
+<p>In R, to set your seed manually, use the function <strong>set.seed(x)</strong> where x is the seed value. The seed value must be an integer. After the seed is held constant, you will see that the generated datasets remain the same, as shown below. You will see that the simulated data changes as you change the seed. As a result, <strong>do not try different seeds and then pick the one that gives the “best” results in your analysis. Pick one number and stick with it anytime you generate data to avoid biasing the analysis</strong>.</p>
+<div class="sourceCode" id="cb537"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb537-1" title="1"><span class="kw">rnorm</span>(<span class="dv">10</span>, <span class="dv">0</span>, <span class="dv">1</span>)</a></code></pre></div>
+<pre><code>##  [1] -0.1267782  1.0592069 -1.1673960 -0.5576436  1.4881199  1.3586658
+##  [7]  1.1632145  1.6615239  0.2040310 -0.5818837</code></pre>
+<div class="sourceCode" id="cb539"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb539-1" title="1"><span class="kw">rnorm</span>(<span class="dv">10</span>, <span class="dv">0</span>, <span class="dv">1</span>) <span class="co"># different values despite using the same size and distribution</span></a></code></pre></div>
+<pre><code>##  [1]  0.55520406  1.05872313  2.41363327 -1.96498233  0.27323570
+##  [6]  0.65479458 -0.05459866 -1.55782225  0.74150089 -0.77908574</code></pre>
+<div class="sourceCode" id="cb541"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb541-1" title="1"><span class="kw">set.seed</span>(<span class="dv">12</span>)</a>
+<a class="sourceLine" id="cb541-2" title="2"><span class="kw">rnorm</span>(<span class="dv">10</span>, <span class="dv">0</span>, <span class="dv">1</span>)</a></code></pre></div>
+<pre><code>##  [1] -1.4805676  1.5771695 -0.9567445 -0.9200052 -1.9976421 -0.2722960
+##  [7] -0.3153487 -0.6282552 -0.1064639  0.4280148</code></pre>
+<div class="sourceCode" id="cb543"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb543-1" title="1"><span class="kw">set.seed</span>(<span class="dv">12</span>)</a>
+<a class="sourceLine" id="cb543-2" title="2"><span class="kw">rnorm</span>(<span class="dv">10</span>, <span class="dv">0</span>, <span class="dv">1</span>) <span class="co"># same value after setting the seed</span></a></code></pre></div>
+<pre><code>##  [1] -1.4805676  1.5771695 -0.9567445 -0.9200052 -1.9976421 -0.2722960
+##  [7] -0.3153487 -0.6282552 -0.1064639  0.4280148</code></pre>
+<div class="sourceCode" id="cb545"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb545-1" title="1"><span class="kw">set.seed</span>(<span class="dv">4</span>)</a>
+<a class="sourceLine" id="cb545-2" title="2"><span class="kw">rnorm</span>(<span class="dv">10</span>, <span class="dv">0</span>, <span class="dv">1</span>)</a></code></pre></div>
+<pre><code>##  [1]  0.2167549 -0.5424926  0.8911446  0.5959806  1.6356180  0.6892754
+##  [7] -1.2812466 -0.2131445  1.8965399  1.7768632</code></pre>
+<div class="sourceCode" id="cb547"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb547-1" title="1"><span class="kw">set.seed</span>(<span class="dv">4</span>)</a>
+<a class="sourceLine" id="cb547-2" title="2"><span class="kw">rnorm</span>(<span class="dv">10</span>, <span class="dv">0</span>, <span class="dv">1</span>) <span class="co"># same value after setting the seed but different values compared to previous seed value as expected</span></a></code></pre></div>
+<pre><code>##  [1]  0.2167549 -0.5424926  0.8911446  0.5959806  1.6356180  0.6892754
+##  [7] -1.2812466 -0.2131445  1.8965399  1.7768632</code></pre>
+<div class="sourceCode" id="cb549"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb549-1" title="1"><span class="kw">rnorm</span>(<span class="dv">10</span>, <span class="dv">0</span>, <span class="dv">1</span>) <span class="co"># different values; we must set the seed after EACH call to the random number generator else a random seed is chosen for the next call</span></a></code></pre></div>
+<pre><code>##  [1]  0.56660450  0.01571945  0.38305734 -0.04513712  0.03435191
+##  [6]  0.16902677  1.16502684 -0.04420400 -0.10036844 -0.28344457</code></pre>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="documenting-your-results-with-r-markdown.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": false,
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+},
+"search": true
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
