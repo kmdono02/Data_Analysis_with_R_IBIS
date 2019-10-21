@@ -750,10 +750,10 @@ Thus, we see that $\phi_i$ has the same interpretation, and the population-level
 
 ```{r nlme_fit_random_effects_2}
 mixed_effect_data_complete <- mixed_fit$data[complete.cases(mixed_fit$data),]
-mixed_effect_data_complete <- data.frame(mixed_effect_data_complete, predict(mixed_fit, newdata = mixed_effect_data_complete))
+mixed_effect_data_complete <- data.frame(mixed_effect_data_complete, "predicted_value"=predict(mixed_fit, newdata = mixed_effect_data_complete))
 
 ggplot(data=mixed_effect_data_complete, mapping=aes(x=Visit, 
-                                          y=predict.mixed_fit.,
+                                          y=predicted_value,
                                           color=ASD_Diag,
                                           group=Identifiers))+
   geom_point()+
@@ -794,10 +794,10 @@ summary(mixed_fit_interact)
 
 # Create plot
 mixed_effect_data_complete <- mixed_fit_interact$data[complete.cases(mixed_fit_interact$data),]
-mixed_effect_data_complete <- data.frame(mixed_effect_data_complete, predict(mixed_fit_interact))
+mixed_effect_data_complete <- data.frame(mixed_effect_data_complete, "predicted_value"=predict(mixed_fit_interact))
 
 ggplot(data=mixed_effect_data_complete, mapping=aes(x=Visit, 
-                                          y=predict.mixed_fit_interact.,
+                                          y=predicted_value,
                                           color=ASD_Diag,
                                           group=Identifiers))+
   geom_point()+

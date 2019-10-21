@@ -331,10 +331,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="creating-tables-with-r-markdown" class="section level2">
 <h2><span class="header-section-number">9.5</span> Creating tables with R Markdown</h2>
 <p>One of the most useful features of R Markdown is the ability to create publication-quality tables. When combined with the plots from ggplot2, this enables you to create detailed reports in R Markdown that display all of your results in a publication-quality format. Recall from our past tutorials that when you output tables with your R script, the format is crude looking.</p>
-<div class="sourceCode" id="cb486"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb486-1" title="1"><span class="kw">library</span>(stats)</a>
-<a class="sourceLine" id="cb486-2" title="2">aosi_data &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;Data/cross-sec_aosi.csv&quot;</span>, <span class="dt">stringsAsFactors=</span><span class="ot">FALSE</span>, <span class="dt">na.strings =</span> <span class="st">&quot;.&quot;</span>)</a>
-<a class="sourceLine" id="cb486-3" title="3">table_ex_xtabs &lt;-<span class="st"> </span><span class="kw">xtabs</span>(<span class="op">~</span>Gender<span class="op">+</span>Study_Site, <span class="dt">data=</span>aosi_data)</a>
-<a class="sourceLine" id="cb486-4" title="4">table_ex_xtabs</a></code></pre></div>
+<div class="sourceCode" id="cb485"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb485-1" title="1"><span class="kw">library</span>(stats)</a>
+<a class="sourceLine" id="cb485-2" title="2">aosi_data &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;Data/cross-sec_aosi.csv&quot;</span>, <span class="dt">stringsAsFactors=</span><span class="ot">FALSE</span>, <span class="dt">na.strings =</span> <span class="st">&quot;.&quot;</span>)</a>
+<a class="sourceLine" id="cb485-3" title="3">table_ex_xtabs &lt;-<span class="st"> </span><span class="kw">xtabs</span>(<span class="op">~</span>Gender<span class="op">+</span>Study_Site, <span class="dt">data=</span>aosi_data)</a>
+<a class="sourceLine" id="cb485-4" title="4">table_ex_xtabs</a></code></pre></div>
 <pre><code>##         Study_Site
 ## Gender   PHI SEA STL UNC
 ##   Female  55  67  60  53
@@ -343,8 +343,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="summary-statistics" class="section level3">
 <h3><span class="header-section-number">9.5.1</span> Summary statistics</h3>
 <p>First, we discuss some functions which create publication quality summary statistics tables. We have discussed previously how to create some crude-looking summary statistics tables in R (see Chapter 7), however here we discuss some functions which take advantage of R Markdown to better display these results. The first function we discuss is the function <strong>describe()</strong> from the <strong>Hmisc</strong> package, which was discussed in Chapter 7. When used in R Markdown, the results look the same as when used in a usual R script.</p>
-<div class="sourceCode" id="cb488"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb488-1" title="1"><span class="kw">library</span>(Hmisc)</a>
-<a class="sourceLine" id="cb488-2" title="2"><span class="kw">describe</span>(aosi_data)</a></code></pre></div>
+<div class="sourceCode" id="cb487"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb487-1" title="1"><span class="kw">library</span>(Hmisc)</a>
+<a class="sourceLine" id="cb487-2" title="2"><span class="kw">describe</span>(aosi_data)</a></code></pre></div>
 <pre><code>## aosi_data 
 ## 
 ##  8  Variables      587  Observations
@@ -420,8 +420,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## Proportion 0.041 0.020 0.016 0.014 0.012 0.008 0.006 0.002 0.002 0.002
 ## ---------------------------------------------------------------------------</code></pre>
 <p>However, we can force the output to be of HTML format to match with our HTML formatted R Markdown document using the function <strong>html()</strong> which is also in the Hmisc package. This greatly improves the look of the output. We combine it with the pipe operator (see Chapter 4) to make the code more efficient. This html() function can be used for most output to force it to HTML form when you compile your R Markdown file into an HTML document.</p>
-<div class="sourceCode" id="cb490"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb490-1" title="1"><span class="kw">library</span>(tidyverse)</a>
-<a class="sourceLine" id="cb490-2" title="2"><span class="kw">describe</span>(aosi_data) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">html</span>()</a></code></pre></div>
+<div class="sourceCode" id="cb489"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb489-1" title="1"><span class="kw">library</span>(tidyverse)</a>
+<a class="sourceLine" id="cb489-2" title="2"><span class="kw">describe</span>(aosi_data) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">html</span>()</a></code></pre></div>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
 <script type="text/javascript">
 <!--
@@ -657,67 +657,67 @@ iVBORw0KGgoAAAANSUhEUgAAAD0AAAANCAMAAAAtxpZ2AAAACVBMVEUAAADMzMz////1iUV5AAAAVElE
  Proportion 0.016 0.014 0.012 0.008 0.006 0.002 0.002 0.002
  </pre>
  <hr class="thinhr">
-<div class="sourceCode" id="cb491"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb491-1" title="1"><span class="co"># html(describe(aosi_data)) this does the saem thing as above with pipe</span></a></code></pre></div>
+<div class="sourceCode" id="cb490"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb490-1" title="1"><span class="co"># html(describe(aosi_data)) this does the saem thing as above with pipe</span></a></code></pre></div>
 </div>
 <div id="general-tables" class="section level3">
 <h3><span class="header-section-number">9.5.2</span> General tables</h3>
 <p>In R Markdown, you can essentially create and format any table you can think of by simply creating a matrix object containing the table of interest and then applying a special function to format it into HTML form. Two of these “special” functions are <strong>kable()</strong> from the <strong>kableExtra</strong> package and <strong>htmlTable()</strong> from the <strong>htmlTable</strong> package. We cover kable() here though curious readers can also learn about htmlTable() online.</p>
 <p>First, we need to create a matrix which contains the results of interest in the row by column formt that matches the format of our desired table.</p>
 <p>For example, suppose we wanted to conduct an ANOVA analysis with some of the Mullen composite standard score and ASO total score with respect to diagnosis group (High Risk: ASD, High Risk: Negative, and Low Risk: Negative).</p>
-<div class="sourceCode" id="cb492"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb492-1" title="1"><span class="kw">library</span>(lsmeans)</a>
-<a class="sourceLine" id="cb492-2" title="2"></a>
-<a class="sourceLine" id="cb492-3" title="3">data &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;Data/Cross-sec_full.csv&quot;</span>, <span class="dt">stringsAsFactors=</span><span class="ot">FALSE</span>, <span class="dt">na.strings =</span> <span class="kw">c</span>(<span class="st">&quot;.&quot;</span>, <span class="st">&quot;&quot;</span>, <span class="st">&quot; &quot;</span>))</a>
-<a class="sourceLine" id="cb492-4" title="4"></a>
-<a class="sourceLine" id="cb492-5" title="5">data_v2 &lt;-<span class="st"> </span>data <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb492-6" title="6"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">GROUP=</span><span class="kw">fct_recode</span>(GROUP, <span class="st">&quot;HR: Negative&quot;</span>=<span class="st">&quot;HR_neg&quot;</span>, <span class="st">&quot;LR: Negative&quot;</span>=<span class="st">&quot;LR_neg&quot;</span>,</a>
-<a class="sourceLine" id="cb492-7" title="7">                          <span class="st">&quot;HR: ASD&quot;</span>=<span class="st">&quot;HR_ASD&quot;</span>))</a>
-<a class="sourceLine" id="cb492-8" title="8"></a>
-<a class="sourceLine" id="cb492-9" title="9"><span class="co">## Mullen</span></a>
-<a class="sourceLine" id="cb492-10" title="10"><span class="co"># Get means and CIs</span></a>
-<a class="sourceLine" id="cb492-11" title="11">composite_anova &lt;-<span class="st"> </span><span class="kw">lm</span>(V12.mullen.composite_standard_score<span class="op">~</span>GROUP, <span class="dt">data=</span>data_v2)</a>
-<a class="sourceLine" id="cb492-12" title="12">composite_for_table &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(<span class="kw">lsmeans</span>(composite_anova, <span class="dt">specs=</span><span class="st">&quot;GROUP&quot;</span>))</a>
-<a class="sourceLine" id="cb492-13" title="13">composite_for_table &lt;-<span class="st"> </span>composite_for_table <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb492-14" title="14"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">Mean_SE=</span><span class="kw">paste</span>(<span class="kw">round</span>(lsmean,<span class="dv">2</span>), </a>
-<a class="sourceLine" id="cb492-15" title="15">                       <span class="kw">paste</span>(<span class="st">&quot;(&quot;</span>,<span class="kw">round</span>(SE,<span class="dv">2</span>),<span class="st">&quot;)&quot;</span>,<span class="dt">sep=</span><span class="st">&quot;&quot;</span>),<span class="dt">sep=</span><span class="st">&quot; &quot;</span>))  <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb492-16" title="16"><span class="st">  </span><span class="kw">select</span>(GROUP, Mean_SE)</a>
-<a class="sourceLine" id="cb492-17" title="17">composite_for_table &lt;-<span class="st"> </span><span class="kw">t</span>(composite_for_table)</a>
-<a class="sourceLine" id="cb492-18" title="18"><span class="kw">colnames</span>(composite_for_table) &lt;-<span class="st"> </span>composite_for_table[<span class="dv">1</span>,]</a>
-<a class="sourceLine" id="cb492-19" title="19">composite_for_table &lt;-<span class="st"> </span>composite_for_table[<span class="op">-</span><span class="dv">1</span>,]</a>
-<a class="sourceLine" id="cb492-20" title="20">composite_for_table &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Score&quot;</span>=<span class="st">&quot;Mullen Composite&quot;</span>, composite_for_table)</a>
-<a class="sourceLine" id="cb492-21" title="21"></a>
-<a class="sourceLine" id="cb492-22" title="22"><span class="co">## AOSI</span></a>
-<a class="sourceLine" id="cb492-23" title="23"><span class="co"># Get means and CIs</span></a>
-<a class="sourceLine" id="cb492-24" title="24">aosi_anova &lt;-<span class="st"> </span><span class="kw">lm</span>(V12.aosi.total_score_<span class="dv">1</span>_<span class="dv">18</span><span class="op">~</span>GROUP, <span class="dt">data=</span>data_v2)</a>
-<a class="sourceLine" id="cb492-25" title="25">aosi_for_table &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(<span class="kw">lsmeans</span>(aosi_anova, <span class="dt">specs=</span><span class="st">&quot;GROUP&quot;</span>))</a>
-<a class="sourceLine" id="cb492-26" title="26">aosi_for_table &lt;-<span class="st"> </span>aosi_for_table <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb492-27" title="27"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">Mean_SE=</span><span class="kw">paste</span>(<span class="kw">round</span>(lsmean,<span class="dv">2</span>), </a>
-<a class="sourceLine" id="cb492-28" title="28">                       <span class="kw">paste</span>(<span class="st">&quot;(&quot;</span>,<span class="kw">round</span>(SE,<span class="dv">2</span>),<span class="st">&quot;)&quot;</span>,<span class="dt">sep=</span><span class="st">&quot;&quot;</span>),<span class="dt">sep=</span><span class="st">&quot; &quot;</span>)) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb492-29" title="29"><span class="st">  </span><span class="kw">select</span>(GROUP, Mean_SE)</a>
-<a class="sourceLine" id="cb492-30" title="30">aosi_for_table &lt;-<span class="st"> </span><span class="kw">t</span>(aosi_for_table)</a>
-<a class="sourceLine" id="cb492-31" title="31"><span class="kw">colnames</span>(aosi_for_table) &lt;-<span class="st"> </span>aosi_for_table[<span class="dv">1</span>,]</a>
-<a class="sourceLine" id="cb492-32" title="32">aosi_for_table &lt;-<span class="st"> </span>aosi_for_table[<span class="op">-</span><span class="dv">1</span>,]</a>
-<a class="sourceLine" id="cb492-33" title="33">aosi_for_table &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Score&quot;</span>=<span class="st">&quot;AOSI Total&quot;</span>, aosi_for_table)</a>
-<a class="sourceLine" id="cb492-34" title="34"></a>
-<a class="sourceLine" id="cb492-35" title="35"><span class="co">## Calculate overall F tests for each score</span></a>
-<a class="sourceLine" id="cb492-36" title="36">composite_f_stat &lt;-<span class="st"> </span><span class="kw">round</span>(<span class="kw">anova</span>(composite_anova)<span class="op">$</span><span class="st">`</span><span class="dt">F value</span><span class="st">`</span>[<span class="dv">1</span>],<span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb492-37" title="37">aosi_f_stat &lt;-<span class="st"> </span><span class="kw">round</span>(<span class="kw">anova</span>(aosi_anova)<span class="op">$</span><span class="st">`</span><span class="dt">F value</span><span class="st">`</span>[<span class="dv">1</span>],<span class="dv">2</span>) </a>
-<a class="sourceLine" id="cb492-38" title="38"></a>
-<a class="sourceLine" id="cb492-39" title="39">composite_f_test &lt;-<span class="st"> </span><span class="kw">ifelse</span>(<span class="kw">anova</span>(composite_anova)<span class="op">$</span><span class="st">`</span><span class="dt">Pr(&gt;F)</span><span class="st">`</span>[<span class="dv">1</span>]<span class="op">&gt;</span><span class="fl">0.001</span>,                         <span class="kw">round</span>(<span class="kw">anova</span>(composite_anova)<span class="op">$</span><span class="st">`</span><span class="dt">Pr(&gt;F)</span><span class="st">`</span>[<span class="dv">1</span>],<span class="dv">3</span>),<span class="st">&quot;&lt;0.001&quot;</span>) </a>
-<a class="sourceLine" id="cb492-40" title="40">aosi_f_test &lt;-<span class="st"> </span><span class="kw">ifelse</span>(<span class="kw">anova</span>(aosi_anova)<span class="op">$</span><span class="st">`</span><span class="dt">Pr(&gt;F)</span><span class="st">`</span>[<span class="dv">1</span>]<span class="op">&gt;</span><span class="fl">0.001</span>,</a>
-<a class="sourceLine" id="cb492-41" title="41">                          <span class="kw">round</span>(<span class="kw">anova</span>(aosi_anova)<span class="op">$</span><span class="st">`</span><span class="dt">Pr(&gt;F)</span><span class="st">`</span>[<span class="dv">1</span>],<span class="dv">3</span>),<span class="st">&quot;&lt;0.001&quot;</span>)</a>
-<a class="sourceLine" id="cb492-42" title="42"></a>
-<a class="sourceLine" id="cb492-43" title="43"><span class="co">## Combine into single table</span></a>
-<a class="sourceLine" id="cb492-44" title="44">anova_table &lt;-<span class="st"> </span><span class="kw">rbind</span>(composite_for_table, aosi_for_table)</a>
-<a class="sourceLine" id="cb492-45" title="45">anova_table &lt;-<span class="st"> </span><span class="kw">cbind</span>(anova_table, </a>
-<a class="sourceLine" id="cb492-46" title="46">                     <span class="st">&quot;F Statistic&quot;</span>=<span class="kw">c</span>(composite_f_stat, </a>
-<a class="sourceLine" id="cb492-47" title="47">                                     aosi_f_stat),</a>
-<a class="sourceLine" id="cb492-48" title="48">                     <span class="st">&quot;P-value&quot;</span>=<span class="kw">c</span>(composite_f_test, aosi_f_test))</a>
-<a class="sourceLine" id="cb492-49" title="49"></a>
-<a class="sourceLine" id="cb492-50" title="50"><span class="co"># Remove rownames, can see they are not needed (composite_for_table, etc.)</span></a>
-<a class="sourceLine" id="cb492-51" title="51"><span class="kw">rownames</span>(anova_table) &lt;-<span class="st"> </span><span class="ot">NULL</span> <span class="co"># (NULL =&gt; empty, different from missing NA)</span></a>
-<a class="sourceLine" id="cb492-52" title="52"></a>
-<a class="sourceLine" id="cb492-53" title="53"><span class="co"># Print out table in crude format (default format from R output)</span></a>
-<a class="sourceLine" id="cb492-54" title="54">anova_table</a></code></pre></div>
+<div class="sourceCode" id="cb491"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb491-1" title="1"><span class="kw">library</span>(lsmeans)</a>
+<a class="sourceLine" id="cb491-2" title="2"></a>
+<a class="sourceLine" id="cb491-3" title="3">data &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;Data/Cross-sec_full.csv&quot;</span>, <span class="dt">stringsAsFactors=</span><span class="ot">FALSE</span>, <span class="dt">na.strings =</span> <span class="kw">c</span>(<span class="st">&quot;.&quot;</span>, <span class="st">&quot;&quot;</span>, <span class="st">&quot; &quot;</span>))</a>
+<a class="sourceLine" id="cb491-4" title="4"></a>
+<a class="sourceLine" id="cb491-5" title="5">data_v2 &lt;-<span class="st"> </span>data <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb491-6" title="6"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">GROUP=</span><span class="kw">fct_recode</span>(GROUP, <span class="st">&quot;HR: Negative&quot;</span>=<span class="st">&quot;HR_neg&quot;</span>, <span class="st">&quot;LR: Negative&quot;</span>=<span class="st">&quot;LR_neg&quot;</span>,</a>
+<a class="sourceLine" id="cb491-7" title="7">                          <span class="st">&quot;HR: ASD&quot;</span>=<span class="st">&quot;HR_ASD&quot;</span>))</a>
+<a class="sourceLine" id="cb491-8" title="8"></a>
+<a class="sourceLine" id="cb491-9" title="9"><span class="co">## Mullen</span></a>
+<a class="sourceLine" id="cb491-10" title="10"><span class="co"># Get means and CIs</span></a>
+<a class="sourceLine" id="cb491-11" title="11">composite_anova &lt;-<span class="st"> </span><span class="kw">lm</span>(V12.mullen.composite_standard_score<span class="op">~</span>GROUP, <span class="dt">data=</span>data_v2)</a>
+<a class="sourceLine" id="cb491-12" title="12">composite_for_table &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(<span class="kw">lsmeans</span>(composite_anova, <span class="dt">specs=</span><span class="st">&quot;GROUP&quot;</span>))</a>
+<a class="sourceLine" id="cb491-13" title="13">composite_for_table &lt;-<span class="st"> </span>composite_for_table <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb491-14" title="14"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">Mean_SE=</span><span class="kw">paste</span>(<span class="kw">round</span>(lsmean,<span class="dv">2</span>), </a>
+<a class="sourceLine" id="cb491-15" title="15">                       <span class="kw">paste</span>(<span class="st">&quot;(&quot;</span>,<span class="kw">round</span>(SE,<span class="dv">2</span>),<span class="st">&quot;)&quot;</span>,<span class="dt">sep=</span><span class="st">&quot;&quot;</span>),<span class="dt">sep=</span><span class="st">&quot; &quot;</span>))  <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb491-16" title="16"><span class="st">  </span><span class="kw">select</span>(GROUP, Mean_SE)</a>
+<a class="sourceLine" id="cb491-17" title="17">composite_for_table &lt;-<span class="st"> </span><span class="kw">t</span>(composite_for_table)</a>
+<a class="sourceLine" id="cb491-18" title="18"><span class="kw">colnames</span>(composite_for_table) &lt;-<span class="st"> </span>composite_for_table[<span class="dv">1</span>,]</a>
+<a class="sourceLine" id="cb491-19" title="19">composite_for_table &lt;-<span class="st"> </span>composite_for_table[<span class="op">-</span><span class="dv">1</span>,]</a>
+<a class="sourceLine" id="cb491-20" title="20">composite_for_table &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Score&quot;</span>=<span class="st">&quot;Mullen Composite&quot;</span>, composite_for_table)</a>
+<a class="sourceLine" id="cb491-21" title="21"></a>
+<a class="sourceLine" id="cb491-22" title="22"><span class="co">## AOSI</span></a>
+<a class="sourceLine" id="cb491-23" title="23"><span class="co"># Get means and CIs</span></a>
+<a class="sourceLine" id="cb491-24" title="24">aosi_anova &lt;-<span class="st"> </span><span class="kw">lm</span>(V12.aosi.total_score_<span class="dv">1</span>_<span class="dv">18</span><span class="op">~</span>GROUP, <span class="dt">data=</span>data_v2)</a>
+<a class="sourceLine" id="cb491-25" title="25">aosi_for_table &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(<span class="kw">lsmeans</span>(aosi_anova, <span class="dt">specs=</span><span class="st">&quot;GROUP&quot;</span>))</a>
+<a class="sourceLine" id="cb491-26" title="26">aosi_for_table &lt;-<span class="st"> </span>aosi_for_table <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb491-27" title="27"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">Mean_SE=</span><span class="kw">paste</span>(<span class="kw">round</span>(lsmean,<span class="dv">2</span>), </a>
+<a class="sourceLine" id="cb491-28" title="28">                       <span class="kw">paste</span>(<span class="st">&quot;(&quot;</span>,<span class="kw">round</span>(SE,<span class="dv">2</span>),<span class="st">&quot;)&quot;</span>,<span class="dt">sep=</span><span class="st">&quot;&quot;</span>),<span class="dt">sep=</span><span class="st">&quot; &quot;</span>)) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb491-29" title="29"><span class="st">  </span><span class="kw">select</span>(GROUP, Mean_SE)</a>
+<a class="sourceLine" id="cb491-30" title="30">aosi_for_table &lt;-<span class="st"> </span><span class="kw">t</span>(aosi_for_table)</a>
+<a class="sourceLine" id="cb491-31" title="31"><span class="kw">colnames</span>(aosi_for_table) &lt;-<span class="st"> </span>aosi_for_table[<span class="dv">1</span>,]</a>
+<a class="sourceLine" id="cb491-32" title="32">aosi_for_table &lt;-<span class="st"> </span>aosi_for_table[<span class="op">-</span><span class="dv">1</span>,]</a>
+<a class="sourceLine" id="cb491-33" title="33">aosi_for_table &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Score&quot;</span>=<span class="st">&quot;AOSI Total&quot;</span>, aosi_for_table)</a>
+<a class="sourceLine" id="cb491-34" title="34"></a>
+<a class="sourceLine" id="cb491-35" title="35"><span class="co">## Calculate overall F tests for each score</span></a>
+<a class="sourceLine" id="cb491-36" title="36">composite_f_stat &lt;-<span class="st"> </span><span class="kw">round</span>(<span class="kw">anova</span>(composite_anova)<span class="op">$</span><span class="st">`</span><span class="dt">F value</span><span class="st">`</span>[<span class="dv">1</span>],<span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb491-37" title="37">aosi_f_stat &lt;-<span class="st"> </span><span class="kw">round</span>(<span class="kw">anova</span>(aosi_anova)<span class="op">$</span><span class="st">`</span><span class="dt">F value</span><span class="st">`</span>[<span class="dv">1</span>],<span class="dv">2</span>) </a>
+<a class="sourceLine" id="cb491-38" title="38"></a>
+<a class="sourceLine" id="cb491-39" title="39">composite_f_test &lt;-<span class="st"> </span><span class="kw">ifelse</span>(<span class="kw">anova</span>(composite_anova)<span class="op">$</span><span class="st">`</span><span class="dt">Pr(&gt;F)</span><span class="st">`</span>[<span class="dv">1</span>]<span class="op">&gt;</span><span class="fl">0.001</span>,                         <span class="kw">round</span>(<span class="kw">anova</span>(composite_anova)<span class="op">$</span><span class="st">`</span><span class="dt">Pr(&gt;F)</span><span class="st">`</span>[<span class="dv">1</span>],<span class="dv">3</span>),<span class="st">&quot;&lt;0.001&quot;</span>) </a>
+<a class="sourceLine" id="cb491-40" title="40">aosi_f_test &lt;-<span class="st"> </span><span class="kw">ifelse</span>(<span class="kw">anova</span>(aosi_anova)<span class="op">$</span><span class="st">`</span><span class="dt">Pr(&gt;F)</span><span class="st">`</span>[<span class="dv">1</span>]<span class="op">&gt;</span><span class="fl">0.001</span>,</a>
+<a class="sourceLine" id="cb491-41" title="41">                          <span class="kw">round</span>(<span class="kw">anova</span>(aosi_anova)<span class="op">$</span><span class="st">`</span><span class="dt">Pr(&gt;F)</span><span class="st">`</span>[<span class="dv">1</span>],<span class="dv">3</span>),<span class="st">&quot;&lt;0.001&quot;</span>)</a>
+<a class="sourceLine" id="cb491-42" title="42"></a>
+<a class="sourceLine" id="cb491-43" title="43"><span class="co">## Combine into single table</span></a>
+<a class="sourceLine" id="cb491-44" title="44">anova_table &lt;-<span class="st"> </span><span class="kw">rbind</span>(composite_for_table, aosi_for_table)</a>
+<a class="sourceLine" id="cb491-45" title="45">anova_table &lt;-<span class="st"> </span><span class="kw">cbind</span>(anova_table, </a>
+<a class="sourceLine" id="cb491-46" title="46">                     <span class="st">&quot;F Statistic&quot;</span>=<span class="kw">c</span>(composite_f_stat, </a>
+<a class="sourceLine" id="cb491-47" title="47">                                     aosi_f_stat),</a>
+<a class="sourceLine" id="cb491-48" title="48">                     <span class="st">&quot;P-value&quot;</span>=<span class="kw">c</span>(composite_f_test, aosi_f_test))</a>
+<a class="sourceLine" id="cb491-49" title="49"></a>
+<a class="sourceLine" id="cb491-50" title="50"><span class="co"># Remove rownames, can see they are not needed (composite_for_table, etc.)</span></a>
+<a class="sourceLine" id="cb491-51" title="51"><span class="kw">rownames</span>(anova_table) &lt;-<span class="st"> </span><span class="ot">NULL</span> <span class="co"># (NULL =&gt; empty, different from missing NA)</span></a>
+<a class="sourceLine" id="cb491-52" title="52"></a>
+<a class="sourceLine" id="cb491-53" title="53"><span class="co"># Print out table in crude format (default format from R output)</span></a>
+<a class="sourceLine" id="cb491-54" title="54">anova_table</a></code></pre></div>
 <pre><code>##      Score              HR: ASD        HR: Negative    LR_ASD         
 ## [1,] &quot;Mullen Composite&quot; &quot;92.48 (1.44)&quot; &quot;101.21 (0.76)&quot; &quot;100.67 (7.47)&quot;
 ## [2,] &quot;AOSI Total&quot;       &quot;7.34 (0.39)&quot;  &quot;4.84 (0.21)&quot;   &quot;3.67 (2)&quot;     
@@ -733,12 +733,12 @@ iVBORw0KGgoAAAANSUhEUgAAAD0AAAANCAMAAAAtxpZ2AAAACVBMVEUAAADMzMz////1iUV5AAAAVElE
 </ol>
 <p>While it took some code to do, we now have a table which is structured as we had desired for the ANOVA results. You can create similar tables for regression analyses by using the above code and making some changes to reflect the use of lm() or lme() instead of aov(). This pasting together of various results using cbind() and rbind(), as well as editing the results using paste(), round(), and the functions from dplyr is a general method you can use to create your tables for any analysis.</p>
 <p>Finally, we use kable() from the kableExtra package to print out this table in HTML format. The first argument is the table/matrix/data frame of interest. Some other useful arguments include <strong>row.names=</strong> which lets you specify that names of the rows of the output, <strong>col.names=</strong> which does the same for the column names, and <strong>caption=</strong> which allows you to specify the title for the output. Here, we omit the row names and just have the column names be the column names of the actual R object. To adjust more aspects, use the function <strong>kable_styling()</strong>; see the documentation for this function to learn more. This function also changes the overall look of the output and it is recommended to always apply it, even if you do not use any of its arguments (see below).</p>
-<div class="sourceCode" id="cb494"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb494-1" title="1"><span class="kw">library</span>(kableExtra)</a>
-<a class="sourceLine" id="cb494-2" title="2"></a>
-<a class="sourceLine" id="cb494-3" title="3"><span class="kw">kable</span>(anova_table, </a>
-<a class="sourceLine" id="cb494-4" title="4">      <span class="dt">col.names =</span> <span class="kw">colnames</span>(anova_table), </a>
-<a class="sourceLine" id="cb494-5" title="5">      <span class="dt">caption=</span><span class="st">&quot;Comparison of group means from regression of Mullen composite and AOSI total score on diagnosis group.  Estimated group means and their corresponding standard errors (SE), rounded to two decimal spaces, are provided for each score  These comparisons were done for Expressive Language, Fine Motor, and Gross Motor at 12 months.  For each of these, the p-value and test statistic corresponding to the ANOVA F-test for group differences is reported.&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb494-6" title="6"><span class="st">  </span><span class="kw">kable_styling</span>()</a></code></pre></div>
+<div class="sourceCode" id="cb493"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb493-1" title="1"><span class="kw">library</span>(kableExtra)</a>
+<a class="sourceLine" id="cb493-2" title="2"></a>
+<a class="sourceLine" id="cb493-3" title="3"><span class="kw">kable</span>(anova_table, </a>
+<a class="sourceLine" id="cb493-4" title="4">      <span class="dt">col.names =</span> <span class="kw">colnames</span>(anova_table), </a>
+<a class="sourceLine" id="cb493-5" title="5">      <span class="dt">caption=</span><span class="st">&quot;Comparison of group means from regression of Mullen composite and AOSI total score on diagnosis group.  Estimated group means and their corresponding standard errors (SE), rounded to two decimal spaces, are provided for each score  These comparisons were done for Expressive Language, Fine Motor, and Gross Motor at 12 months.  For each of these, the p-value and test statistic corresponding to the ANOVA F-test for group differences is reported.&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb493-6" title="6"><span class="st">  </span><span class="kw">kable_styling</span>()</a></code></pre></div>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <caption>
 (#tab:ANOVA_ex_kable)Comparison of group means from regression of Mullen composite and AOSI total score on diagnosis group. Estimated group means and their corresponding standard errors (SE), rounded to two decimal spaces, are provided for each score These comparisons were done for Expressive Language, Fine Motor, and Gross Motor at 12 months. For each of these, the p-value and test statistic corresponding to the ANOVA F-test for group differences is reported.

@@ -1256,17 +1256,16 @@ where we denote <span class="math inline">\(\mbox{Pr}(Y=1|X,Z)\)</span> by <span
 <p><span class="math inline">\(Mullen_{ij}=86.41+1.14Visit_{ij}-15.22+\phi_i+\epsilon_{1j}\)</span>.</p>
 <p>Thus, we see that <span class="math inline">\(\phi_i\)</span> has the same interpretation, and the population-level baseline in this case is 86.41-15.22. That is, the ASD negative and ASD positive populations have different “baselines” as reflected by the regression parameter <span class="math inline">\(\beta_2\)</span>. We can plot each subject’s fitted model (i.e., ignoring their residuals <span class="math inline">\(\epsilon_{ij}\)</span>) and visualize these interpretations for all subjects with the following code.</p>
 <div class="sourceCode" id="cb477"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb477-1" title="1">mixed_effect_data_complete &lt;-<span class="st"> </span>mixed_fit<span class="op">$</span>data[<span class="kw">complete.cases</span>(mixed_fit<span class="op">$</span>data),]</a>
-<a class="sourceLine" id="cb477-2" title="2">mixed_effect_data_complete &lt;-<span class="st"> </span><span class="kw">data.frame</span>(mixed_effect_data_complete, <span class="kw">predict</span>(mixed_fit, <span class="dt">newdata =</span> mixed_effect_data_complete))</a>
+<a class="sourceLine" id="cb477-2" title="2">mixed_effect_data_complete &lt;-<span class="st"> </span><span class="kw">data.frame</span>(mixed_effect_data_complete, <span class="st">&quot;predicted_value&quot;</span>=<span class="kw">predict</span>(mixed_fit, <span class="dt">newdata =</span> mixed_effect_data_complete))</a>
 <a class="sourceLine" id="cb477-3" title="3"></a>
 <a class="sourceLine" id="cb477-4" title="4"><span class="kw">ggplot</span>(<span class="dt">data=</span>mixed_effect_data_complete, <span class="dt">mapping=</span><span class="kw">aes</span>(<span class="dt">x=</span>Visit, </a>
-<a class="sourceLine" id="cb477-5" title="5">                                          <span class="dt">y=</span>predict.mixed_fit.,</a>
+<a class="sourceLine" id="cb477-5" title="5">                                          <span class="dt">y=</span>predicted_value,</a>
 <a class="sourceLine" id="cb477-6" title="6">                                          <span class="dt">color=</span>ASD_Diag,</a>
 <a class="sourceLine" id="cb477-7" title="7">                                          <span class="dt">group=</span>Identifiers))<span class="op">+</span></a>
 <a class="sourceLine" id="cb477-8" title="8"><span class="st">  </span><span class="kw">geom_point</span>()<span class="op">+</span></a>
 <a class="sourceLine" id="cb477-9" title="9"><span class="st">  </span><span class="kw">geom_line</span>()<span class="op">+</span></a>
 <a class="sourceLine" id="cb477-10" title="10"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">y=</span><span class="st">&quot;Fitted Value: Mullen Composite&quot;</span>, </a>
 <a class="sourceLine" id="cb477-11" title="11">       <span class="dt">title=</span><span class="st">&quot;Mixed model fitted values without interaction term&quot;</span>)</a></code></pre></div>
-<pre><code>## Error in FUN(X[[i]], ...): object &#39;predict.mixed_fit.&#39; not found</code></pre>
 <p><img src="_main_files/figure-html/nlme_fit_random_effects_2-1.png" width="672" /></p>
 <p>To create this plot, we had to do the following
 1) Remove all missing values from the dataset used to fit our mixed model. Recall when fitting the mixed model, we had R remove all subjects with missing values from the analysis
@@ -1280,15 +1279,15 @@ where <span class="math inline">\(\phi_i\)</span> are independent across index <
 <p>implying that their intercept is <span class="math inline">\(\beta_{0}+\phi_{i}\)</span> and their slope with respect to visit number is <span class="math inline">\(\beta_1\)</span>. For a child who is ASD positive, their model is</p>
 <p><span class="math inline">\(Mullen_{ij}=\beta_{0}+\beta_{1}Visit_{ij}+\beta_{2}+\beta_{3}Visit_{ij}+\phi_{i}+\epsilon_{ij}\)</span></p>
 <p>so we see that their intercept is <span class="math inline">\(\beta_{0}+\beta_{2}+\phi_{i}\)</span> and their slope is <span class="math inline">\(\beta_1+\beta_3\)</span>. Thus, the difference in the trends with visit between ASD positive is ASD negative is <span class="math inline">\(\beta_3\)</span>. Without this interaction term, this difference was not modeled. We fit this model to the data and create the same fitted values plot as was done above.</p>
-<div class="sourceCode" id="cb479"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb479-1" title="1"><span class="co"># Fit model</span></a>
-<a class="sourceLine" id="cb479-2" title="2">mixed_fit_interact &lt;-</a>
-<a class="sourceLine" id="cb479-3" title="3"><span class="st">  </span><span class="kw">lme</span>(Mullen_Composite_Score<span class="op">~</span>Visit_Num <span class="op">+</span><span class="st"> </span>ASD_Diag <span class="op">+</span><span class="st"> </span>Visit_Num<span class="op">*</span>ASD_Diag, </a>
-<a class="sourceLine" id="cb479-4" title="4">    <span class="dt">data=</span>mixed_model_data,</a>
-<a class="sourceLine" id="cb479-5" title="5">    <span class="dt">random =</span> <span class="op">~</span><span class="dv">1</span><span class="op">|</span>Identifiers,</a>
-<a class="sourceLine" id="cb479-6" title="6">    <span class="dt">na.action =</span> na.omit)</a>
-<a class="sourceLine" id="cb479-7" title="7"></a>
-<a class="sourceLine" id="cb479-8" title="8"><span class="co"># Print out results</span></a>
-<a class="sourceLine" id="cb479-9" title="9"><span class="kw">summary</span>(mixed_fit_interact)</a></code></pre></div>
+<div class="sourceCode" id="cb478"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb478-1" title="1"><span class="co"># Fit model</span></a>
+<a class="sourceLine" id="cb478-2" title="2">mixed_fit_interact &lt;-</a>
+<a class="sourceLine" id="cb478-3" title="3"><span class="st">  </span><span class="kw">lme</span>(Mullen_Composite_Score<span class="op">~</span>Visit_Num <span class="op">+</span><span class="st"> </span>ASD_Diag <span class="op">+</span><span class="st"> </span>Visit_Num<span class="op">*</span>ASD_Diag, </a>
+<a class="sourceLine" id="cb478-4" title="4">    <span class="dt">data=</span>mixed_model_data,</a>
+<a class="sourceLine" id="cb478-5" title="5">    <span class="dt">random =</span> <span class="op">~</span><span class="dv">1</span><span class="op">|</span>Identifiers,</a>
+<a class="sourceLine" id="cb478-6" title="6">    <span class="dt">na.action =</span> na.omit)</a>
+<a class="sourceLine" id="cb478-7" title="7"></a>
+<a class="sourceLine" id="cb478-8" title="8"><span class="co"># Print out results</span></a>
+<a class="sourceLine" id="cb478-9" title="9"><span class="kw">summary</span>(mixed_fit_interact)</a></code></pre></div>
 <pre><code>## Linear mixed-effects model fit by REML
 ##  Data: mixed_model_data 
 ##        AIC      BIC    logLik
@@ -1317,33 +1316,33 @@ where <span class="math inline">\(\phi_i\)</span> are independent across index <
 ## 
 ## Number of Observations: 1852
 ## Number of Groups: 587</code></pre>
-<div class="sourceCode" id="cb481"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb481-1" title="1"><span class="co"># Create plot</span></a>
-<a class="sourceLine" id="cb481-2" title="2">mixed_effect_data_complete &lt;-<span class="st"> </span>mixed_fit_interact<span class="op">$</span>data[<span class="kw">complete.cases</span>(mixed_fit_interact<span class="op">$</span>data),]</a>
-<a class="sourceLine" id="cb481-3" title="3">mixed_effect_data_complete &lt;-<span class="st"> </span><span class="kw">data.frame</span>(mixed_effect_data_complete, <span class="kw">predict</span>(mixed_fit_interact))</a>
-<a class="sourceLine" id="cb481-4" title="4"></a>
-<a class="sourceLine" id="cb481-5" title="5"><span class="kw">ggplot</span>(<span class="dt">data=</span>mixed_effect_data_complete, <span class="dt">mapping=</span><span class="kw">aes</span>(<span class="dt">x=</span>Visit, </a>
-<a class="sourceLine" id="cb481-6" title="6">                                          <span class="dt">y=</span>predict.mixed_fit_interact.,</a>
-<a class="sourceLine" id="cb481-7" title="7">                                          <span class="dt">color=</span>ASD_Diag,</a>
-<a class="sourceLine" id="cb481-8" title="8">                                          <span class="dt">group=</span>Identifiers))<span class="op">+</span></a>
-<a class="sourceLine" id="cb481-9" title="9"><span class="st">  </span><span class="kw">geom_point</span>()<span class="op">+</span></a>
-<a class="sourceLine" id="cb481-10" title="10"><span class="st">  </span><span class="kw">geom_line</span>()<span class="op">+</span></a>
-<a class="sourceLine" id="cb481-11" title="11"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">y=</span><span class="st">&quot;Fitted Value: Mullen Composite&quot;</span>, </a>
-<a class="sourceLine" id="cb481-12" title="12">       <span class="dt">title=</span><span class="st">&quot;Mixed model fitted values with interaction term&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb480"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb480-1" title="1"><span class="co"># Create plot</span></a>
+<a class="sourceLine" id="cb480-2" title="2">mixed_effect_data_complete &lt;-<span class="st"> </span>mixed_fit_interact<span class="op">$</span>data[<span class="kw">complete.cases</span>(mixed_fit_interact<span class="op">$</span>data),]</a>
+<a class="sourceLine" id="cb480-3" title="3">mixed_effect_data_complete &lt;-<span class="st"> </span><span class="kw">data.frame</span>(mixed_effect_data_complete, <span class="st">&quot;predicted_value&quot;</span>=<span class="kw">predict</span>(mixed_fit_interact))</a>
+<a class="sourceLine" id="cb480-4" title="4"></a>
+<a class="sourceLine" id="cb480-5" title="5"><span class="kw">ggplot</span>(<span class="dt">data=</span>mixed_effect_data_complete, <span class="dt">mapping=</span><span class="kw">aes</span>(<span class="dt">x=</span>Visit, </a>
+<a class="sourceLine" id="cb480-6" title="6">                                          <span class="dt">y=</span>predicted_value,</a>
+<a class="sourceLine" id="cb480-7" title="7">                                          <span class="dt">color=</span>ASD_Diag,</a>
+<a class="sourceLine" id="cb480-8" title="8">                                          <span class="dt">group=</span>Identifiers))<span class="op">+</span></a>
+<a class="sourceLine" id="cb480-9" title="9"><span class="st">  </span><span class="kw">geom_point</span>()<span class="op">+</span></a>
+<a class="sourceLine" id="cb480-10" title="10"><span class="st">  </span><span class="kw">geom_line</span>()<span class="op">+</span></a>
+<a class="sourceLine" id="cb480-11" title="11"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">y=</span><span class="st">&quot;Fitted Value: Mullen Composite&quot;</span>, </a>
+<a class="sourceLine" id="cb480-12" title="12">       <span class="dt">title=</span><span class="st">&quot;Mixed model fitted values with interaction term&quot;</span>)</a></code></pre></div>
 <p><img src="_main_files/figure-html/nlme_fit_2-1.png" width="672" /></p>
 <p>Now, we see ASD negative children have an increasing Mullen composite over time on average while ASD positive children have a decreasing Mullen composite over time on average.</p>
 <p>Finally, in order to illustrate a simpele example of a random slope model, we now include visit as a random effect to the interaction term model discussed above. This will model subject-specific slopes across time (recall in plot above, slopes were the same within a diagnosis group). The corresponding model is</p>
 <p><span class="math inline">\(Mullen_{ij}=\beta_{0}+\beta_{1}Visit_{ij}+\beta_{2}Group_{ij}+\beta_{3}Group_{ij}*Visit_{ij}+\phi_{0,i}+\phi_{1,i}*Visit_{ij}+\epsilon_{ij}\)</span>
 where <span class="math inline">\((\phi_{0,i}, \phi_{1,i})\)</span> is independent across index <span class="math inline">\(i\)</span> and <span class="math inline">\(\epsilon_{ij}\)</span> are independent across <span class="math inline">\(i\)</span>. Note that for index <span class="math inline">\(i\)</span>, we are <strong>not</strong> assuming <span class="math inline">\(\phi_{0,i}\)</span> and <span class="math inline">\(\phi_{1,i}\)</span> are independent; only that the random effects are independent <strong>between subjects</strong> and not <strong>within subjects</strong>. We can see that the slope with respect to time for subject <span class="math inline">\(i\)</span> is <span class="math inline">\(\beta_{1}+\beta_{3}Group_{ij}+\phi_{1,i}*Visit_{ij}\)</span>.</p>
 <p>We fit this model to the data with an unstructured covariance structure for the random effects.</p>
-<div class="sourceCode" id="cb482"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb482-1" title="1"><span class="co">## Fit model</span></a>
-<a class="sourceLine" id="cb482-2" title="2">mixed_fit_interact_rand_slope &lt;-</a>
-<a class="sourceLine" id="cb482-3" title="3"><span class="st">  </span><span class="kw">lme</span>(Mullen_Composite_Score<span class="op">~</span>Visit_Num <span class="op">+</span><span class="st"> </span>ASD_Diag <span class="op">+</span><span class="st"> </span>Visit_Num<span class="op">*</span>ASD_Diag, </a>
-<a class="sourceLine" id="cb482-4" title="4">    <span class="dt">data=</span>mixed_model_data,</a>
-<a class="sourceLine" id="cb482-5" title="5">    <span class="dt">random =</span> <span class="op">~</span><span class="dv">1</span><span class="op">+</span>Visit_Num<span class="op">|</span>Identifiers,</a>
-<a class="sourceLine" id="cb482-6" title="6">    <span class="dt">na.action =</span> na.omit)</a>
-<a class="sourceLine" id="cb482-7" title="7"></a>
-<a class="sourceLine" id="cb482-8" title="8"><span class="co">## Print out results</span></a>
-<a class="sourceLine" id="cb482-9" title="9"><span class="kw">summary</span>(mixed_fit_interact_rand_slope)</a></code></pre></div>
+<div class="sourceCode" id="cb481"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb481-1" title="1"><span class="co">## Fit model</span></a>
+<a class="sourceLine" id="cb481-2" title="2">mixed_fit_interact_rand_slope &lt;-</a>
+<a class="sourceLine" id="cb481-3" title="3"><span class="st">  </span><span class="kw">lme</span>(Mullen_Composite_Score<span class="op">~</span>Visit_Num <span class="op">+</span><span class="st"> </span>ASD_Diag <span class="op">+</span><span class="st"> </span>Visit_Num<span class="op">*</span>ASD_Diag, </a>
+<a class="sourceLine" id="cb481-4" title="4">    <span class="dt">data=</span>mixed_model_data,</a>
+<a class="sourceLine" id="cb481-5" title="5">    <span class="dt">random =</span> <span class="op">~</span><span class="dv">1</span><span class="op">+</span>Visit_Num<span class="op">|</span>Identifiers,</a>
+<a class="sourceLine" id="cb481-6" title="6">    <span class="dt">na.action =</span> na.omit)</a>
+<a class="sourceLine" id="cb481-7" title="7"></a>
+<a class="sourceLine" id="cb481-8" title="8"><span class="co">## Print out results</span></a>
+<a class="sourceLine" id="cb481-9" title="9"><span class="kw">summary</span>(mixed_fit_interact_rand_slope)</a></code></pre></div>
 <pre><code>## Linear mixed-effects model fit by REML
 ##  Data: mixed_model_data 
 ##        AIC      BIC    logLik
@@ -1375,23 +1374,23 @@ where <span class="math inline">\((\phi_{0,i}, \phi_{1,i})\)</span> is independe
 ## 
 ## Number of Observations: 1852
 ## Number of Groups: 587</code></pre>
-<div class="sourceCode" id="cb484"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb484-1" title="1"><span class="co">## Create plot</span></a>
-<a class="sourceLine" id="cb484-2" title="2">mixed_effect_data_complete &lt;-<span class="st"> </span>mixed_fit_interact_rand_slope<span class="op">$</span>data[</a>
-<a class="sourceLine" id="cb484-3" title="3">  <span class="kw">complete.cases</span>(mixed_fit_interact_rand_slope<span class="op">$</span>data),]</a>
-<a class="sourceLine" id="cb484-4" title="4">mixed_effect_data_complete &lt;-<span class="st"> </span></a>
-<a class="sourceLine" id="cb484-5" title="5"><span class="st">  </span><span class="kw">data.frame</span>(mixed_effect_data_complete, <span class="st">&quot;predicted_value&quot;</span>=<span class="kw">predict</span>(mixed_fit_interact_rand_slope, <span class="dt">newdata =</span> mixed_effect_data_complete))</a>
-<a class="sourceLine" id="cb484-6" title="6"><span class="co"># Notice above, we create variable &quot;predicted_value&quot; to hold each subject&#39;s fitted values, including random effect realizations, in dataset called mixed_effect_data_complete (&quot;complete&quot; meaning all subjects with missing data for variables in model are removed from dataset to be used in plot)</span></a>
-<a class="sourceLine" id="cb484-7" title="7"></a>
-<a class="sourceLine" id="cb484-8" title="8"><span class="kw">ggplot</span>(<span class="dt">data=</span>mixed_effect_data_complete, <span class="dt">mapping=</span><span class="kw">aes</span>(<span class="dt">x=</span>Visit, </a>
-<a class="sourceLine" id="cb484-9" title="9">                                          <span class="dt">y=</span>predicted_value,</a>
-<a class="sourceLine" id="cb484-10" title="10">                                          <span class="dt">color=</span>ASD_Diag,</a>
-<a class="sourceLine" id="cb484-11" title="11">                                          <span class="dt">group=</span>Identifiers))<span class="op">+</span></a>
-<a class="sourceLine" id="cb484-12" title="12"><span class="st">  </span><span class="kw">geom_point</span>()<span class="op">+</span></a>
-<a class="sourceLine" id="cb484-13" title="13"><span class="st">  </span><span class="kw">geom_line</span>()<span class="op">+</span></a>
-<a class="sourceLine" id="cb484-14" title="14"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">y=</span><span class="st">&quot;Fitted Value: Mullen Composite&quot;</span>, </a>
-<a class="sourceLine" id="cb484-15" title="15">       <span class="dt">title=</span><span class="st">&quot;Mixed model fitted values with interaction term</span><span class="ch">\n</span><span class="st">and random slope for visit&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb483"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb483-1" title="1"><span class="co">## Create plot</span></a>
+<a class="sourceLine" id="cb483-2" title="2">mixed_effect_data_complete &lt;-<span class="st"> </span>mixed_fit_interact_rand_slope<span class="op">$</span>data[</a>
+<a class="sourceLine" id="cb483-3" title="3">  <span class="kw">complete.cases</span>(mixed_fit_interact_rand_slope<span class="op">$</span>data),]</a>
+<a class="sourceLine" id="cb483-4" title="4">mixed_effect_data_complete &lt;-<span class="st"> </span></a>
+<a class="sourceLine" id="cb483-5" title="5"><span class="st">  </span><span class="kw">data.frame</span>(mixed_effect_data_complete, <span class="st">&quot;predicted_value&quot;</span>=<span class="kw">predict</span>(mixed_fit_interact_rand_slope, <span class="dt">newdata =</span> mixed_effect_data_complete))</a>
+<a class="sourceLine" id="cb483-6" title="6"><span class="co"># Notice above, we create variable &quot;predicted_value&quot; to hold each subject&#39;s fitted values, including random effect realizations, in dataset called mixed_effect_data_complete (&quot;complete&quot; meaning all subjects with missing data for variables in model are removed from dataset to be used in plot)</span></a>
+<a class="sourceLine" id="cb483-7" title="7"></a>
+<a class="sourceLine" id="cb483-8" title="8"><span class="kw">ggplot</span>(<span class="dt">data=</span>mixed_effect_data_complete, <span class="dt">mapping=</span><span class="kw">aes</span>(<span class="dt">x=</span>Visit, </a>
+<a class="sourceLine" id="cb483-9" title="9">                                          <span class="dt">y=</span>predicted_value,</a>
+<a class="sourceLine" id="cb483-10" title="10">                                          <span class="dt">color=</span>ASD_Diag,</a>
+<a class="sourceLine" id="cb483-11" title="11">                                          <span class="dt">group=</span>Identifiers))<span class="op">+</span></a>
+<a class="sourceLine" id="cb483-12" title="12"><span class="st">  </span><span class="kw">geom_point</span>()<span class="op">+</span></a>
+<a class="sourceLine" id="cb483-13" title="13"><span class="st">  </span><span class="kw">geom_line</span>()<span class="op">+</span></a>
+<a class="sourceLine" id="cb483-14" title="14"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">y=</span><span class="st">&quot;Fitted Value: Mullen Composite&quot;</span>, </a>
+<a class="sourceLine" id="cb483-15" title="15">       <span class="dt">title=</span><span class="st">&quot;Mixed model fitted values with interaction term</span><span class="ch">\n</span><span class="st">and random slope for visit&quot;</span>)</a></code></pre></div>
 <p><img src="_main_files/figure-html/nlme_fit_3-1.png" width="672" /></p>
-<div class="sourceCode" id="cb485"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb485-1" title="1"><span class="co"># Use of \n forces new line for plot title</span></a></code></pre></div>
+<div class="sourceCode" id="cb484"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb484-1" title="1"><span class="co"># Use of \n forces new line for plot title</span></a></code></pre></div>
 <p>We see that for most subjects, their slopes follow the general trend for their diagnosis group. Since this model is a little more complicated, let’s dig into the output provided in the <strong>summary()</strong> command. Since the previous models are simpler, understanding these results will teach the concepts to understand all of the output for other models.</p>
 <p>First, we see a table with AIC, BIC, and negative loglikelihood (logLik) results for the model. These three measures are different ways of quantifying the “goodness of fit” for our model with respect to the analyzed dataset. For all three, higher implies a better correspondance between the data and the data one woudl expect to see under the chosen mixed model. For logLik, higher corresponds to “less negative”/closer to zero.</p>
 <p>Next, we see a table entitled “Random effects:” with standard deviation and correlation values. This table provides the estimated standard deviation for each of the random effects and the estimated correlation for each pair of random effects (i.e., the correlation between the random intercept and random slope for visit in this example). Notice that for the earlier mixed models with only a single random intercept, the correlation entry was not provided as these models only had one random effect. We then see a table entitled “Fixed effects:”, which includes the usual calculations for the fixed effects (i.e., beta coefficients). The following table entitled “Correlation:” provides the estimated correlations between each pair of estimates for the fixed effects (between the estimates <strong>not</strong> the fixed effects themselves). These are generally not important. Finally, we are provided a summary of the spread of the residuals.</p>
