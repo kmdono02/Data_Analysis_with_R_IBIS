@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>2 Introducing R and Rstudio | Data Analysis and Processing with R based on IBIS data</title>
+  <meta name="description" content="2 Introducing R and Rstudio | Data Analysis and Processing with R based on IBIS data" />
+  <meta name="generator" content="bookdown 0.13 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="2 Introducing R and Rstudio | Data Analysis and Processing with R based on IBIS data" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:image" content="mushroom.jpg" />
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="2 Introducing R and Rstudio | Data Analysis and Processing with R based on IBIS data" />
+  
+  
+  <meta name="twitter:image" content="mushroom.jpg" />
+
+<meta name="author" content="Kevin Donovan" />
+
+
+<meta name="date" content="2019-10-21" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="index.html"/>
+<link rel="next" href="objects-and-functions.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Index</a><ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#preface"><i class="fa fa-check"></i><b>1.1</b> Preface</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="introducing-r-and-rstudio.html"><a href="introducing-r-and-rstudio.html"><i class="fa fa-check"></i><b>2</b> Introducing R and Rstudio</a><ul>
+<li class="chapter" data-level="2.1" data-path="introducing-r-and-rstudio.html"><a href="introducing-r-and-rstudio.html#intro"><i class="fa fa-check"></i><b>2.1</b> Intro</a></li>
+<li class="chapter" data-level="2.2" data-path="introducing-r-and-rstudio.html"><a href="introducing-r-and-rstudio.html#why-use-r-for-data-analysis"><i class="fa fa-check"></i><b>2.2</b> Why use R for data analysis?</a></li>
+<li class="chapter" data-level="2.3" data-path="introducing-r-and-rstudio.html"><a href="introducing-r-and-rstudio.html#r-and-rstudio-what-is-the-difference"><i class="fa fa-check"></i><b>2.3</b> R and RStudio: What is the difference?</a></li>
+<li class="chapter" data-level="2.4" data-path="introducing-r-and-rstudio.html"><a href="introducing-r-and-rstudio.html#installing-r-and-rstudio"><i class="fa fa-check"></i><b>2.4</b> Installing R and RStudio</a></li>
+<li class="chapter" data-level="2.5" data-path="introducing-r-and-rstudio.html"><a href="introducing-r-and-rstudio.html#the-interface-of-rstudio"><i class="fa fa-check"></i><b>2.5</b> The interface of RStudio</a><ul>
+<li class="chapter" data-level="2.5.1" data-path="introducing-r-and-rstudio.html"><a href="introducing-r-and-rstudio.html#console"><i class="fa fa-check"></i><b>2.5.1</b> Console</a></li>
+<li class="chapter" data-level="2.5.2" data-path="introducing-r-and-rstudio.html"><a href="introducing-r-and-rstudio.html#scripts"><i class="fa fa-check"></i><b>2.5.2</b> Scripts</a></li>
+<li class="chapter" data-level="2.5.3" data-path="introducing-r-and-rstudio.html"><a href="introducing-r-and-rstudio.html#rmd-files"><i class="fa fa-check"></i><b>2.5.3</b> RMD Files</a></li>
+<li class="chapter" data-level="2.5.4" data-path="introducing-r-and-rstudio.html"><a href="introducing-r-and-rstudio.html#environment"><i class="fa fa-check"></i><b>2.5.4</b> Environment</a></li>
+<li class="chapter" data-level="2.5.5" data-path="introducing-r-and-rstudio.html"><a href="introducing-r-and-rstudio.html#plots-packages-and-help"><i class="fa fa-check"></i><b>2.5.5</b> Plots, Packages, and Help</a></li>
+</ul></li>
+<li class="chapter" data-level="2.6" data-path="introducing-r-and-rstudio.html"><a href="introducing-r-and-rstudio.html#file-directories-in-r"><i class="fa fa-check"></i><b>2.6</b> File Directories in R</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="objects-and-functions.html"><a href="objects-and-functions.html"><i class="fa fa-check"></i><b>3</b> Objects and Functions</a><ul>
+<li class="chapter" data-level="3.1" data-path="objects-and-functions.html"><a href="objects-and-functions.html#intro-1"><i class="fa fa-check"></i><b>3.1</b> Intro</a></li>
+<li class="chapter" data-level="3.2" data-path="objects-and-functions.html"><a href="objects-and-functions.html#functions"><i class="fa fa-check"></i><b>3.2</b> Functions</a></li>
+<li class="chapter" data-level="3.3" data-path="objects-and-functions.html"><a href="objects-and-functions.html#objects"><i class="fa fa-check"></i><b>3.3</b> Objects</a></li>
+<li class="chapter" data-level="3.4" data-path="objects-and-functions.html"><a href="objects-and-functions.html#object-classes-and-types"><i class="fa fa-check"></i><b>3.4</b> Object classes and types</a><ul>
+<li class="chapter" data-level="3.4.1" data-path="objects-and-functions.html"><a href="objects-and-functions.html#vectors"><i class="fa fa-check"></i><b>3.4.1</b> Vectors</a></li>
+<li class="chapter" data-level="3.4.2" data-path="objects-and-functions.html"><a href="objects-and-functions.html#matricies"><i class="fa fa-check"></i><b>3.4.2</b> Matricies</a></li>
+<li class="chapter" data-level="3.4.3" data-path="objects-and-functions.html"><a href="objects-and-functions.html#lists"><i class="fa fa-check"></i><b>3.4.3</b> Lists</a></li>
+<li class="chapter" data-level="3.4.4" data-path="objects-and-functions.html"><a href="objects-and-functions.html#data-frames"><i class="fa fa-check"></i><b>3.4.4</b> Data Frames</a></li>
+<li class="chapter" data-level="3.4.5" data-path="objects-and-functions.html"><a href="objects-and-functions.html#types"><i class="fa fa-check"></i><b>3.4.5</b> Types</a></li>
+</ul></li>
+<li class="chapter" data-level="3.5" data-path="objects-and-functions.html"><a href="objects-and-functions.html#subsetting"><i class="fa fa-check"></i><b>3.5</b> Subsetting</a></li>
+<li class="chapter" data-level="3.6" data-path="objects-and-functions.html"><a href="objects-and-functions.html#base-r"><i class="fa fa-check"></i><b>3.6</b> Base R</a></li>
+<li class="chapter" data-level="3.7" data-path="objects-and-functions.html"><a href="objects-and-functions.html#environment-1"><i class="fa fa-check"></i><b>3.7</b> Environment</a></li>
+<li class="chapter" data-level="3.8" data-path="objects-and-functions.html"><a href="objects-and-functions.html#putting-it-all-together-read.csv"><i class="fa fa-check"></i><b>3.8</b> Putting It All Together: read.csv</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="using-dplyr.html"><a href="using-dplyr.html"><i class="fa fa-check"></i><b>4</b> Using dplyr</a><ul>
+<li class="chapter" data-level="4.1" data-path="using-dplyr.html"><a href="using-dplyr.html#intro-2"><i class="fa fa-check"></i><b>4.1</b> Intro</a></li>
+<li class="chapter" data-level="4.2" data-path="using-dplyr.html"><a href="using-dplyr.html#dplyr-functions"><i class="fa fa-check"></i><b>4.2</b> dplyr Functions</a><ul>
+<li class="chapter" data-level="4.2.1" data-path="using-dplyr.html"><a href="using-dplyr.html#select-filter-and-arrange"><i class="fa fa-check"></i><b>4.2.1</b> Select, filter, and arrange</a></li>
+<li class="chapter" data-level="4.2.2" data-path="using-dplyr.html"><a href="using-dplyr.html#mutate-and-summarize"><i class="fa fa-check"></i><b>4.2.2</b> Mutate and summarize</a></li>
+<li class="chapter" data-level="4.2.3" data-path="using-dplyr.html"><a href="using-dplyr.html#spread-gather-separate-and-unite"><i class="fa fa-check"></i><b>4.2.3</b> Spread, Gather, Separate and Unite</a></li>
+<li class="chapter" data-level="4.2.4" data-path="using-dplyr.html"><a href="using-dplyr.html#renaming-variables"><i class="fa fa-check"></i><b>4.2.4</b> Renaming variables</a></li>
+<li class="chapter" data-level="4.2.5" data-path="using-dplyr.html"><a href="using-dplyr.html#using-the-pipe"><i class="fa fa-check"></i><b>4.2.5</b> Using the pipe</a></li>
+<li class="chapter" data-level="4.2.6" data-path="using-dplyr.html"><a href="using-dplyr.html#editing-factor-variables-recode-and-relevel"><i class="fa fa-check"></i><b>4.2.6</b> Editing factor variables: recode() and relevel()</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="creating-graphs-with-ggplot2.html"><a href="creating-graphs-with-ggplot2.html"><i class="fa fa-check"></i><b>5</b> Creating Graphs With ggplot2</a><ul>
+<li class="chapter" data-level="5.1" data-path="creating-graphs-with-ggplot2.html"><a href="creating-graphs-with-ggplot2.html#base-r-vs.-ggplot2"><i class="fa fa-check"></i><b>5.1</b> Base R vs. ggplot2</a></li>
+<li class="chapter" data-level="5.2" data-path="creating-graphs-with-ggplot2.html"><a href="creating-graphs-with-ggplot2.html#ggplot2"><i class="fa fa-check"></i><b>5.2</b> ggplot2</a><ul>
+<li class="chapter" data-level="5.2.1" data-path="creating-graphs-with-ggplot2.html"><a href="creating-graphs-with-ggplot2.html#introduction"><i class="fa fa-check"></i><b>5.2.1</b> Introduction</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="creating-graphs-with-ggplot2.html"><a href="creating-graphs-with-ggplot2.html#ggplot-aesthetics"><i class="fa fa-check"></i><b>5.3</b> ggplot Aesthetics</a><ul>
+<li class="chapter" data-level="5.3.1" data-path="creating-graphs-with-ggplot2.html"><a href="creating-graphs-with-ggplot2.html#scatterplot"><i class="fa fa-check"></i><b>5.3.1</b> Scatterplot</a></li>
+<li class="chapter" data-level="5.3.2" data-path="creating-graphs-with-ggplot2.html"><a href="creating-graphs-with-ggplot2.html#colors-in-r"><i class="fa fa-check"></i><b>5.3.2</b> Colors in R</a></li>
+<li class="chapter" data-level="5.3.3" data-path="creating-graphs-with-ggplot2.html"><a href="creating-graphs-with-ggplot2.html#line-of-best-fit"><i class="fa fa-check"></i><b>5.3.3</b> Line of best fit</a></li>
+<li class="chapter" data-level="5.3.4" data-path="creating-graphs-with-ggplot2.html"><a href="creating-graphs-with-ggplot2.html#box-and-whisker"><i class="fa fa-check"></i><b>5.3.4</b> Box and whisker</a></li>
+<li class="chapter" data-level="5.3.5" data-path="creating-graphs-with-ggplot2.html"><a href="creating-graphs-with-ggplot2.html#barchart"><i class="fa fa-check"></i><b>5.3.5</b> Barchart</a></li>
+<li class="chapter" data-level="5.3.6" data-path="creating-graphs-with-ggplot2.html"><a href="creating-graphs-with-ggplot2.html#other-aesthetics"><i class="fa fa-check"></i><b>5.3.6</b> Other aesthetics</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="creating-graphs-with-ggplot2.html"><a href="creating-graphs-with-ggplot2.html#additional-customization"><i class="fa fa-check"></i><b>5.4</b> Additional customization</a><ul>
+<li class="chapter" data-level="5.4.1" data-path="creating-graphs-with-ggplot2.html"><a href="creating-graphs-with-ggplot2.html#titles-and-labels"><i class="fa fa-check"></i><b>5.4.1</b> Titles and Labels</a></li>
+<li class="chapter" data-level="5.4.2" data-path="creating-graphs-with-ggplot2.html"><a href="creating-graphs-with-ggplot2.html#colors"><i class="fa fa-check"></i><b>5.4.2</b> Colors</a></li>
+<li class="chapter" data-level="5.4.3" data-path="creating-graphs-with-ggplot2.html"><a href="creating-graphs-with-ggplot2.html#sizes-and-shapes"><i class="fa fa-check"></i><b>5.4.3</b> Sizes and shapes</a></li>
+<li class="chapter" data-level="5.4.4" data-path="creating-graphs-with-ggplot2.html"><a href="creating-graphs-with-ggplot2.html#themes"><i class="fa fa-check"></i><b>5.4.4</b> Themes</a></li>
+<li class="chapter" data-level="5.4.5" data-path="creating-graphs-with-ggplot2.html"><a href="creating-graphs-with-ggplot2.html#reversing-the-axes"><i class="fa fa-check"></i><b>5.4.5</b> Reversing the axes</a></li>
+<li class="chapter" data-level="5.4.6" data-path="creating-graphs-with-ggplot2.html"><a href="creating-graphs-with-ggplot2.html#facets"><i class="fa fa-check"></i><b>5.4.6</b> Facets</a></li>
+<li class="chapter" data-level="5.4.7" data-path="creating-graphs-with-ggplot2.html"><a href="creating-graphs-with-ggplot2.html#exporting-your-plot"><i class="fa fa-check"></i><b>5.4.7</b> Exporting your plot</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="working-with-tables-in-r.html"><a href="working-with-tables-in-r.html"><i class="fa fa-check"></i><b>6</b> Working with Tables in R</a><ul>
+<li class="chapter" data-level="6.1" data-path="working-with-tables-in-r.html"><a href="working-with-tables-in-r.html#intro-3"><i class="fa fa-check"></i><b>6.1</b> Intro</a></li>
+<li class="chapter" data-level="6.2" data-path="working-with-tables-in-r.html"><a href="working-with-tables-in-r.html#creating-basic-tables-table-and-xtabs"><i class="fa fa-check"></i><b>6.2</b> Creating Basic Tables: table() and xtabs()</a></li>
+<li class="chapter" data-level="6.3" data-path="working-with-tables-in-r.html"><a href="working-with-tables-in-r.html#tabular-data-analysis"><i class="fa fa-check"></i><b>6.3</b> Tabular Data Analysis</a><ul>
+<li class="chapter" data-level="6.3.1" data-path="working-with-tables-in-r.html"><a href="working-with-tables-in-r.html#tests-for-independence"><i class="fa fa-check"></i><b>6.3.1</b> Tests for Independence</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="statistical-fundamentals.html"><a href="statistical-fundamentals.html"><i class="fa fa-check"></i><b>7</b> Statistical Fundamentals</a><ul>
+<li class="chapter" data-level="7.1" data-path="statistical-fundamentals.html"><a href="statistical-fundamentals.html#intro-4"><i class="fa fa-check"></i><b>7.1</b> Intro</a></li>
+<li class="chapter" data-level="7.2" data-path="statistical-fundamentals.html"><a href="statistical-fundamentals.html#statistical-inference"><i class="fa fa-check"></i><b>7.2</b> Statistical Inference</a><ul>
+<li class="chapter" data-level="7.2.1" data-path="statistical-fundamentals.html"><a href="statistical-fundamentals.html#parameter-estimation-mean-median-tutorial-quantiles"><i class="fa fa-check"></i><b>7.2.1</b> Parameter Estimation: Mean, Median, tutorial, Quantiles</a></li>
+<li class="chapter" data-level="7.2.2" data-path="statistical-fundamentals.html"><a href="statistical-fundamentals.html#accounting-for-estimation-variance-and-hypothesis-testing"><i class="fa fa-check"></i><b>7.2.2</b> Accounting for estimation variance and hypothesis testing</a></li>
+<li class="chapter" data-level="7.2.3" data-path="statistical-fundamentals.html"><a href="statistical-fundamentals.html#confidence-intervals"><i class="fa fa-check"></i><b>7.2.3</b> Confidence intervals</a></li>
+<li class="chapter" data-level="7.2.4" data-path="statistical-fundamentals.html"><a href="statistical-fundamentals.html#hypothesis-testing"><i class="fa fa-check"></i><b>7.2.4</b> Hypothesis testing</a></li>
+<li class="chapter" data-level="7.2.5" data-path="statistical-fundamentals.html"><a href="statistical-fundamentals.html#hypothesis-testing-with-means"><i class="fa fa-check"></i><b>7.2.5</b> Hypothesis Testing with Means</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="regression-analysis-methods.html"><a href="regression-analysis-methods.html"><i class="fa fa-check"></i><b>8</b> Regression Analysis Methods</a><ul>
+<li class="chapter" data-level="8.1" data-path="regression-analysis-methods.html"><a href="regression-analysis-methods.html#intro-5"><i class="fa fa-check"></i><b>8.1</b> Intro</a></li>
+<li class="chapter" data-level="8.2" data-path="regression-analysis-methods.html"><a href="regression-analysis-methods.html#linear-regression"><i class="fa fa-check"></i><b>8.2</b> Linear Regression</a><ul>
+<li class="chapter" data-level="8.2.1" data-path="regression-analysis-methods.html"><a href="regression-analysis-methods.html#motivation"><i class="fa fa-check"></i><b>8.2.1</b> Motivation</a></li>
+<li class="chapter" data-level="8.2.2" data-path="regression-analysis-methods.html"><a href="regression-analysis-methods.html#methodology"><i class="fa fa-check"></i><b>8.2.2</b> Methodology</a></li>
+<li class="chapter" data-level="8.2.3" data-path="regression-analysis-methods.html"><a href="regression-analysis-methods.html#overview"><i class="fa fa-check"></i><b>8.2.3</b> Overview</a></li>
+<li class="chapter" data-level="8.2.4" data-path="regression-analysis-methods.html"><a href="regression-analysis-methods.html#example-1-continuous-predictors"><i class="fa fa-check"></i><b>8.2.4</b> Example 1: Continuous predictors</a></li>
+<li class="chapter" data-level="8.2.5" data-path="regression-analysis-methods.html"><a href="regression-analysis-methods.html#example-2-categorical-predictors"><i class="fa fa-check"></i><b>8.2.5</b> Example 2: Categorical predictors</a></li>
+<li class="chapter" data-level="8.2.6" data-path="regression-analysis-methods.html"><a href="regression-analysis-methods.html#diagnostics"><i class="fa fa-check"></i><b>8.2.6</b> Diagnostics</a></li>
+<li class="chapter" data-level="8.2.7" data-path="regression-analysis-methods.html"><a href="regression-analysis-methods.html#anova-and-ancova"><i class="fa fa-check"></i><b>8.2.7</b> ANOVA and ANCOVA</a></li>
+</ul></li>
+<li class="chapter" data-level="8.3" data-path="regression-analysis-methods.html"><a href="regression-analysis-methods.html#logistic-regression"><i class="fa fa-check"></i><b>8.3</b> Logistic regression</a><ul>
+<li class="chapter" data-level="8.3.1" data-path="regression-analysis-methods.html"><a href="regression-analysis-methods.html#methodology-1"><i class="fa fa-check"></i><b>8.3.1</b> Methodology</a></li>
+<li class="chapter" data-level="8.3.2" data-path="regression-analysis-methods.html"><a href="regression-analysis-methods.html#example-1-continuous-covariates"><i class="fa fa-check"></i><b>8.3.2</b> Example 1: Continuous Covariates</a></li>
+<li class="chapter" data-level="8.3.3" data-path="regression-analysis-methods.html"><a href="regression-analysis-methods.html#example-2-categorical-covariates"><i class="fa fa-check"></i><b>8.3.3</b> Example 2: Categorical Covariates</a></li>
+<li class="chapter" data-level="8.3.4" data-path="regression-analysis-methods.html"><a href="regression-analysis-methods.html#prediction"><i class="fa fa-check"></i><b>8.3.4</b> Prediction</a></li>
+</ul></li>
+<li class="chapter" data-level="8.4" data-path="regression-analysis-methods.html"><a href="regression-analysis-methods.html#mixed-models"><i class="fa fa-check"></i><b>8.4</b> Mixed Models</a><ul>
+<li class="chapter" data-level="8.4.1" data-path="regression-analysis-methods.html"><a href="regression-analysis-methods.html#motivation-1"><i class="fa fa-check"></i><b>8.4.1</b> Motivation</a></li>
+<li class="chapter" data-level="8.4.2" data-path="regression-analysis-methods.html"><a href="regression-analysis-methods.html#example-mullen-composite-and-visit"><i class="fa fa-check"></i><b>8.4.2</b> Example: Mullen composite and Visit</a></li>
+<li class="chapter" data-level="8.4.3" data-path="regression-analysis-methods.html"><a href="regression-analysis-methods.html#interpreting-results-time-dependent-covariates"><i class="fa fa-check"></i><b>8.4.3</b> Interpreting results: time dependent covariates</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="documenting-your-results-with-r-markdown.html"><a href="documenting-your-results-with-r-markdown.html"><i class="fa fa-check"></i><b>9</b> Documenting your results with R Markdown</a><ul>
+<li class="chapter" data-level="9.1" data-path="documenting-your-results-with-r-markdown.html"><a href="documenting-your-results-with-r-markdown.html#intro-6"><i class="fa fa-check"></i><b>9.1</b> Intro</a></li>
+<li class="chapter" data-level="9.2" data-path="documenting-your-results-with-r-markdown.html"><a href="documenting-your-results-with-r-markdown.html#starting-your-r-markdown"><i class="fa fa-check"></i><b>9.2</b> Starting Your R Markdown</a></li>
+<li class="chapter" data-level="9.3" data-path="documenting-your-results-with-r-markdown.html"><a href="documenting-your-results-with-r-markdown.html#understanding-the-r-markdown-editor"><i class="fa fa-check"></i><b>9.3</b> Understanding the R Markdown editor</a><ul>
+<li class="chapter" data-level="9.3.1" data-path="documenting-your-results-with-r-markdown.html"><a href="documenting-your-results-with-r-markdown.html#prelude"><i class="fa fa-check"></i><b>9.3.1</b> Prelude</a></li>
+<li class="chapter" data-level="9.3.2" data-path="documenting-your-results-with-r-markdown.html"><a href="documenting-your-results-with-r-markdown.html#chunk"><i class="fa fa-check"></i><b>9.3.2</b> Chunk</a></li>
+<li class="chapter" data-level="9.3.3" data-path="documenting-your-results-with-r-markdown.html"><a href="documenting-your-results-with-r-markdown.html#non-chunk"><i class="fa fa-check"></i><b>9.3.3</b> Non-chunk</a></li>
+</ul></li>
+<li class="chapter" data-level="9.4" data-path="documenting-your-results-with-r-markdown.html"><a href="documenting-your-results-with-r-markdown.html#creating-your-document-from-the-r-markdown-file"><i class="fa fa-check"></i><b>9.4</b> Creating your document from the R Markdown file</a></li>
+<li class="chapter" data-level="9.5" data-path="documenting-your-results-with-r-markdown.html"><a href="documenting-your-results-with-r-markdown.html#creating-tables-with-r-markdown"><i class="fa fa-check"></i><b>9.5</b> Creating tables with R Markdown</a><ul>
+<li class="chapter" data-level="9.5.1" data-path="documenting-your-results-with-r-markdown.html"><a href="documenting-your-results-with-r-markdown.html#summary-statistics"><i class="fa fa-check"></i><b>9.5.1</b> Summary statistics</a></li>
+<li class="chapter" data-level="9.5.2" data-path="documenting-your-results-with-r-markdown.html"><a href="documenting-your-results-with-r-markdown.html#general-tables"><i class="fa fa-check"></i><b>9.5.2</b> General tables</a></li>
+</ul></li>
+<li class="chapter" data-level="9.6" data-path="documenting-your-results-with-r-markdown.html"><a href="documenting-your-results-with-r-markdown.html#practice-with-r-markdown"><i class="fa fa-check"></i><b>9.6</b> Practice with R Markdown</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="loops-and-functional-programming.html"><a href="loops-and-functional-programming.html"><i class="fa fa-check"></i><b>10</b> Loops and Functional Programming</a><ul>
+<li class="chapter" data-level="10.1" data-path="loops-and-functional-programming.html"><a href="loops-and-functional-programming.html#intro-7"><i class="fa fa-check"></i><b>10.1</b> Intro</a></li>
+<li class="chapter" data-level="10.2" data-path="loops-and-functional-programming.html"><a href="loops-and-functional-programming.html#loops"><i class="fa fa-check"></i><b>10.2</b> Loops</a><ul>
+<li class="chapter" data-level="10.2.1" data-path="loops-and-functional-programming.html"><a href="loops-and-functional-programming.html#example-1-running-many-regression-models"><i class="fa fa-check"></i><b>10.2.1</b> Example 1: Running many regression models</a></li>
+<li class="chapter" data-level="10.2.2" data-path="loops-and-functional-programming.html"><a href="loops-and-functional-programming.html#example-2-the-apply-functions"><i class="fa fa-check"></i><b>10.2.2</b> Example 2: The Apply Functions</a></li>
+</ul></li>
+<li class="chapter" data-level="10.3" data-path="loops-and-functional-programming.html"><a href="loops-and-functional-programming.html#functional-programming"><i class="fa fa-check"></i><b>10.3</b> Functional Programming</a><ul>
+<li class="chapter" data-level="10.3.1" data-path="loops-and-functional-programming.html"><a href="loops-and-functional-programming.html#example-regression-analysis-as-a-function-call"><i class="fa fa-check"></i><b>10.3.1</b> Example: Regression Analysis as a Function Call</a></li>
+</ul></li>
+<li class="chapter" data-level="10.4" data-path="loops-and-functional-programming.html"><a href="loops-and-functional-programming.html#simulation-studies"><i class="fa fa-check"></i><b>10.4</b> Simulation Studies</a><ul>
+<li class="chapter" data-level="10.4.1" data-path="loops-and-functional-programming.html"><a href="loops-and-functional-programming.html#setting-the-seed-reproducibility-in-simulation-studies"><i class="fa fa-check"></i><b>10.4.1</b> Setting the Seed: Reproducibility in Simulation Studies</a></li>
+</ul></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Data Analysis and Processing with R based on IBIS data</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="introducing-r-and-rstudio" class="section level1">
+<h1><span class="header-section-number">2</span> Introducing R and Rstudio</h1>
+<div id="intro" class="section level2">
+<h2><span class="header-section-number">2.1</span> Intro</h2>
+<p>The goal of this tutorial is to complete Objective 1; learn the interface of RStudio and understand the fundamentals of how R works. Those who understand the following can skip this tutorial:</p>
+<ol style="list-style-type: decimal">
+<li><p>The “difference” between R and RStudio</p></li>
+<li><p>How to install and open R and Rstudio</p></li>
+<li><p>The interface of RStudio and why after installing both, one only needs to open and work in RStudio</p></li>
+<li><p>What packages are, what a working directory is, and how RStudio handles file locations/location references</p></li>
+</ol>
+<p>If you don’t fully understand these points, I strongly recommend going through this tutorial or just reading the specific sections which are necessary.</p>
+</div>
+<div id="why-use-r-for-data-analysis" class="section level2">
+<h2><span class="header-section-number">2.2</span> Why use R for data analysis?</h2>
+<p>While R is necessary for many statisticians and data scientists due to it’s computation power and great flexibility, it may not be clear how R is useful for scientists looking to do data processing and simple analyses. However, R has many advantages over other popular data analysis software suites such as SAS or SPSS, even for investigators who do not require R’s advanced capabilities.</p>
+<ol style="list-style-type: decimal">
+<li>R is free to download and use</li>
+</ol>
+<ul>
+<li>SAS and SPSS are very costly to use and/or require access through an employer license</li>
+<li>R is easy to download and install on Windows, Mac, and Linux</li>
+<li>R takes up less space to install then other such software</li>
+</ul>
+<ol start="2" style="list-style-type: decimal">
+<li>R is open-source</li>
+</ol>
+<ul>
+<li>Users can expand the functionality of R through add-ons called <strong>packages</strong></li>
+<li>Capabilities of R are continually growing as doesn’t require large-scale releases to expand functionality</li>
+</ul>
+<ol start="3" style="list-style-type: decimal">
+<li>Data processing in R is very easy</li>
+</ol>
+<ul>
+<li>Can import datasets from most other programs, including Excel, SAS, and SPSS</li>
+<li>Creating subsets of your data, creating new variables, selecting specific observations and variables is very easy</li>
+<li>Great flexiblity in these tools</li>
+</ul>
+<ol start="4" style="list-style-type: decimal">
+<li>Data visualization tools in R are very extensive</li>
+</ol>
+<ul>
+<li>Very flexible tools for creating custom graphs and tables</li>
+</ul>
+<ol start="5" style="list-style-type: decimal">
+<li>Advanced functionality often used in practice by scienitists is available in R</li>
+</ol>
+<ul>
+<li>Very robust mixed modeling, principal component, factor analysis, structural equation modeling, etc.</li>
+</ul>
+<ol start="6" style="list-style-type: decimal">
+<li>Will improve one’s understanding of statistics</li>
+</ol>
+<ul>
+<li>Key part of understanding statistics is through real data analysis</li>
+<li>Due to the breadth of its data analysis tools and the way R is operated, understanding R will foster an improved understanding of statistics</li>
+</ul>
+<ol start="7" style="list-style-type: decimal">
+<li>It is very easy to share your output from R</li>
+</ol>
+<ul>
+<li>Can easily select to display only the output you are interested in</li>
+<li>Easy to save and load figures, datasets, etc. created in R</li>
+<li>Due to R using programming through scripts (to be discussed later), your analyses are completely and easily reproducibile and shareable</li>
+<li>Can save your results and code in a report-style form with notes using R Markdown (to be discussd later)</li>
+</ul>
+<ol start="8" style="list-style-type: decimal">
+<li>R provides reproducibility for your analyses</li>
+</ol>
+<ul>
+<li>Use of <strong>scripts</strong> means every step of your analysis is documented and can be easily shared</li>
+</ul>
+</div>
+<div id="r-and-rstudio-what-is-the-difference" class="section level2">
+<h2><span class="header-section-number">2.3</span> R and RStudio: What is the difference?</h2>
+<p>First time users of R are often confused as to the difference between R and RStudio. RStudio is actually an add-on to R: it takes the R software and adds to it a very user-friendly graphical interface. Thus, when one uses RStudio, they are still using the full version of R while also getting the benefit of greater functionality and usability due to an improved user interface. As a result, when using R, one should always use RStudio; working with R itself is very cumbersome. In these tutorials, <strong>from Chapter 3 onwards</strong> R will be used to reference R and RStudio with the assumption that the reader is operating in RStudio.</p>
+<p>Since RStudio is an add-on to R, you must first download and install R as well as RStudio, two steps which are done separately. On your computer, you will see R and RStudio as separate installed programs. When using R for data analysis, you will always open and work in RStudio; you must leave R installed on the computer for RStudio to work, even though you will likely never open R itself.</p>
+</div>
+<div id="installing-r-and-rstudio" class="section level2">
+<h2><span class="header-section-number">2.4</span> Installing R and RStudio</h2>
+<p>As discussed above, you must download and install both R and RStudio. First, the installer for R can found by opening the following link:</p>
+<p><a href="https://cran.r-project.org/mirrors.html" class="uri">https://cran.r-project.org/mirrors.html</a></p>
+<p>and then selecting the mirror link closest your location. After opening this mirror link, you will see “Download and Install R” with links for Windows, Mac, and Linux installers. Always select the newest version posted. Then run the installer and follow the instructions.</p>
+<p>Second, for RStudio, the installer can found at the following link:</p>
+<p><a href="https://www.rstudio.com/products/rstudio/download/" class="uri">https://www.rstudio.com/products/rstudio/download/</a></p>
+<p>for Windows, Mac, and Linux (Ubuntu). Scroll due to “Installers for Supported Platforms”, open the choosen platform’s link, run the installer after downloading, and follow the instructions. The instructions for the installer will eventually ask you where R itself has when been installed. Generally it defaults to the correct path on your system for R though you may have to find where you have installed R and type the path into the RStudio installer manually.</p>
+</div>
+<div id="the-interface-of-rstudio" class="section level2">
+<h2><span class="header-section-number">2.5</span> The interface of RStudio</h2>
+<p>When you open R Studio for the first time, you should see the following interface:</p>
+<p><img src="Interface.png" /></p>
+<div id="console" class="section level3">
+<h3><span class="header-section-number">2.5.1</span> Console</h3>
+<p>The large window on the left side is the <strong>Console</strong>. You can think of this as the “calculator” for R Studio. This is were all of the input, calculations and output are contained. In fact, if you were to run R and not R Studio, this Console is the only window you would see; R Studio adds all of the other interface components that you see. One simple command is to add two numbers. Let’s calculate 2+2 in R. The &gt; symbol indicates the current line in the Console, with the pointer at this line incidated by a blinking vertical bar. To input a command (2+2 for example) into R, you simply type this command in the current line and press enter. R will print the output from the command below the input. R will also print out messages corresponding to the input in the Console. In R, each command is considered a single line; you cannot have multiple commands on the same line <strong>unless you separate the commands in the single line with a ;</strong>. Try typing 2+2;3+3 in the Console and view the output. R will automatically seaprate the commands using ; and print each command’s output in a separate line. Now, try 2+2 3+3 in the Console. You see R returns an <strong>error</strong> indicating that something what wrong when R tried to execute the command.</p>
+<p><img src="First_console_input.png" /></p>
+<p>Note that R is <strong>not</strong> space sensitivty, meaning you can places as many spaces as you want between the components of your commands. For example, try the commands 2 + 2 in your console. You will see R completes the commands as expected without any errors. This holds <strong>for all</strong> commands in R and can be used to neatly format your code (especially when creating scripts which is discussed below).</p>
+</div>
+<div id="scripts" class="section level3">
+<h3><span class="header-section-number">2.5.2</span> Scripts</h3>
+<p>While the Console forms the workhorse of R, operating solely in the Console is very cumbersome. Instead of typing your commands in the Console each time you run R, we will instead create a <strong>script</strong>. A script is a list of R commands that is saved as a text file to then be submitted into R line by line. Scripts are what makes R so useful as they allow easy reproducibility of your analysis since you have a typed list of what you did, as well as making your analysis easy to share with others since the typed list is a text file. Scripts are saved as a .R extension which can be read by most text editors (e.g., Notepad in Windows). To create a new script you can select</p>
+<p>File &gt; New File &gt; R Script</p>
+<p>at the top of R Studio. You should see the Console window go to the bottom and a new, empty window appear above the Console.</p>
+<p><img src="Interface_script.png" /></p>
+<p>This new window is where your scripts that are open will appear; each script that you have loaded is marked by a tab at the top of the window (notice there is now a single tab for your new script with the default name “Untitled1”). Anytime you change a script, the text becomes red and an * appears to indicate that it has been edited since it was last saved. To <strong>save</strong> the script, select the icon below the tabs that looks like a blue floppy disk. Scripts are saved as <strong>.R files</strong>, which are essentially text files (meaning they can also be edited and opened in a text editor such as Notepad on Windows).</p>
+<p>Each “line” in your script corresponds to a line to be inputted into the R console. You can extend a command across multiple lines in your script; R Studio is intellegent enough to interpret these lines as a single command/“line” for the Console. After you write these commands in your script, you then have R read them one by one into the Console. This is done by highlighting the lines of interest and selecting the <strong>Run</strong> button in the upper right; you also can use the shortcut CTRL+Enter in Windows. To quickly run all of the script, you can quickly highlight the whole script’s text using CTRL+A in Windows and then select Run (or CTRL+Enter). When running the script, you will see each line be fed into the Console below with the corresponding output and messages returned.</p>
+</div>
+<div id="rmd-files" class="section level3">
+<h3><span class="header-section-number">2.5.3</span> RMD Files</h3>
+<p>Included with these tutorials are a set of scripts which were used to create all of the content contained in them. Usually, scripts are saved as .R files. However, you will notice that all of these are saved as <strong>.RMD files</strong>. These are called <strong>R Markdown files</strong>, which are explained in detail at a later chapter of these tutorials. However, it will be very useful when going through these tutorials to run the included scripts yourself to clearly see the code as well as obtain hands-on practice in running the code inside R. When you open the .RMD file, you will notice both the pain text used in that file’s tutorial as well as some R code inside of grey boxes called <strong>chunks</strong>. You can ignore the lines which begin and end with – for now.</p>
+<p><img src="Markdown_Ex_Intro.png" /></p>
+<p>Each chunk is a set of R code, that is a “piece of a script”, with the entire “script” composed of the combination of these pieces. Each time you run the code in a chunk, the output from that code will be printed beneath the chunk.</p>
+<p><img src="run_chunk_ex.png" /></p>
+<p>This makes it very easy to learn each piece of the code in an interaction fashion, as you can edit each chunk’s code just as you would edit a piece of your script. To run the code in a chunk, simply press the green triangle icon in the upper right corner of the chunk. To run all of the code in chunks above the chunk of interest, press the grey triangle icon directly to the left. This is needed when the chunk of interest depends on the results from chunks above it in the .RMD file. In this way, these .RMD files are like “advanced” versions of scripts, i.e. scripts with additional features (output prints below the chunk instead of in the console and you can easily accompany your R code with text detailing the code by using the white space outside the chunks). Thus, the best way to use these tutorials is the following. <strong>As you are reading through the HTML files, you should have the corresponding .RMD file open as well. Run each piece of code in the .RMD file as you come across it in the HTML file.</strong> In this way, you can combine your reading with hands-on practice by replicating what you have read at the same time. These R Markdown files are especially useful for creating detailed reports to document your statistical analyses. Please see the R Markdown chapter in these tutorials for more information.</p>
+</div>
+<div id="environment" class="section level3">
+<h3><span class="header-section-number">2.5.4</span> Environment</h3>
+<p>The upper right-hand window in the R Studio interface contains the Environment. See the Chapter 3 for more information on this window and the Environment in general.</p>
+</div>
+<div id="plots-packages-and-help" class="section level3">
+<h3><span class="header-section-number">2.5.5</span> Plots, Packages, and Help</h3>
+<p>Finally, the lower right-hand window of the R Studio interface contains various components, each separated by a tab. The “Files” tab is a graphical way of opening files in R. Generally, it is easier to use the commands in R through your script so we move on to the next tab. The “Plots” tab is where all plots that you create in R will show up; see Chapter 5 for more details. The “Packages” tab is where you can install new packages and view the ones that you have already installed. <strong>Packages</strong> are add-ons for R that expand it’s capabilities. To install a new package, in the Packages tab select the Install button and type in the names of the package you are interested in. This works like a search engine where as you type, packages which have matching characters in their name will appear for you to select. Whenever you load R, you must always “turn on” any packages that are required for your analysis. This is most easily done by using the <strong>library()</strong> function. We discuss <strong>functions</strong> in detail later one; for now, to turn on package named ex, use the command library(ex). Include this command in your script at the beginning so that you load up the packages you need each time your run your script. Lastly, we have the “Help” tab. Here is where you can access the R documentation to help with any issues you encounter in R or to use as a source of information about R.</p>
+</div>
+</div>
+<div id="file-directories-in-r" class="section level2">
+<h2><span class="header-section-number">2.6</span> File Directories in R</h2>
+<p>When working in R you often will have to reference various external files, for example datasets that you want to load. To reference the external file, you will use its <strong>file path</strong>. However, the concept of <strong>working directories</strong> makes this process much easier. It would be a pain to have to type the full file path when refering to an external files. The working directory is the default directory that R looks for when you specify a file name. That is, you just provide the file name, and R will look in the working directory for this file. To see what your working directory is, use the command <strong>get.wd()</strong>; R will print the working directory’s path in the Console. By default, when you load a script, R will set the working directory to the directory where the script is. To set a new working directory, use <strong>set.wd()</strong> and provide the directory’s name in quotes inside the parentheses.</p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="objects-and-functions.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": false,
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+},
+"search": true
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

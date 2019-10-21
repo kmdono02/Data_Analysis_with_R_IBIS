@@ -1,0 +1,45 @@
+---
+title: "Data Analysis and Processing with R based on IBIS data"
+author: "Kevin Donovan"
+date: "`r format(Sys.time(), '%B %d, %Y')`"
+output: 
+  bookdown::gitbook:
+    config:
+       search: yes
+       download: no
+       sharing: no
+documentclass: book
+site: bookdown::bookdown_site
+cover-image: mushroom.jpg
+
+---
+
+# Index
+
+## Preface
+
+Over the course of my time working with the Carolina Insitute for Developmental Disabilities (CIDD) and the Infant Brain Imaging Study (IBIS) network, I have seen a great interest in learning how to do basic statistical analyses and data processing among the trainees.  Specially, there is an interest in learning how to use R, due to its popularity across the sciences and its zero financial cost.  As a statistican in training, I feel it is a great benefit for scientists to learn R.  It is vital for scientists to understand the fundamentals of statistics to foster communication with the statisticans they are working with and learning some statistical computing facilitates this understanding.  Furthermore, R has great tools for data processing, which is an essential first step in any data analysis.  
+
+The objectives of this set of R tutorials are four-fold.
+
+1.  Learn the interface of RStudio and understand the fundamentals of how R works (i.e., learn the "language" of R)
+
+2.  Learn how to use the data processing tools in R
+
+3.  Learn how to do basic data analysis methods in R (plotting, 1-way and 2-way tables, regression modeling, contingency table analyses, comparing means) 
+
+4.  Learn to present these results in a report directly through R (called R Markdown)
+
+Intermediate and advanced statistical analyses, such as machine learning techniques, are not covered in these tutorials.  While exploratory and standard regression analyses are useful for non-statisticans to understand and learn how to do, these other types of analyses are beyond the goal of these tutorials.
+
+Much of the and content and structure of these tutorials will be based off of Hadley Wickham's excellent book [R for Data Science](https://r4ds.had.co.nz/).  For those who want more detail and some exercises for the techniques detailed here, I recommmend going through Wickham's book.  All examples and exercises detailed in these tutorials will be based on IBIS data.  I hope these tutorials are useful and make R more inviting to use and learn, as after the inital learning curve I think you will find that R is an intuitive software for data analysis and processing.
+
+I would like to thank Shoba Sreenath Meera who is a post-doctoral Fullbright Scholar at the CIDD for the suggestion to create these tutorials, as well as for processing the datasets that were used in these tutorials.  The examples using these datasets are essential for the usefulness of these tutorials.  Without her work creating these datasets, these tutorials could not have been created.
+
+Thank you,
+
+Kevin Donovan
+
+PhD student in Biostatistics
+
+University of North Carolina-Chapel Hill
