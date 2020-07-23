@@ -32,7 +32,7 @@ All of the R Markdown files (denoted with file type .RMD) used to create this bo
 
 3) Datasets
 
-The **Data** folder also includes all of the datasets referenced in this book are included in .CSV format.  This are to be used in conjunction with the RMD files to run the code provided in the tutorials to recreate all of the output seen in the tutorials.  The RMD files and datasets provide essential hands-on practice with using R.
+The **data** folder also includes all of the datasets referenced in this book are included in .CSV format.  This are to be used in conjunction with the RMD files to run the code provided in the tutorials to recreate all of the output seen in the tutorials.  The RMD files and datasets provide essential hands-on practice with using R.
 
 Thank you,
 
