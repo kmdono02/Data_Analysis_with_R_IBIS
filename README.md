@@ -18,7 +18,7 @@ Intermediate and advanced statistical analyses, such as machine learning techniq
 Much of the and content and structure of these tutorials will be based off of Hadley Wickham's excellent book [R for Data Science](https://r4ds.had.co.nz/).  For those who want more detail and some exercises for the techniques detailed here, I recommmend going through Wickham's book.  All examples and exercises detailed in these tutorials will be based on IBIS data.  I hope these tutorials are useful and make R more inviting to use and learn, as after the inital learning curve I think you will find that R is an intuitive software for data analysis and processing.
 
 ## File Structure
-In order to access the book **while online**, visit the webpage https://bookdown.org/kdonovan125/ibis_data_analysis_r/.  See below for instructions to access the book while **offline/without an internet connection.**
+In order to access the book **while online**, visit the webpage https://kmdono02.github.io/Data_Analysis_with_R_IBIS/.  See below for instructions to access the book while **offline/without an internet connection.**
 
 The repository contains the following materials:
 
