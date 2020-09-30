@@ -15,7 +15,7 @@ The objectives of this set of R tutorials are four-fold.
 
 Intermediate and advanced statistical analyses, such as machine learning techniques, are not covered in these tutorials.  While exploratory and standard regression analyses are useful for non-statisticans to understand and learn how to do, these other types of analyses are beyond the goal of these tutorials.
 
-Much of the and content and structure of these tutorials will be based off of Hadley Wickham's excellent book [R for Data Science](https://r4ds.had.co.nz/).  For those who want more detail and some exercises for the techniques detailed here, I recommmend going through Wickham's book.  All examples and exercises detailed in these tutorials will be based on IBIS data.  I hope these tutorials are useful and make R more inviting to use and learn, as after the inital learning curve I think you will find that R is an intuitive software for data analysis and processing.
+Much of the content and structure of these tutorials will be based off of Hadley Wickham's excellent book [R for Data Science](https://r4ds.had.co.nz/).  For those who want more detail and some exercises for the techniques detailed here, I recommmend going through Wickham's book.  All examples and exercises detailed in these tutorials will be based on IBIS data.  I hope these tutorials are useful and make R more inviting to use and learn, as after the inital learning curve I think you will find that R is an intuitive software for data analysis and processing.
 
 ## File Structure
 In order to access the book **while online**, visit the webpage https://kmdono02.github.io/Data_Analysis_with_R_IBIS/.  See below for instructions to access the book while **offline/without an internet connection.**
